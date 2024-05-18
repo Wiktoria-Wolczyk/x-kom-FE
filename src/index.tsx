@@ -1,15 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import Register from "../src/register/Register";
+import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
+import { ChakraProvider } from "@chakra-ui/react";
+import Homepage from "./Homepage";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <ChakraProvider>
+      <Toaster position="top-center" reverseOrder={false} />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route index element={<Homepage />} />
+            <Route path="/register" element={<Register />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </ChakraProvider>
   </React.StrictMode>
 );
 

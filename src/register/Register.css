@@ -1,0 +1,147 @@
+.containerForRegister {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(207, 229, 252);
+}
+
+.registerText {
+  margin-top: 20px;
+  font-size: 30px;
+}
+
+.divForRegisterInputs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  height: 700px;
+  padding-top: 10px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.userRegisterInputs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  height: 300px;
+}
+
+.firstName {
+  margin-bottom: 30px;
+  padding: 10px;
+}
+
+.lastName {
+  height: 50px;
+  margin-bottom: 30px;
+  padding: 10px;
+}
+
+.email {
+  height: 50px;
+  margin-bottom: 30px;
+  padding: 10px;
+}
+
+.InputGroupForPassword {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  height: 130px;
+  margin-left: 20px;
+  margin-bottom: 30px;
+}
+
+.containerForPasswordInputs {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+.ContainerForButtonHideShow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+}
+
+.divForShowOrHideButton {
+  display: flex;
+}
+
+.showOrHidePasswordInRegister {
+  width: 50px;
+  border: 1px solid black;
+}
+
+.inputRegisterPassword {
+  height: 50px;
+  margin-bottom: 30px;
+  border-radius: 5px;
+}
+
+.inputConfirmPassword {
+  height: 50px;
+  margin-bottom: 30px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.labelForCheckboxRegister {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.divForAcceptTermsConatiner {
+  width: 100%;
+  padding: 10px;
+}
+
+.containerForAcceptTerms {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 150px;
+}
+
+.checkboxTerms {
+  color: blue;
+  font-weight: bold;
+  width: 30px;
+  height: 30px;
+}
+
+.termsHref {
+  color: blue;
+}
+
+.checkboxStatue {
+  width: 20px;
+  height: 20px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.containerForButtonAcceptRegister {
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+  width: 100%;
+  height: 100px;
+}
+
+.buttonAcceptRegister {
+  border-radius: 5px;
+  border: 1px solid darkgrey;
+  height: 40px;
+  width: 50%;
+  font-weight: bold;
+}

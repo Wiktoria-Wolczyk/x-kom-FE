@@ -1,38 +1,208 @@
 .App {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(188, 232, 206);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.loginList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 7px;
+  width: 390px;
+  height: 772px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(233, 233, 233);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.loginText {
+  margin-top: 20px;
+  font-size: 30px;
+}
+
+.divForLoginBy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  height: 100px;
+  padding-top: 10px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.logInByGoogle {
+  width: 90%;
+  height: 50px;
+  border-radius: 5px;
+  background-color: white;
+  border: 1px solid black;
+}
+
+.lineBetweenLogin {
+  width: 70%;
+  height: 5px;
+  border-bottom: 1px solid black;
+}
+
+.divForLoginInputs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  height: 300px;
+  padding-top: 10px;
+  margin-top: 25px;
+}
+
+.labelEmail {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.emailInput {
+  padding: 10px;
+  width: 90%;
+  height: 50px;
+  border-radius: 5px;
+  border: 1px solid darkgrey;
+}
+
+.labelPassword {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.passwordInput {
+  padding: 10px;
+  width: 90%;
+  height: 50px;
+  border-radius: 5px;
+  border: 1px solid darkgrey;
+}
+
+.divForForgotPasswordButton {
+  display: flex;
+  justify-content: flex-end;
+  width: 90%;
+  height: 50px;
+  margin-bottom: 20px;
+}
+
+.forgotPasswordButton {
+  display: flex;
+  justify-content: flex-end;
+  height: 100%;
+  width: 50%;
+  font-weight: 500;
+}
+
+.buttonLogIn {
+  width: 90%;
+  height: 40px;
+  border-radius: 5px;
+  background-color: white;
+  border: 1px solid black;
+}
+
+.divForRegister {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  width: 90%;
+  height: 100px;
+  margin-top: 150px;
 }
 
-.App-link {
-  color: #61dafb;
+.buttonRegister {
+  width: 90%;
+  height: 40px;
+  border-radius: 5px;
+  background-color: white;
+  border: 1px solid black;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.divScrollingContainer {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.divForActualCoupon {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 0;
+  width: 100%;
+  height: 150px;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+  margin: 10px 0px 10px 0px;
+  background-color: rgb(241, 239, 239);
+  padding: 10px 10px 10px 10px;
+}
+
+.coupon {
+  height: 50%;
+  width: 100%;
+  background-color: white;
+}
+
+.couponName {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+}
+
+.couponCode {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+}
+
+.ourProductsText {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0px 25px 0px;
+  font-size: 25px;
+}
+
+.containerForCardsWithProducts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  height: 100%;
+}
+
+.categoryCard {
+  margin-bottom: 20px;
+}
+
+.categoryTitle {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
