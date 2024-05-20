@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { Input, Button } from "@chakra-ui/react";
 import { response } from "express";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface IProps {
   openAuthModal: boolean | null;
@@ -112,6 +113,12 @@ function Navbar({ openAuthModal }: IProps) {
           </Menu>
         </div>
         <span className="shopTitle">Clothes Shop</span>
+        <div className="divForCart">
+          <i
+            className="fa-solid fa-cart-shopping"
+            style={{ color: "#383838" }}
+          ></i>
+        </div>
         <div className="divForUser">
           <Menu isOpen={menuLoginIsOpen}>
             <>
