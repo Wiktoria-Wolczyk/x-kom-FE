@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import "./JeansTrousers.css";
+import "./Products.css";
+import { Routes, Route, useParams } from "react-router-dom";
+import toast from "react-hot-toast";
 import {
   Card,
   CardHeader,
@@ -15,7 +17,7 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 
-interface IJeansArray {
+interface IProductsArray {
   id: number;
   name: string;
   price: number;
@@ -24,33 +26,53 @@ interface IJeansArray {
   brand: string;
 }
 
-function JeansTrousers() {
-  const [jeansArray, setJeansArray] = useState([]);
+function Products() {
+  const [productsArray, setProductsArray] = useState([]);
+
+  let { categoryName } = useParams();
+
+  const category = categoryName?.replaceAll("_", " ");
+
+  const [cart, setCart] = useState<any>(
+    JSON.parse(localStorage.getItem("cart") || "[]") || []
+  );
 
   useEffect(() => {
-    const fetchJeans = async () => {
+    const fetchProducts = async () => {
       try {
+        // const categoryName = request.params.categoryname;
         const response = await axios.post(
           "http://localhost:3000/products/filter/page/1/limit/50",
           {
-            category: ["jeans trousers"],
+            category: [category],
           }
         );
 
-        let allJeansArray = response.data.message?.data;
-        setJeansArray(allJeansArray);
+        let allProductsArray = response.data.message?.data;
+        setProductsArray(allProductsArray);
       } catch (error) {
         console.error(error);
       }
     };
 
-    fetchJeans();
+    fetchProducts();
   }, []);
+
+  function productsToCart(el: IProductsArray) {
+    let arrOfProducts = cart.concat(el);
+    setCart(arrOfProducts);
+
+    let saveArray = JSON.stringify(arrOfProducts);
+
+    localStorage.setItem("cart", saveArray);
+
+    toast.success("Added to cart!");
+  }
 
   return (
     <div className="containerForAllJeansTrousers">
       <div className="containerForTrousersCards">
-        {jeansArray.map((el: IJeansArray) => (
+        {productsArray.map((el: IProductsArray) => (
           <Card maxW="sm" className="categoryCard">
             <CardBody>
               <Image
@@ -61,16 +83,23 @@ function JeansTrousers() {
               <Stack mt="6" spacing="3">
                 <Heading size="md">{el.name}</Heading>
                 <Text color="blue.600" fontSize="2xl">
-                  discounted price: {el.discountedPrice}$
+                  {el.discountedPrice}$
                 </Text>
               </Stack>
             </CardBody>
             <Divider />
             <CardFooter>
               <ButtonGroup spacing="2">
-                <Button variant="solid" colorScheme="blue">
+                <Button
+                  onClick={() => productsToCart(el)}
+                  variant="solid"
+                  colorScheme="blue"
+                >
                   Add to cart
                 </Button>
+                <div className="availableJeans">
+                  Available: <b className="available">{el.available}</b>
+                </div>
               </ButtonGroup>
             </CardFooter>
           </Card>
@@ -80,4 +109,4 @@ function JeansTrousers() {
   );
 }
 
-export default JeansTrousers;
+export default Products;
