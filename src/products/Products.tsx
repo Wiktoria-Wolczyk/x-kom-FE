@@ -24,6 +24,11 @@ interface IProductsArray {
   discountedPrice: number;
   available: number;
   brand: string;
+  quantity?: number;
+}
+
+interface IElement {
+  id: number;
 }
 
 function Products() {
@@ -34,7 +39,8 @@ function Products() {
   const category = categoryName?.replaceAll("_", " ");
 
   const [cart, setCart] = useState<any>(
-    JSON.parse(localStorage.getItem("cart") || "[]") || []
+    []
+    // JSON.parse(localStorage.getItem("cart") || "[]") || []
   );
 
   useEffect(() => {
@@ -58,15 +64,31 @@ function Products() {
     fetchProducts();
   }, []);
 
-  function productsToCart(el: any) {
-    let arrWithProductsInCart = cart;
-    arrWithProductsInCart.push(el);
+  function productsToCart(el: IProductsArray) {
+    let arrWithProductsInCart = [...cart]; // to bedzie cart z usestate'a
+    let foundProduct = arrWithProductsInCart.find(
+      (element: IElement) => element.id === el.id
+    );
+
+    if (foundProduct && foundProduct.quantity) {
+      foundProduct.quantity += 1;
+
+      let index = arrWithProductsInCart.findIndex(
+        (product: IElement) => product.id === foundProduct.id
+      );
+
+      arrWithProductsInCart[index] = foundProduct;
+    } else {
+      el.quantity = 1;
+      arrWithProductsInCart.push(el);
+    }
+
     setCart(arrWithProductsInCart);
 
-    let saveArray = JSON.stringify(arrWithProductsInCart);
-    localStorage.setItem("cart", saveArray);
+    // let saveArray = JSON.stringify(cart);
+    // localStorage.setItem("cart", saveArray);
 
-    toast.success("Added to cart!");
+    // toast.success("Added to cart!");
   }
 
   return (
