@@ -22,6 +22,7 @@ interface IProductsInCart {
   discountedPrice: number;
   available: number;
   brand: string;
+  quantity: number;
 }
 
 function Cart() {
@@ -49,7 +50,7 @@ function Cart() {
                     </span>
                     <span className="elAvailable">
                       <b>quantity: </b>
-                      {el.available}
+                      {el.quantity}
                     </span>
                   </div>
                 </li>

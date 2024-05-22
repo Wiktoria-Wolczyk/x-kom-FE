@@ -39,9 +39,11 @@ function Products() {
   const category = categoryName?.replaceAll("_", " ");
 
   const [cart, setCart] = useState<any>(
-    []
-    // JSON.parse(localStorage.getItem("cart") || "[]") || []
+    JSON.parse(localStorage.getItem("cart") || "[]") || []
   );
+
+  // 1. Muszę pobierać z localStorage (tym: getItem) po kluczu "cart".
+  // i wyświetlać w koszyku tylko elementy które zostały dodane.
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -85,10 +87,10 @@ function Products() {
 
     setCart(arrWithProductsInCart);
 
-    // let saveArray = JSON.stringify(cart);
-    // localStorage.setItem("cart", saveArray);
+    let saveArray = JSON.stringify(arrWithProductsInCart);
+    localStorage.setItem("cart", saveArray);
 
-    // toast.success("Added to cart!");
+    toast.success("Added to cart!");
   }
 
   return (
