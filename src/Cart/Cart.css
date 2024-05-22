@@ -6,16 +6,19 @@
   width: 100%;
   height: 100%;
   background-color: rgb(167, 207, 233);
+  overflow: auto;
 }
 
 .cartTextInCartComponent {
   font-size: 30px;
+  margin-top: 10px;
   margin-bottom: 20px;
 }
 
 .divForCartInCartComponent {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   width: 90%;
   height: 90%;
   background-color: rgb(251, 209, 216);
@@ -32,6 +35,7 @@
 
 .ulForProductsInCart {
   width: 100%;
+  overflow: auto;
 }
 
 /* .divForPriceAndTrash {
@@ -138,3 +142,41 @@
   width: 100%;
   height: 50%;
 } */
+
+.containerForQuantityButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 30px;
+  border: 1px solid lightgrey;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.plusQuantityButton {
+  width: 35px;
+  height: 30px;
+}
+
+.inputWithQuantityCount {
+  display: flex;
+  text-align: center;
+  width: 50px;
+  height: 25px;
+}
+
+.minusQuantityButton {
+  width: 35px;
+  height: 30px;
+}
+
+.buttonBuy {
+  width: 200px;
+  height: 60px;
+  border: 1px solid darkgray;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  background-color: white;
+  border-radius: 10px;
+}
