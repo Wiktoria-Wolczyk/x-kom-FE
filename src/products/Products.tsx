@@ -58,12 +58,12 @@ function Products() {
     fetchProducts();
   }, []);
 
-  function productsToCart(el: IProductsArray) {
-    let arrOfProducts = cart.concat(el);
-    setCart(arrOfProducts);
+  function productsToCart(el: any) {
+    let arrWithProductsInCart = cart;
+    arrWithProductsInCart.push(el);
+    setCart(arrWithProductsInCart);
 
-    let saveArray = JSON.stringify(arrOfProducts);
-
+    let saveArray = JSON.stringify(arrWithProductsInCart);
     localStorage.setItem("cart", saveArray);
 
     toast.success("Added to cart!");
