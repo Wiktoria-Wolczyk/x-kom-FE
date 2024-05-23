@@ -109,6 +109,26 @@ function Navbar({ openAuthModal }: IProps) {
                 <MenuItem className="category Contact">Kontakt</MenuItem>
                 <MenuItem className="category Statue">Regulamin</MenuItem>
               </div>
+              <div className="containerForLoginAndRegister">
+                <button
+                  onClick={() => {
+                    navigate("/login");
+                    handleChangeAuthMenuOpen();
+                  }}
+                  className="buttonLoginInNavbar"
+                >
+                  Login
+                </button>
+                <button
+                  onClick={() => {
+                    navigate("/register");
+                    handleChangeAuthMenuOpen();
+                  }}
+                  className="buttonRegisterInNavbar"
+                >
+                  Register
+                </button>
+              </div>
             </MenuList>
           </Menu>
         </div>

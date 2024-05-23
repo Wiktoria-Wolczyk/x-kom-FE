@@ -78,5 +78,27 @@
   border: 0px solid white;
 }
 
-.avatar {
+.containerForLoginAndRegister {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  width: 100%;
+  height: 100px;
+  margin-top: 30px;
+}
+
+.buttonLoginInNavbar {
+  width: 40%;
+  height: 80%;
+  border: 1px solid gray;
+  border-radius: 10px;
+  background-color: rgb(205, 234, 247);
+}
+
+.buttonRegisterInNavbar {
+  width: 40%;
+  height: 80%;
+  border: 1px solid gray;
+  border-radius: 10px;
+  background-color: rgb(205, 234, 247);
 }

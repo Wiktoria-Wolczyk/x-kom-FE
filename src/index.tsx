@@ -11,6 +11,7 @@ import Homepage from "./Homepage";
 import Products from "./products/Products";
 import Cart from "./Cart/Cart";
 import { Routes, Route } from "react-router-dom";
+import Login from "./Login/Login";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -23,6 +24,7 @@ root.render(
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<Homepage />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="category">

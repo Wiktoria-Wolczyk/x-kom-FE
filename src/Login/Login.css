@@ -1,0 +1,48 @@
+.containerForLogin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+
+.divForLoginInputsInLogin {
+  width: 90%;
+  height: 90%;
+}
+
+.loginEmail {
+  display: flex;
+  justify-content: center;
+  border: 1px solid black;
+  margin-bottom: 30px;
+}
+
+.loginPassword {
+  display: flex;
+  justify-content: center;
+  border: 1px solid black;
+  margin-bottom: 30px;
+}
+
+.divForLoginButtonsInLogin {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  margin-top: 50px;
+}
+
+.buttonLoginInLogin {
+  width: 500px;
+  height: 40px;
+  background-color: lightskyblue;
+  border-radius: 10px;
+}
+
+.buttonForgotPasswordInLogin {
+  width: 150px;
+  height: 40px;
+}
