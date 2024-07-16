@@ -1,0 +1,53 @@
+.containerForListComponent {
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+}
+
+.userNameDiv {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  background-color: white;
+  padding-left: 20px;
+  margin-top: 20px;
+}
+
+.userNameTextBold {
+  font-weight: bold;
+}
+
+.containerForList {
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+.divInList {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding-right: 10px;
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+.containerForIconAndText {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 300px;
+}
+
+.textInList {
+  padding-left: 10px;
+}
+
+.chevronRight {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 100px;
+}

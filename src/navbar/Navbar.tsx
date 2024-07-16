@@ -1,69 +1,71 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Navbar.css";
 import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { IconButton } from "@chakra-ui/react";
-import { Avatar } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
-import axios from "axios";
-import toast from "react-hot-toast";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { Input, Button } from "@chakra-ui/react";
-import { response } from "express";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import axios from "axios";
+// import toast from "react-hot-toast";
+// import { useForm, SubmitHandler } from "react-hook-form";
+import { LoginContext } from "../context/loginContext/LoginContext";
+import { ProductsContext } from "../context/loginContext/ProductsInCartContext";
 
 interface IProps {
   openAuthModal: boolean | null;
 }
 
-interface IFormValues {
-  email: string;
-  password: string;
-}
+// interface IFormValues {
+//   email: string;
+//   password: string;
+// }
 
 function Navbar({ openAuthModal }: IProps) {
   const [menuLoginIsOpen, setMenuLoginIsOpen] = useState(
-    openAuthModal || false
+    openAuthModal || false,
   );
-  const [buttonLoginIsClicked, setButtonLoginIsClicked] = useState(false);
+  // const [buttonLoginIsClicked, setButtonLoginIsClicked] = useState(false);
 
-  const { control, handleSubmit, reset } = useForm({
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
+  // const { reset } = useForm({
+  //   defaultValues: {
+  //     email: "",
+  //     password: "",
+  //   },
+  // });
 
-  const onSubmit: SubmitHandler<IFormValues> = async (data) => {
-    try {
-      const login = async () => {
-        const checkUser = await axios.post("http://localhost:3000/auth/login", {
-          email: data.email,
-          password: data.password,
-        });
+  const { userIsLoggedIn, actualUser } = useContext(LoginContext);
 
-        let response = checkUser.data.message;
-        console.log(response);
-        localStorage.setItem("token", response);
-        return checkUser;
-      };
+  const { setButtonLoginIsClicked } = useContext(ProductsContext);
 
-      await login();
-      reset();
-      setButtonLoginIsClicked(true);
-      toast("successfully logged in!", {
-        icon: "👏",
-      });
+  // const onSubmit: SubmitHandler<IFormValues> = async (data) => {
+  //   try {
+  //     const login = async () => {
+  //       const checkUser = await axios.post("http://localhost:3000/auth/login", {
+  //         email: data.email,
+  //         password: data.password,
+  //       });
 
-      setTimeout(() => {
-        setMenuLoginIsOpen(false);
-      }, 500);
-    } catch (err) {
-      console.error(err);
-      toast.error("server error - try again later");
-    }
-  };
+  //       const response = checkUser.data.message;
+  //       console.log(response);
+  //       localStorage.setItem("token", response);
+  //       return checkUser;
+  //     };
+
+  //     await login();
+  //     reset();
+  //     setButtonLoginIsClicked(true);
+  //     toast("successfully logged in!", {
+  //       icon: "👏",
+  //     });
+
+  //     setTimeout(() => {
+  //       setMenuLoginIsOpen(false);
+  //     }, 500);
+  //   } catch (err) {
+  //     console.error(err);
+  //     toast.error("server error - try again later");
+  //   }
+  // };
 
   useEffect(() => {
     if (openAuthModal) {
@@ -73,7 +75,7 @@ function Navbar({ openAuthModal }: IProps) {
 
   const navigate = useNavigate();
 
-  const handleClick = () => navigate("/register");
+  // const handleClick = () => navigate("/register");
 
   // useEffect(() => {
   //   const intervalId = setInterval(() => {
@@ -89,16 +91,38 @@ function Navbar({ openAuthModal }: IProps) {
     setMenuLoginIsOpen((prev) => !prev);
   };
 
+  const { arrayWithActualProducts } = useContext(ProductsContext);
+
+  useEffect(() => {
+    // console.log("arrayWithActualProductsInNavbar", arrayWithActualProducts);
+  }, [arrayWithActualProducts]);
+
+  // useEffect(() => {
+  //   let productsInLocalstorage: string | null = localStorage.getItem("cart");
+
+  //   if (!!productsInLocalstorage) {
+  //     let arrayproductsInCart = JSON.parse(productsInLocalstorage);
+  //     let productsFromLocalstorage = setProductsInCart(arrayproductsInCart);
+
+  //     // let countedProductsInCart = arrayproductsInCart.length;
+  //     // console.log("wowowo", countedProductsInCart);
+  //   }
+  // }, [productsInLStorage]);
+
   return (
     <ChakraProvider>
       <div className="Navbar">
         <div className="divForHamburgerMenu">
-          <Menu>
+          <Menu isOpen={menuLoginIsOpen}>
             <MenuButton
               as={IconButton}
               aria-label="Options"
               icon={<HamburgerIcon />}
               variant="outline"
+              onClick={() => {
+                setMenuLoginIsOpen((prev) => !prev);
+                setButtonLoginIsClicked(!menuLoginIsOpen);
+              }}
             />
             <MenuList className="menuList">
               <div className="divForMenuCategories">
@@ -110,24 +134,37 @@ function Navbar({ openAuthModal }: IProps) {
                 <MenuItem className="category Statue">Regulamin</MenuItem>
               </div>
               <div className="containerForLoginAndRegister">
-                <button
-                  onClick={() => {
-                    navigate("/login");
-                    handleChangeAuthMenuOpen();
-                  }}
-                  className="buttonLoginInNavbar"
-                >
-                  Login
-                </button>
-                <button
-                  onClick={() => {
-                    navigate("/register");
-                    handleChangeAuthMenuOpen();
-                  }}
-                  className="buttonRegisterInNavbar"
-                >
-                  Register
-                </button>
+                {userIsLoggedIn ? (
+                  <button
+                    onClick={() => {
+                      navigate("/list");
+                      setMenuLoginIsOpen(false);
+                    }}
+                  >
+                    {actualUser?.firstName} Zalogowana
+                  </button>
+                ) : (
+                  <>
+                    <button
+                      onClick={() => {
+                        setMenuLoginIsOpen(false);
+                        navigate("/login");
+                      }}
+                      className="buttonLoginInNavbar"
+                    >
+                      Login
+                    </button>
+                    <button
+                      onClick={() => {
+                        handleChangeAuthMenuOpen();
+                        navigate("/register");
+                      }}
+                      className="buttonRegisterInNavbar"
+                    >
+                      Register
+                    </button>
+                  </>
+                )}
               </div>
             </MenuList>
           </Menu>
@@ -135,9 +172,11 @@ function Navbar({ openAuthModal }: IProps) {
         <span onClick={() => navigate("/")} className="shopTitle">
           Zara
         </span>
-        <div className="divForCart">
+        <div className="divForCart" onClick={() => navigate("/cart")}>
+          <div className="countProductsInCart">
+            {arrayWithActualProducts?.length}
+          </div>
           <i
-            onClick={() => navigate("/cart")}
             className="fa-solid fa-cart-shopping"
             style={{ color: "#383838" }}
           ></i>

@@ -5,23 +5,61 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  background-color: rgb(167, 207, 233);
+  background-color: rgb(235, 233, 233);
+  overflow: auto;
+}
+
+.divForCartInCartComponent {
+  width: 90%;
+  height: 90%;
+  background-color: rgb(235, 233, 233);
   overflow: auto;
 }
 
 .cartTextInCartComponent {
+  position: relative;
+  top: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  width: 100%;
   font-size: 30px;
-  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.countProductsNextToCartText {
+  display: flex;
+  align-items: flex-end;
+  height: 100%;
+  padding-left: 5px;
+  font-size: 15px;
+  padding-bottom: 5px;
+}
+
+.containerForSaveAndClearTrash {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 
-.divForCartInCartComponent {
+.saveDiv {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 90%;
-  height: 90%;
-  background-color: rgb(251, 209, 216);
+  justify-content: space-between;
+  align-items: center;
+  width: 60px;
+  height: 40px;
+}
+
+.clearTrashDiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100px;
+  height: 40px;
+  margin-left: 20px;
 }
 
 .divForProductsInCart {
@@ -29,13 +67,11 @@
   flex-direction: row;
   justify-content: center;
   width: 100%;
-  height: 100%;
-  background-color: rgb(167, 207, 233);
+  background-color: rgb(235, 233, 233);
 }
 
 .ulForProductsInCart {
   width: 100%;
-  overflow: auto;
 }
 
 /* .divForPriceAndTrash {
@@ -86,10 +122,28 @@
   background-color: white;
 } */
 
+.containerForPhotoAndList {
+  display: flex;
+  flex-direction: row;
+}
+
+.containerForPhoto {
+  display: flex;
+  align-items: center;
+  width: 40%;
+  height: 150px;
+  background-color: white;
+}
+
+.clothesPhotoClass {
+  width: 100%;
+  height: 100%;
+}
+
 .listInCart {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 60%;
   height: 150px;
   margin-bottom: 20px;
 }
@@ -101,9 +155,10 @@
   justify-content: space-between;
   width: 100%;
   height: 100%;
-  background-color: rgb(216, 253, 253);
+  background-color: white;
   padding-left: 10px;
   padding-right: 10px;
+  border-top-right-radius: 10px;
 }
 
 .elName {
@@ -112,7 +167,16 @@
 }
 
 .buttonDeleteFromCart {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
   font-weight: 500;
+  width: 80px;
+}
+
+.deleteProductByClick {
+  margin-right: 5px;
 }
 
 /* .elDiscountedPrice {
@@ -130,9 +194,10 @@
   justify-content: space-between;
   width: 100%;
   height: 100%;
-  background-color: rgb(216, 253, 253);
+  background-color: white;
   padding-left: 10px;
   padding-right: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 /* .elAvailable {
@@ -147,7 +212,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 120px;
+  width: 80px;
   height: 30px;
   border: 1px solid lightgrey;
   background-color: white;
@@ -155,28 +220,143 @@
 }
 
 .plusQuantityButton {
-  width: 35px;
+  width: 20px;
   height: 30px;
 }
 
 .inputWithQuantityCount {
   display: flex;
   text-align: center;
-  width: 50px;
+  width: 40px;
   height: 25px;
 }
 
 .minusQuantityButton {
-  width: 35px;
+  width: 20px;
   height: 30px;
 }
 
-.buttonBuy {
-  width: 200px;
+.containerForCouponInCart {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  border-radius: 10px;
+  background-color: white;
+  margin-top: 20px;
+}
+
+.textAddCouponInCart {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.fa-ticket {
+  padding-left: 20px;
+  padding-right: 10px;
+}
+
+.fa-chevron-up {
+  padding-right: 20px;
+}
+
+.containerForInputCouponInCart {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  height: 70px;
+}
+
+.inputToCouponInCart {
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  margin-top: 10px;
+  width: 70%;
+}
+
+.useCouponCodeButton {
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-top: 10px;
+  width: 20%;
+  color: white;
+  background-color: black;
+}
+
+.containerForSumOrderAndBuy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.divForAmountToPay {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 5px;
   height: 60px;
+  padding: 10px 10px 0px;
+}
+
+.textAmountToPay {
+  display: flex;
+  align-items: flex-end;
+  font-size: 20px;
+}
+
+.divForSumAmountToPayAndDiscount {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 200px;
+}
+
+.savedMoney {
+  color: rgb(0, 117, 0);
+  background-color: rgb(203, 254, 203);
+  font-size: 15px;
+  padding: 2px;
+  border-radius: 10px;
+}
+
+.amountToPayBeforeAndAfter {
+  display: flex;
+}
+
+.priceBefore {
+  display: flex;
+  align-items: center;
+  margin-right: 5px;
+  font-size: 15px;
+  text-decoration: line-through;
+  color: rgb(81, 81, 81);
+}
+
+.priceAfter {
+  display: flex;
+  align-items: flex-end;
+  font-size: 20px;
+}
+
+.buttonBuy {
+  position: relative;
+  bottom: 0px;
+  width: 80%;
+  height: 40px;
   border: 1px solid darkgray;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   background-color: white;
   border-radius: 10px;
 }

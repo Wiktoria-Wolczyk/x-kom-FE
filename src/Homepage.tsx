@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { ChakraProvider } from "@chakra-ui/react";
+import React, { useContext, useEffect, useState } from "react";
 import { Card, CardBody } from "@chakra-ui/react";
 import { Image, Heading } from "@chakra-ui/react";
-import Navbar from "./navbar/Navbar";
-import { useLocation, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import axios from "axios";
+import { ProductsContext } from "./context/loginContext/ProductsInCartContext";
 
 interface IProductsArrValues {
   category: string;
@@ -14,13 +13,19 @@ interface IProductsArrValues {
 function Homepage() {
   const [productsArr, setProductsArr] = useState([]);
 
+  const { buttonLoginIsClicked } = useContext(ProductsContext);
+
+  useEffect(() => {
+    console.log("buttonLoginIsClicked", buttonLoginIsClicked);
+  }, []);
+
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/products/categories/count"
+          "http://localhost:3000/products/categories/count",
         );
 
         const productsCategoryAndName = response.data.message;
@@ -38,21 +43,29 @@ function Homepage() {
   return (
     <>
       <div className="divScrollingContainer">
-        <div className="divForActualCoupon">
-          <div className="coupon couponName">tutaj NAZWA KUPONU</div>
+        <div
+          className="divForActualCoupon"
+          style={{ zIndex: buttonLoginIsClicked ? 0 : 1 }}
+        >
+          <div className="coupon couponName text-red-700 text-base font-semibold">
+            tutaj NAZWA KUPONU
+          </div>
           <div className="coupon couponCode">
             tutaj KOD DO OTRZYMANIA KUPONU
           </div>
         </div>
+
         <span className="ourProductsText">Nasze Produkty</span>
         <div className="containerForCardsWithProducts">
-          {productsArr?.map((el: IProductsArrValues) => (
-            <Card className="categoryCard" maxW="sm">
+          {productsArr?.map((el: IProductsArrValues, index) => (
+            <Card key={index} className="categoryCard" maxW="sm">
               <CardBody>
                 <Image
                   onClick={() => {
                     if (el.category) {
-                      let joinCategoryString = el.category.split(" ").join("_");
+                      const joinCategoryString = el.category
+                        .split(" ")
+                        .join("_");
                       navigate(`/category/${joinCategoryString}`);
                     }
                   }}

@@ -1,0 +1,114 @@
+.ContainerForOrderDetails {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.divForOrderInformations {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin-top: 20px;
+  background-color: white;
+  border: 1px solid black;
+  font-size: 20px;
+}
+
+.orderID {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  border-bottom: 1px solid black;
+
+  margin-top: 5px;
+  margin-bottom: 30px;
+}
+
+.createDate {
+  padding-left: 10px;
+  margin-top: 5px;
+}
+
+.createTime {
+  padding-left: 10px;
+  margin-top: 5px;
+}
+
+.orderStatus {
+  padding-left: 10px;
+  margin-top: 5px;
+}
+
+.productsTextInOrder {
+  margin-top: 30px;
+  font-weight: bold;
+  padding-left: 10px;
+}
+
+.scrollableTable {
+  width: 100%;
+  overflow-x: scroll;
+}
+
+.tableWithOrder {
+  text-align: center;
+}
+
+.trHeaders {
+  border-bottom: 1px solid black;
+}
+
+th,
+td {
+  text-align: center;
+  padding-top: 30px;
+  font-size: 20px;
+  min-width: 200px;
+}
+
+.containerForPriceAndDiscountedPrice {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.productPrice {
+  text-decoration: line-through;
+  font-size: 15px;
+  text-align: center;
+  color: gray;
+  padding-right: 10px;
+}
+
+.orderPrice {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-top: 50px;
+  padding-left: 10px;
+  padding-right: 30px;
+  text-align: center;
+}
+.containerForCancelOrderButton {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 80px;
+  margin-top: 50px;
+}
+
+.cancelOrder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 60px;
+  border: 1px solid red;
+  border-radius: 10px;
+  color: red;
+  font-weight: bold;
+}

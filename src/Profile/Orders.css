@@ -1,0 +1,170 @@
+.containerForUserInformations {
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+}
+
+.containerForLastOrders {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+}
+
+.returnButtonInOrders {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  padding-left: 5px;
+  padding-right: 10px;
+  width: 100px;
+  height: 40px;
+  background-color: rgb(223, 222, 222);
+  border-radius: 10px;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.textLastOrders {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 20px;
+  width: 100vw;
+  height: 80px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.buttonsFilterAndSort {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 70px;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 50px;
+}
+
+.buttonFilterOrders {
+  width: 50%;
+  height: 50%;
+  border-right: 1px solid lightgray;
+}
+
+.fa-filter {
+  padding-right: 10px;
+}
+
+.fa-up-down {
+  padding-right: 10px;
+}
+
+.buttonSortOrders {
+  width: 50%;
+  height: 50%;
+}
+
+.displayLastOrders {
+  margin-bottom: 20px;
+}
+
+.orderDateInOrder {
+  padding-left: 30px;
+}
+
+.containerForOrderWhenUserIsLoggedIn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px;
+  height: 120px;
+  padding-right: 10px;
+  border: 2px solid lightgray;
+  border-radius: 10px;
+}
+
+.containerForOrderInfo {
+  width: 50%;
+  height: 100%;
+  background-color: rgb(223, 222, 222);
+  padding-left: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.containerForProductsInfo {
+  width: 60%;
+  padding-left: 10px;
+}
+
+.divForStatusAndCreateDate {
+  display: flex;
+  flex-direction: column;
+}
+
+.orderStatusInDiv {
+  font-weight: bold;
+  padding-top: 5px;
+  padding-bottom: 10px;
+}
+
+.divForIDAndPrice {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.productIDInOrder {
+  font-weight: bold;
+  font-size: 12px;
+  color: gray;
+}
+
+.divForPriceInOrder {
+  font-weight: bold;
+  font-size: 15px;
+  padding-bottom: 5px;
+}
+
+.containerForProductsInfo {
+  display: flex;
+  flex-direction: row;
+}
+
+.productsLengthInOrder {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 50%;
+}
+
+.moreDetails {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: self-start;
+  padding-top: 20px;
+  padding-right: 5px;
+  width: 50%;
+}
+
+.userInformations {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: rgb(194, 243, 243);
+}
+
+.informations {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  font-size: 18px;
+}

@@ -26,16 +26,17 @@
 }
 
 .menuList {
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 7px;
-  width: 390px;
-  height: 772px;
+  width: 100vw;
+  height: 100% - 50px;
 }
 
 .divForMenuCategories {
+  z-index: 2;
   width: 200px;
 }
 
@@ -61,8 +62,25 @@
 
 .divForCart {
   display: flex;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  display: flex;
   justify-content: flex-end;
   padding-right: 10px;
+}
+
+.countProductsInCart {
+  width: 18px;
+  height: 18px;
+  border-radius: 18px;
+  background-color: rgb(219, 83, 83);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: -10px;
+  left: 25px;
 }
 
 .divForUser {

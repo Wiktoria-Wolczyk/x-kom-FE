@@ -5,36 +5,61 @@ import App from "./App";
 import Register from "../src/register/Register";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import { ChakraProvider } from "@chakra-ui/react";
 import Homepage from "./Homepage";
 import Products from "./products/Products";
 import Cart from "./Cart/Cart";
 import { Routes, Route } from "react-router-dom";
 import Login from "./Login/Login";
+import { createContext } from "react";
+import { LoginContextController } from "./context/loginContext/LoginContext";
+import "./types";
+import OrderDetails from "./OrderDetails/OrderDetails";
+import List from "./List/List";
+import Orders from "./Profile/Orders";
+import UserDetails from "./Profile/UserDetails";
+import ChangeUserName from "./Profile/Edition/ChangeUserName";
+import { ProductsContextController } from "./context/loginContext/ProductsInCartContext";
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+  document.getElementById("root") as HTMLElement,
 );
+
+export const TestContext = createContext({});
+
 root.render(
   <React.StrictMode>
-    <ChakraProvider>
-      <Toaster position="top-center" reverseOrder={false} />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />}>
-            <Route index element={<Homepage />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="category">
-              <Route path=":categoryName" element={<Products />} />
-            </Route>
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </ChakraProvider>
-  </React.StrictMode>
+    <ProductsContextController>
+      <LoginContextController>
+        <ChakraProvider>
+          <Toaster position="top-center" reverseOrder={false} />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<App />}>
+                <Route index element={<Homepage />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/list" element={<List />} />
+                <Route path="/orders" element={<Orders />} />
+                <Route path="/user_details" element={<UserDetails />} />
+
+                <Route path="/order/:id" element={<OrderDetails />} />
+                <Route path="category">
+                  <Route path=":categoryName" element={<Products />} />
+                </Route>
+              </Route>
+              <Route
+                path="/user_details/edit_name"
+                element={<ChangeUserName />}
+              />
+            </Routes>
+          </BrowserRouter>
+        </ChakraProvider>
+      </LoginContextController>
+    </ProductsContextController>
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

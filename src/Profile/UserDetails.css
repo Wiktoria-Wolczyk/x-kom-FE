@@ -1,0 +1,236 @@
+.containerForChangeUserNameComponent {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.divForReturnButtonInChangeUserName {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 20px;
+  width: 100%;
+  height: 80px;
+  border: 1px solid gray;
+  background-color: rgb(223, 222, 222);
+  font-size: 20px;
+}
+
+.returnButtonInChangeUserName {
+  padding-right: 20px;
+}
+
+.returnButtonInUserDetails {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  padding-left: 5px;
+  padding-right: 10px;
+  width: 100px;
+  height: 40px;
+  background-color: rgb(223, 222, 222);
+  border-radius: 10px;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.textAccountSettings {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 20px;
+  width: 100vw;
+  height: 80px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.yourDetailsText {
+  padding-left: 20px;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.containerForUserNameAndEdit {
+  display: flex;
+  flex-direction: row;
+  margin-left: 20px;
+  margin-right: 20px;
+  border: 1px solid lightgrey;
+  border-radius: 10px;
+}
+
+.containerForUserName {
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  align-items: center;
+  height: 50px;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-weight: bold;
+}
+
+.pUserFirstName {
+  padding-right: 5px;
+}
+
+.editUserName {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 20px;
+  color: rgb(0, 119, 255);
+  width: 50%;
+}
+
+.userEmailText {
+  margin-top: 30px;
+  padding-left: 20px;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.containerForEmailAndEdit {
+  display: flex;
+  flex-direction: row;
+  margin-left: 20px;
+  margin-right: 20px;
+  border: 1px solid lightgrey;
+  border-radius: 10px;
+}
+
+.containerForEmail {
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  align-items: center;
+  height: 50px;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-weight: bold;
+}
+
+.pUserEmail {
+  padding-right: 5px;
+}
+
+.changeEmail {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 20px;
+  color: rgb(0, 119, 255);
+  width: 50%;
+}
+
+.userPasswordText {
+  margin-top: 30px;
+  padding-left: 20px;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.containerForPasswordAndEdit {
+  display: flex;
+  flex-direction: row;
+  margin-left: 20px;
+  margin-right: 20px;
+  border: 1px solid lightgrey;
+  border-radius: 10px;
+}
+
+.containerForPassword {
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  align-items: center;
+  height: 50px;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-weight: bold;
+}
+
+.pUserPassword {
+  padding-right: 5px;
+}
+
+.editPassword {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 20px;
+  color: rgb(0, 119, 255);
+  width: 50%;
+}
+
+.changePasswordText {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  color: rgb(0, 119, 255);
+  width: 50%;
+}
+
+.lastPasswordChange {
+  margin-left: 20px;
+  padding-top: 5px;
+  font-size: 12px;
+}
+
+.buttonAcceptNameChanges {
+  margin-left: 20px;
+  margin-right: 20px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: rgb(0, 119, 255);
+  color: white;
+}
+
+.containerForForm {
+  height: 100%;
+  margin: 0 15px;
+}
+
+.informationsAboutUser {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 90vh;
+  padding-top: 30px;
+  padding-bottom: 10px;
+}
+
+.containerForAddFile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 30px;
+  border: 1px solid lightgrey;
+  border-radius: 10px;
+}
+
+.changeFile {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  color: rgb(0, 119, 255);
+  width: 50%;
+}
+
+.fileInput {
+  border-width: 1px;
+  display: flex;
+}

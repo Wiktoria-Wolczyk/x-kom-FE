@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Products.css";
-import { Routes, Route, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import {
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
   Image,
@@ -16,31 +15,23 @@ import {
   Button,
 } from "@chakra-ui/react";
 import axios from "axios";
-
-interface IProductsArray {
-  id: number;
-  name: string;
-  price: number;
-  discountedPrice: number;
-  available: number;
-  brand: string;
-  quantity?: number;
-}
+import { IProductsArray } from "../types";
+import { ProductsContext } from "../context/loginContext/ProductsInCartContext";
 
 interface IElement {
   id: number;
 }
 
 function Products() {
-  const [productsArray, setProductsArray] = useState([]);
-
-  let { categoryName } = useParams();
+  const { categoryName } = useParams();
+  const [productsArray, setProductsArray] = useState<IProductsArray[]>([]);
 
   const category = categoryName?.replaceAll("_", " ");
-
-  const [cart, setCart] = useState<any>(
-    JSON.parse(localStorage.getItem("cart") || "[]") || []
+  const [cart, setCart] = useState<IProductsArray[]>(
+    JSON.parse(localStorage.getItem("cart") || "[]") || [],
   );
+
+  const { setArrayWithActualProducts } = useContext(ProductsContext);
 
   // 1. Muszę pobierać z localStorage (tym: getItem) po kluczu "cart".
   // i wyświetlać w koszyku tylko elementy które zostały dodane.
@@ -53,10 +44,10 @@ function Products() {
           "http://localhost:3000/products/filter/page/1/limit/50",
           {
             category: [category],
-          }
+          },
         );
 
-        let allProductsArray = response.data.message?.data;
+        const allProductsArray = response.data.message?.data;
         setProductsArray(allProductsArray);
       } catch (error) {
         console.error(error);
@@ -66,17 +57,17 @@ function Products() {
     fetchProducts();
   }, []);
 
-  function productsToCart(el: IProductsArray) {
-    let arrWithProductsInCart = [...cart]; // to bedzie cart z usestate'a
-    let foundProduct = arrWithProductsInCart.find(
-      (element: IElement) => element.id === el.id
+  function addProductsToCart(el: IProductsArray) {
+    const arrWithProductsInCart = [...cart]; // to bedzie cart z usestate'a
+    const foundProduct = arrWithProductsInCart.find(
+      (element: IElement) => element.id === el.id,
     );
 
     if (foundProduct && foundProduct.quantity) {
       foundProduct.quantity += 1;
 
-      let index = arrWithProductsInCart.findIndex(
-        (product: IElement) => product.id === foundProduct.id
+      const index = arrWithProductsInCart.findIndex(
+        (product: IElement) => product.id === foundProduct!.id,
       );
 
       arrWithProductsInCart[index] = foundProduct;
@@ -86,18 +77,23 @@ function Products() {
     }
 
     setCart(arrWithProductsInCart);
-
-    let saveArray = JSON.stringify(arrWithProductsInCart);
+    setArrayWithActualProducts(arrWithProductsInCart);
+    const saveArray = JSON.stringify(arrWithProductsInCart);
     localStorage.setItem("cart", saveArray);
 
     toast.success("Added to cart!");
   }
 
+  useEffect(() => {
+    setArrayWithActualProducts(cart);
+    // console.log("arractprod", arrayWithActualProducts);
+  }, []);
+
   return (
     <div className="containerForAllJeansTrousers">
       <div className="containerForTrousersCards">
         {productsArray.map((el: IProductsArray) => (
-          <Card maxW="sm" className="categoryCard">
+          <Card key={el.id} maxW="sm" className="categoryCard">
             <CardBody>
               <Image
                 src="https://c.stocksy.com/a/jpm700/z9/1856015.jpg"
@@ -115,7 +111,7 @@ function Products() {
             <CardFooter>
               <ButtonGroup spacing="2">
                 <Button
-                  onClick={() => productsToCart(el)}
+                  onClick={() => addProductsToCart(el)}
                   variant="solid"
                   colorScheme="blue"
                 >

@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Register.css";
-import Navbar from "../navbar/Navbar";
 import { Input, InputGroup, InputRightElement, Button } from "@chakra-ui/react";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -18,14 +17,14 @@ interface IFormValues {
 
 function Register() {
   const [show, setShow] = useState(false);
-  const [isClicked, setIsClicked] = useState(false);
+  // const [isClicked, setIsClicked] = useState(false);
   // const [isRegistered, setIsRegistered] = useState(false);
   const navigate = useNavigate();
 
   const handleClick = () => setShow(!show);
-  const registerClick = () => {
-    setIsClicked(!isClicked);
-  };
+  // const registerClick = () => {
+  //   setIsClicked(!isClicked);
+  // };
 
   const { control, handleSubmit, reset } = useForm({
     defaultValues: {
@@ -179,7 +178,6 @@ function Register() {
             className="buttonAcceptRegister"
             type="submit"
             value="Register"
-            style={{ color: isClicked ? "green" : "red" }}
           />
         </form>
       </div>

@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Input } from "@chakra-ui/react";
 import "./Login.css";
 import axios from "axios";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
+import { LoginContext } from "../context/loginContext/LoginContext";
 
 interface IFormInput {
   email: string;
@@ -19,22 +20,26 @@ function Login() {
     },
   });
 
+  const { userIsLoggedIn, setUserIsLoggedIn, setActualUser } =
+    useContext(LoginContext);
+  console.log(userIsLoggedIn);
+
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     try {
       console.log("data", data);
 
-      let response = await axios.post("http://localhost:3000/auth/login", {
+      const response = await axios.post("http://localhost:3000/auth/login", {
         email: data.email,
         password: data.password,
       });
 
-      let token = response.data.message?.token;
-      let user = response.data.message?.user;
-      let userName = response.data.message?.user.firstName;
+      const token = response.data.message?.token;
+      const user = response.data.message?.user;
+      const userName = response.data.message?.user.firstName;
 
-      let userString = JSON.stringify(user);
+      const userString = JSON.stringify(user);
 
       console.log(userString);
 
@@ -45,7 +50,9 @@ function Login() {
         icon: "👏",
       });
 
-      // setUserIsLoggedIn(true);
+      setUserIsLoggedIn(true);
+      setActualUser(user);
+
       setTimeout(() => {
         navigate("/");
       }, 1000);

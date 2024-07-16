@@ -1,8 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./App.css";
-import { ChakraProvider } from "@chakra-ui/react";
-import { Card, CardBody } from "@chakra-ui/react";
-import { Image, Heading } from "@chakra-ui/react";
 import Navbar from "./navbar/Navbar";
 import { useLocation } from "react-router";
 import { Outlet } from "react-router-dom";
