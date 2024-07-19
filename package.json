@@ -9,6 +9,7 @@
     "@emotion/styled": "^11.11.5",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.1",
+    "@tanstack/react-query": "^5.51.9",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -37,12 +38,6 @@
     "build-css": "tailwindcss build src/styles.css -o public/styles.css",
     "lint": "prettier . --write && eslint"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -59,6 +54,8 @@
     "@eslint/compat": "^1.1.1",
     "@eslint/js": "^9.7.0",
     "eslint": "9.x",
+    "eslint-config-react": "^1.1.7",
+    "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-react": "^7.34.4",
     "globals": "^15.8.0",
     "prettier": "3.3.3",

@@ -17,14 +17,25 @@ import {
 import axios from "axios";
 import { IProductsArray } from "../types";
 import { ProductsContext } from "../context/loginContext/ProductsInCartContext";
+import { useQuery } from "@tanstack/react-query";
 
 interface IElement {
   id: number;
 }
 
+const getProducts = async (category: string) => {
+  const response = await axios.post(
+    "http://localhost:3000/products/filter/page/1/limit/50",
+    {
+      category: [category],
+    },
+  );
+
+  return response.data;
+};
+
 function Products() {
   const { categoryName } = useParams();
-  const [productsArray, setProductsArray] = useState<IProductsArray[]>([]);
 
   const category = categoryName?.replaceAll("_", " ");
   const [cart, setCart] = useState<IProductsArray[]>(
@@ -33,29 +44,41 @@ function Products() {
 
   const { setArrayWithActualProducts } = useContext(ProductsContext);
 
-  // 1. Muszę pobierać z localStorage (tym: getItem) po kluczu "cart".
-  // i wyświetlać w koszyku tylko elementy które zostały dodane.
+  const {
+    error,
+    isError,
+    isLoading,
+    data: productsArray,
+  } = useQuery({
+    queryKey: ["products"],
+    queryFn: () => getProducts(category!),
+    select(data) {
+      return data.message.data;
+    },
+  });
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        // const categoryName = request.params.categoryname;
-        const response = await axios.post(
-          "http://localhost:3000/products/filter/page/1/limit/50",
-          {
-            category: [category],
-          },
-        );
+  //tutaj sie konczy to cudo
 
-        const allProductsArray = response.data.message?.data;
-        setProductsArray(allProductsArray);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchProducts = async () => {
+  //     try {
+  //       // const categoryName = request.params.categoryname;
+  //       const response = await axios.post(
+  //         "http://localhost:3000/products/filter/page/1/limit/50",
+  //         {
+  //           category: [category],
+  //         },
+  //       );
 
-    fetchProducts();
-  }, []);
+  //       const allProductsArray = response.data.message?.data;
+  //       setProductsArray(allProductsArray);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
+
+  //   fetchProducts();
+  // }, []);
 
   function addProductsToCart(el: IProductsArray) {
     const arrWithProductsInCart = [...cart]; // to bedzie cart z usestate'a
@@ -89,10 +112,19 @@ function Products() {
     // console.log("arractprod", arrayWithActualProducts);
   }, []);
 
-  return (
+  console.log(productsArray);
+  return isLoading ? (
+    <div>
+      <p>Loading...</p>
+    </div>
+  ) : isError ? (
+    <div>
+      <p>{error.message}</p>
+    </div>
+  ) : (
     <div className="containerForAllJeansTrousers">
       <div className="containerForTrousersCards">
-        {productsArray.map((el: IProductsArray) => (
+        {productsArray?.map((el: IProductsArray) => (
           <Card key={el.id} maxW="sm" className="categoryCard">
             <CardBody>
               <Image

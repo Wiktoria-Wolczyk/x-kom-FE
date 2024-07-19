@@ -21,44 +21,48 @@ import Orders from "./Profile/Orders";
 import UserDetails from "./Profile/UserDetails";
 import ChangeUserName from "./Profile/Edition/ChangeUserName";
 import { ProductsContextController } from "./context/loginContext/ProductsInCartContext";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
 );
+const queryClient = new QueryClient();
 
 export const TestContext = createContext({});
 
 root.render(
   <React.StrictMode>
-    <ProductsContextController>
-      <LoginContextController>
-        <ChakraProvider>
-          <Toaster position="top-center" reverseOrder={false} />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<App />}>
-                <Route index element={<Homepage />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/list" element={<List />} />
-                <Route path="/orders" element={<Orders />} />
-                <Route path="/user_details" element={<UserDetails />} />
+    <QueryClientProvider client={queryClient}>
+      <ProductsContextController>
+        <LoginContextController>
+          <ChakraProvider>
+            <Toaster position="top-center" reverseOrder={false} />
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<App />}>
+                  <Route index element={<Homepage />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                  <Route path="/cart" element={<Cart />} />
+                  <Route path="/list" element={<List />} />
+                  <Route path="/orders" element={<Orders />} />
+                  <Route path="/user_details" element={<UserDetails />} />
 
-                <Route path="/order/:id" element={<OrderDetails />} />
-                <Route path="category">
-                  <Route path=":categoryName" element={<Products />} />
+                  <Route path="/order/:id" element={<OrderDetails />} />
+                  <Route path="category">
+                    <Route path=":categoryName" element={<Products />} />
+                  </Route>
                 </Route>
-              </Route>
-              <Route
-                path="/user_details/edit_name"
-                element={<ChangeUserName />}
-              />
-            </Routes>
-          </BrowserRouter>
-        </ChakraProvider>
-      </LoginContextController>
-    </ProductsContextController>
+                <Route
+                  path="/user_details/edit_name"
+                  element={<ChangeUserName />}
+                />
+              </Routes>
+            </BrowserRouter>
+          </ChakraProvider>
+        </LoginContextController>
+      </ProductsContextController>
+    </QueryClientProvider>
   </React.StrictMode>,
 );
 
