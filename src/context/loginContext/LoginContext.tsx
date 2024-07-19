@@ -36,11 +36,20 @@ export const LoginContextController = ({
   const [actualUser, setActualUser] = useState<IActualUser | null>(
     localStorage.getItem("user") ? loggedUser : null,
   );
-  console.log({ actualUser });
+
+  const setUserInStateAndLocalStorage = (newUser: IActualUser) => {
+    setActualUser(newUser);
+    localStorage.setItem("user", JSON.stringify(newUser));
+  };
 
   return (
     <LoginContext.Provider
-      value={{ userIsLoggedIn, setUserIsLoggedIn, actualUser, setActualUser }}
+      value={{
+        userIsLoggedIn,
+        setUserIsLoggedIn,
+        actualUser,
+        setActualUser: setUserInStateAndLocalStorage,
+      }}
     >
       {children}
     </LoginContext.Provider>

@@ -9,6 +9,7 @@ import axios from "axios";
 import { Input } from "@chakra-ui/react";
 import { useDropzone } from "react-dropzone";
 import { IActualUser } from "../context/loginContext/LoginContext";
+import { useMutation } from "@tanstack/react-query";
 
 interface IFormValues {
   firstName: string;
@@ -56,12 +57,47 @@ interface IFileWithPreview extends File {
 function UserDetails() {
   const navigate = useNavigate();
   const { actualUser, setActualUser } = useContext(LoginContext);
-
   const [editNameIsClicked, setEditNameIsClicked] = useState(false);
   const [changeEmailIsClicked, setChangeEmailIsClicked] = useState(false);
   const [changePasswordIsClicked, setChangePasswordIsClicked] = useState(false);
   const [files, setFiles] = useState<IFileWithPreview[]>([]);
   const [dragDropIsClicked, setDragDropIsClicked] = useState(false);
+
+  const mutation = useMutation({
+    mutationFn: (data: {
+      firstName: string;
+      lastName: string;
+      email: string;
+      password: string;
+    }) => {
+      return axios.put(
+        `http://localhost:3000/users/${actualUser?.id}`,
+
+        {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.email,
+          password: data.password,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+      );
+    },
+    onSuccess: (data, variables) => {
+      const newActualUser = {
+        ...actualUser!,
+        ...variables,
+      };
+      setActualUser(newActualUser);
+
+      toast("account updated!", {
+        icon: "👏",
+      });
+    },
+  });
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
@@ -81,22 +117,10 @@ function UserDetails() {
 
   const sendAvatar = async () => {
     const formData = new FormData();
-    console.log("mimimim", files);
-    console.log("file", files);
     formData.append("avatar", files[0]!);
     formData.append("userID", `${actualUser!.id}`);
 
-    console.log("newAvatar", files[0]!);
-
-    // const element: any = document.getElementById("avatar");
-
-    // console.log("elel", element!.value);
-
-    // const timeout = () => new Promise((resolve, reject) => setTimeout(() => resolve, 1000))
-
     try {
-      // setTimeout(() => {}, 1000);
-      // await timeout();
       const response = await axios.post(
         "http://localhost:3000/files/fs/upload",
         formData,
@@ -106,9 +130,6 @@ function UserDetails() {
           },
         },
       );
-
-      // console.log("response", response);
-      console.log("AvatarResponse", response.data.message.avatar);
 
       const updatedUser: IActualUser = {
         ...actualUser!,
@@ -154,38 +175,12 @@ function UserDetails() {
   const onSubmit: SubmitHandler<IFormValues> = async (data) => {
     try {
       setEditNameIsClicked(false);
-      const updateUser = async () =>
-        axios.put(
-          `http://localhost:3000/users/${actualUser?.id}`,
-          {
-            firstName: data.firstName,
-            lastName: data.lastName,
-            email: data.email,
-            password: data.password,
-            // confirmPassword: data.confirmPassword,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          },
-        );
 
-      await updateUser();
-
-      const updatedUser = {
-        ...actualUser!,
+      await mutation.mutate({
         firstName: data.firstName,
         lastName: data.lastName,
         email: data.email,
         password: data.password,
-      };
-      setActualUser(updatedUser);
-
-      localStorage.getItem("token");
-      // reset();
-      toast("account updated!", {
-        icon: "👏",
       });
     } catch (err) {
       console.error(err);
