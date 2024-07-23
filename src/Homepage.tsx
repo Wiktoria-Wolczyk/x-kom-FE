@@ -47,9 +47,7 @@ function Homepage() {
           className="divForActualCoupon"
           style={{ zIndex: buttonLoginIsClicked ? 0 : 1 }}
         >
-          <div className="coupon couponName text-red-700 text-base font-semibold">
-            tutaj NAZWA KUPONU
-          </div>
+          <div className="coupon couponName">tutaj NAZWA KUPONU</div>
           <div className="coupon couponCode">
             tutaj KOD DO OTRZYMANIA KUPONU
           </div>
