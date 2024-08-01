@@ -142,7 +142,8 @@
 .divScrollingContainer {
   display: flex;
   flex-direction: column;
-  overflow: auto;
+  background-color: rgb(245, 244, 244);
+  /* overflow: auto; */
 }
 
 .divForActualCoupon {
@@ -181,6 +182,416 @@
   font-size: 15px;
 }
 
+.containerForCategoriesOfProducts {
+  display: flex;
+  overflow-x: auto;
+  margin-left: 10px;
+  margin-top: 20px;
+  margin-right: 10px;
+  gap: 10px;
+  padding-bottom: 20px;
+}
+
+.containerForCategoriesOfProducts::-webkit-scrollbar {
+  display: none;
+}
+
+.categoryContainerForIMGAndName {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  flex: 0 0 auto;
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
+  border: 1px solid lightgray;
+  box-shadow: 0 4px 2px -2px lightgray;
+  background-color: white;
+}
+
+.centeredText {
+  position: absolute;
+  bottom: 5px;
+  text-align: center;
+}
+
+.containerForScrollablePromoPhotos {
+  margin-top: 10px;
+  width: 100%;
+  height: 190px;
+  overflow-x: scroll;
+}
+
+.containerForScrollablePromoPhotos::-webkit-scrollbar {
+  display: none;
+}
+
+.divForPhotos {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding-left: 10px;
+}
+
+.containerForUnBoxOnHomepage {
+  width: 100%;
+  height: 450px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 20px;
+}
+
+.unBoxLoterryDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  border: 1px solid lightgray;
+  box-shadow: 0 4px 2px -2px lightgray;
+  border-radius: 20px;
+  background-color: rgb(246, 243, 251);
+}
+
+.divForBoxesTextAndButtonLottery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 80%;
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
+
+.loterryButton {
+  width: 300px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: rgb(38, 135, 220);
+  color: white;
+  font-size: 18px;
+}
+
+.centeredPhoto {
+  border-radius: 10px;
+  margin-right: 10px;
+  height: 170px;
+}
+
+.containerForRecommended {
+  border: 1px solid lightgray;
+  width: 100%;
+  height: 400px;
+  padding-left: 10px;
+  background-color: white;
+}
+
+.weRecommendText {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.containerForRecommendedProducts {
+  display: flex;
+  height: 350px;
+  padding-left: 10px;
+  overflow: auto;
+  background-color: white;
+}
+
+.containerForRecommendedProducts::-webkit-scrollbar {
+  display: none;
+}
+
+.infoAboutRecommendedProduct {
+  display: flex;
+  align-items: center;
+  border: 1px solid gray;
+  margin-bottom: 5px;
+  font-size: 13px;
+  border-radius: 5px;
+  width: 60px;
+  height: 20px;
+  margin-top: 20px;
+  color: black;
+  justify-content: center;
+  background-color: white;
+}
+
+.selectedForYouText {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.textUnderSelectedForYouText {
+  color: rgb(93, 93, 93);
+}
+
+.containerWithPropositionForClient {
+  border: 1px solid lightgray;
+  width: 100%;
+  height: 380px;
+  padding-left: 10px;
+  margin-top: 20px;
+  background-color: white;
+  padding-bottom: 50px;
+}
+
+.divWithPropositionForClient {
+  display: flex;
+  height: 350px;
+  padding-left: 10px;
+  overflow: auto;
+}
+
+.divWithPropositionForClient::-webkit-scrollbar {
+  display: none;
+}
+
+.infoAboutProductsForClient {
+  display: flex;
+  align-items: center;
+  border: 1px solid gray;
+  margin-bottom: 5px;
+  font-size: 13px;
+  border-radius: 5px;
+  width: 60px;
+  height: 20px;
+  margin-top: 20px;
+  color: black;
+  justify-content: center;
+  background-color: white;
+}
+
+.containerForHotShotDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 600px;
+}
+
+.hotShotDiv {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 540px;
+  margin: 20px;
+  border: 2px solid red;
+  border-radius: 20px;
+  background-color: white;
+}
+
+.hotShotText {
+  width: 100%;
+  font-size: 25px;
+  font-weight: 600;
+  padding-left: 20px;
+  padding-top: 10px;
+}
+
+.saveXPercentDiv {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90px;
+  border: 1px solid black;
+  background-color: rgb(111, 111, 111);
+  color: white;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 5px 0px;
+  border-radius: 5px;
+}
+
+.smallerTextSave {
+  font-size: 13px;
+}
+
+.containerForHotShotIMG {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 220px;
+  margin-top: 10px;
+}
+
+.nameOfHotShotProduct {
+  display: flex;
+  text-align: center;
+  width: 300px;
+
+  font-size: 20px;
+}
+
+.divForPriceInHotShot {
+  height: 60px;
+}
+
+.priceInHotShot {
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.lowestPriceBeforeDiscountDiV {
+  display: flex;
+  font-size: 12px;
+  margin-left: 20px;
+  color: rgb(93, 93, 93);
+  font-weight: 500;
+  line-height: 5px;
+}
+
+.lowestPriceBeforeDiscount {
+  text-decoration: line-through;
+}
+
+.containerForProductsCountInHotShot {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 60px;
+}
+
+.divForCountProducts {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 100%;
+  height: 30px;
+}
+
+.xOfThemLeftDiv {
+  display: flex;
+  align-items: flex-end;
+  font-weight: bold;
+  font-size: 20px;
+  width: 150px;
+  height: 30px;
+}
+
+.xOfThemSoldDiv {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  font-weight: bold;
+  font-size: 20px;
+  width: 150px;
+  height: 30px;
+}
+
+.smallerTextInHotShot {
+  font-size: 15px;
+  font-weight: 500;
+  margin-right: 5px;
+  padding-bottom: 3px;
+}
+
+.chwilowyContainerForPasek {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 12px;
+}
+
+.szaryPasek {
+  width: 90%;
+  height: 11px;
+  background-color: rgb(219, 218, 218);
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+
+.chwilowyDivPasek {
+  width: 80%;
+  height: 10px;
+  background-color: rgb(112, 180, 229);
+  border-radius: 5px;
+}
+
+.containerForTimer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.textInTimer {
+  padding-top: 5px;
+  font-size: 14px;
+}
+
+.hotShotTimer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-top: 10px;
+}
+
+.centerTimeText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 15px;
+}
+
+.hourInHotShotTimer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  width: 60px;
+  height: 60px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  background-color: rgb(213, 213, 213);
+}
+
+.colonInTimer {
+  display: flex;
+  align-items: center;
+  font-size: 25px;
+  padding: 0px 5px;
+  height: 60px;
+}
+
+.minuteInHotShotTimer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  width: 60px;
+  height: 60px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  background-color: rgb(213, 213, 213);
+}
+
+.secondInHotShotTimer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  width: 60px;
+  height: 60px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  background-color: rgb(213, 213, 213);
+}
+
 .ourProductsText {
   display: flex;
   justify-content: center;
@@ -204,4 +615,68 @@
   display: flex;
   justify-content: center;
   margin-top: 20px;
+}
+
+.containerForCardWithProduct {
+  width: 100%;
+  border-bottom: 1px solid rgb(199, 199, 199);
+  background-color: plum;
+}
+
+.containerForPhotoInHomepageProductCart {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 200px;
+  padding-top: 10px;
+  background-color: white;
+}
+
+.productDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  height: 120px;
+  padding-left: 20px;
+  background-color: white;
+  font-size: 15px;
+}
+
+.productName {
+  font-size: 25px;
+}
+
+.priceAndCartContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  height: 90px;
+  padding: 0px 20px;
+  background-color: white;
+}
+
+.DivWithFreeDelivery {
+  display: flex;
+  flex-direction: column;
+}
+
+.Productprice {
+  font-size: 25px;
+}
+
+.freeDeliveryText {
+  color: rgb(13, 167, 54);
+}
+
+.divForCartInProductCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  margin-top: 5px;
+  border: 2px solid rgb(15, 193, 63);
 }

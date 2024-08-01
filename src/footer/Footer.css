@@ -1,0 +1,476 @@
+.containerForFooter {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 2000px;
+  padding-left: 20px;
+}
+
+.contact {
+}
+
+.contactText {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.phoneNumber {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+.phone1 {
+  padding-right: 20px;
+}
+
+.open-close-hours {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 5px;
+  font-size: 12px;
+  margin-left: 45px;
+  width: 150px;
+  color: gray;
+  font-weight: 500;
+}
+
+.emailTextInFooter {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.fa-envelope {
+  padding-right: 20px;
+}
+
+.WhatsApp {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.fa-whatsapp {
+  padding-right: 20px;
+}
+
+.localizations {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.fa-location-dot {
+  padding-right: 20px;
+}
+
+.containerForFbIgYtX {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+  width: 200px;
+  height: 50px;
+}
+
+.OrdersFooter {
+  display: flex;
+  flex-direction: column;
+  border-top: 0.1px solid lightgray;
+  margin-right: 20px;
+  margin-top: 20px;
+}
+
+.ordersButtonInFooter {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 0.1px solid lightgray;
+}
+
+.fa-chevron-up {
+  padding-right: 20px !important;
+}
+
+.fa-angle-down {
+  padding-right: 20px !important;
+}
+
+.containerForOrdersButtonInFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.buttonInFooter {
+  padding-bottom: 10px;
+}
+
+.salesAndInspirationsButtonInFooter {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 0.1px solid lightgray;
+}
+
+.containerForSalesAndInspirationsButtonInFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.xkomButtonInFooter {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 0.1px solid lightgray;
+}
+
+.containerForXkomButtonInFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.divForFooterCompaniesAndCopywright {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+}
+
+.footer-companies {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.imgCompanies {
+  width: 60px;
+  height: 30px;
+}
+
+.copyright {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 10px;
+  font-size: 15px;
+  padding-bottom: 50px;
+  width: 100%;
+  position: relative;
+}
+
+.containerForCopyrightAndText {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.fa-copyright {
+  display: flex;
+  align-items: center;
+  padding-right: 5px;
+}
+
+/* .containerForChatCloud {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 200%;
+  background-color: rgb(38, 135, 220);
+  position: absolute;
+  right: 0px;
+}
+
+.fa-rocketchat {
+  color: white;
+} */
+
+/* #menuInOrders {
+}
+
+.MenuButtonOrdersInFooter {
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+  background-color: white !important;
+  border-radius: 0px !important;
+  height: 50px !important;
+  margin-bottom: 0px !important;
+  padding-bottom: 0px !important;
+  border-top: 1px solid gray !important;
+  margin-right: 20px !important;
+}
+
+.OrdersTextInFooterMenu {
+  position: absolute;
+  top: 25%;
+  left: 0px;
+  font-size: 20px;
+}
+
+.menuListInOrdersFooter {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  border-radius: 0px !important;
+  border: 0px !important;
+  margin-top: 0px !important;
+  padding-top: 0px !important;
+  width: 90vw !important;
+}
+//
+.MenuButtonSalesAndIspirationsInFooter {
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+  background-color: white !important;
+  border-radius: 0px !important;
+  height: 50px !important;
+  margin-bottom: 0px !important;
+  padding-bottom: 0px !important;
+  border-top: 1px solid gray !important;
+  margin-right: 20px !important;
+}
+
+.SalesAndInspirationsTextInFooterMenu {
+  position: absolute;
+  top: 25%;
+  left: 0px;
+  font-size: 20px;
+}
+
+.menuListInSalesAndInspirationsFooter {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  border-radius: 0px !important;
+  border: 0px !important;
+  margin-top: 0px !important;
+  padding-top: 0px !important;
+  width: 90vw !important;
+} */
+
+/* @media only screen and (min-width: 768px) {
+  .containerForFooter {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 1500px;
+  }
+
+  .containerContactMobile {
+    display: none;
+  }
+
+  .contactTextMobile {
+    display: none;
+  }
+  .phoneNumberMobile {
+    display: none;
+  }
+
+  .phone1 {
+    display: none;
+  }
+
+  .open-close-hours-Mobile {
+    display: none;
+  }
+
+  .divForFootersDetails {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    height: 90%;
+  }
+
+  .OrdersFooter {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 20%;
+  }
+
+  .buttonInFooterOrders {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+
+  .buttonInFooterSales {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+
+  .buttonInFooterAboutUs {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+
+  .buttonInFooter {
+    margin-top: 10px;
+  }
+
+  .salesAndInspirations {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 10%;
+  }
+
+  .x-kom {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 20%;
+  }
+
+  .contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 20%;
+  }
+
+  .contactText {
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  .phoneNumber {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 15px;
+  }
+
+  .phone2 {
+    margin-right: 20px;
+  }
+
+  .open-close-hours {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 5px;
+    font-size: 12px;
+    margin-left: 40px;
+    width: 150px;
+    color: gray;
+    font-weight: 500;
+  }
+
+  .emailTextInFooter {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  }
+
+  .fa-envelope {
+    padding-right: 20px;
+  }
+
+  .WhatsApp {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  }
+
+  .fa-whatsapp {
+    padding-right: 20px;
+  }
+
+  .localizations {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  }
+
+  .fa-location-dot {
+    padding-right: 20px;
+  }
+
+  .containerForFbIgYtX {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    width: 80%;
+    height: 50px;
+  }
+
+  .divForFooterCompaniesAndCopywright {
+    width: 100%;
+    height: 20%;
+  }
+
+  .footer-companies {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 70%;
+  }
+
+  .imgCompanies {
+    padding: 0px 40px 0px 40px;
+  }
+
+  .copyright {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    height: 30%;
+    padding-bottom: 10px;
+  }
+
+  .containerForCopyrightAndText {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 120px;
+    font-size: 12px;
+    color: gray;
+    font-weight: 500;
+  }
+} */

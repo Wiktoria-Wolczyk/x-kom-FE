@@ -1,0 +1,19 @@
+.containerForChatCloud {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 10px;
+  z-index: 10;
+  right: 10px;
+  width: 60px;
+  height: 60px;
+  background-color: rgb(38, 135, 220);
+  border-radius: 200%;
+  border: 0.5px solid gray;
+}
+
+.fa-rocketchat {
+  z-index: 2;
+  color: white;
+}

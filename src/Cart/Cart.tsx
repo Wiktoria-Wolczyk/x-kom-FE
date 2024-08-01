@@ -131,161 +131,165 @@ function Cart() {
   };
 
   return (
-    <div className="containerForCart">
-      <div className="divForCartInCartComponent">
-        <span className="cartTextInCartComponent">
-          Cart
-          <p className="countProductsNextToCartText">
-            ({arrWithQuantites} products)
-          </p>
-        </span>
-        <div className="containerForSaveAndClearTrash">
-          <div className="saveDiv">
-            <i className="fa-regular fa-heart"></i>Save
+    <div className="divScrollingContainer">
+      <div className="containerForCart">
+        <div className="divForCartInCartComponent">
+          <span className="cartTextInCartComponent">
+            Cart
+            <p className="countProductsNextToCartText">
+              ({arrWithQuantites} products)
+            </p>
+          </span>
+          <div className="containerForSaveAndClearTrash">
+            <div className="saveDiv">
+              <i className="fa-regular fa-heart"></i>Save
+            </div>
+            <div
+              className="clearTrashDiv"
+              onClick={() => {
+                localStorage.removeItem("cart");
+                clearCart();
+              }}
+            >
+              <i className="fa-regular fa-trash-can"></i>Clear cart
+            </div>
           </div>
-          <div
-            className="clearTrashDiv"
-            onClick={() => {
-              localStorage.removeItem("cart");
-              clearCart();
-            }}
-          >
-            <i className="fa-regular fa-trash-can"></i>Clear cart
-          </div>
-        </div>
-        <div className="divForProductsInCart">
-          <ul className="ulForProductsInCart">
-            {arrayWithActualProducts.map((el: IProductsArray) => {
-              return (
-                <div key={el.id} className="containerForPhotoAndList">
-                  <div className="containerForPhoto">
-                    <img
-                      className="clothesPhotoClass"
-                      src={PhotoClothes}
-                      alt="clothesOnRail"
-                      width="100%"
-                      height="100%"
-                    />
-                  </div>
-                  <li className="listInCart">
-                    <div className="ContainerForElNameAndButton">
-                      <span className="elName">
-                        <p>{el.name}</p>
-                      </span>
-                      <button
-                        onClick={() => {
-                          const productsArr = [...productsInCart];
-                          const arrWithoutDeletedElement: IProductsArray[] =
-                            productsArr.filter(
-                              (element: IProductsInCart) =>
-                                element.id !== el.id,
+          <div className="divForProductsInCart">
+            <ul className="ulForProductsInCart">
+              {arrayWithActualProducts.map((el: IProductsArray) => {
+                return (
+                  <div key={el.id} className="containerForPhotoAndList">
+                    <div className="containerForPhoto">
+                      <img
+                        className="clothesPhotoClass"
+                        src={PhotoClothes}
+                        alt="clothesOnRail"
+                        width="100%"
+                        height="100%"
+                      />
+                    </div>
+                    <li className="listInCart">
+                      <div className="ContainerForElNameAndButton">
+                        <span className="elName">
+                          <p>{el.name}</p>
+                        </span>
+                        <button
+                          onClick={() => {
+                            const productsArr = [...productsInCart];
+                            const arrWithoutDeletedElement: IProductsArray[] =
+                              productsArr.filter(
+                                (element: IProductsInCart) =>
+                                  element.id !== el.id,
+                              );
+
+                            // console.log(
+                            //   "tu ma się usuwać całe zamównienie",
+                            //   arrWithoutDeletedElement
+                            // );
+
+                            setArrayWithActualProducts(
+                              arrWithoutDeletedElement,
                             );
 
-                          // console.log(
-                          //   "tu ma się usuwać całe zamównienie",
-                          //   arrWithoutDeletedElement
-                          // );
+                            const cartWithElements = JSON.stringify(
+                              arrWithoutDeletedElement,
+                            );
 
-                          setArrayWithActualProducts(arrWithoutDeletedElement);
-
-                          const cartWithElements = JSON.stringify(
-                            arrWithoutDeletedElement,
-                          );
-
-                          localStorage.setItem("cart", cartWithElements);
-                        }}
-                        className="buttonDeleteFromCart"
-                      >
-                        <i className="fa-regular fa-trash-can fa-lg"></i>
-                      </button>
-                    </div>
-                    <div className="ContainerForElAvailableAndDiscountedPrice">
-                      <div className="containerForQuantityButtons">
-                        <MinusPlusButtons
-                          value={el.quantity!}
-                          productId={el.id}
-                        />
+                            localStorage.setItem("cart", cartWithElements);
+                          }}
+                          className="buttonDeleteFromCart"
+                        >
+                          <i className="fa-regular fa-trash-can fa-lg"></i>
+                        </button>
                       </div>
-                      <span className="elDiscountedPrice">
-                        <b>price: </b> {el.discountedPrice}$
-                      </span>
+                      <div className="ContainerForElAvailableAndDiscountedPrice">
+                        <div className="containerForQuantityButtons">
+                          <MinusPlusButtons
+                            value={el.quantity!}
+                            productId={el.id}
+                          />
+                        </div>
+                        <span className="elDiscountedPrice">
+                          <b>price: </b> {el.discountedPrice}$
+                        </span>
 
-                      {/* <span className="elAvailable">
+                        {/* <span className="elAvailable">
                       <b>quantity: </b>
                       {el.quantity}
                     </span> */}
-                    </div>
-                  </li>
+                      </div>
+                    </li>
 
-                  {/* <div className="CartProductNameText">Product Name:</div>
+                    {/* <div className="CartProductNameText">Product Name:</div>
               <div className="ProductNameText">{el.name}</div>
               <div className="CartSelectedProducts">Selected Products</div>
               <div className="ProductSelectedText"></div> */}
-                </div>
-              );
-            })}
-          </ul>
-        </div>
-        <div className="divForPriceAndTrash"></div>
-      </div>
-      <div className="containerForCouponInCart">
-        <div className="textAddCouponInCart">
-          <div>
-            <i className="fa-solid fa-ticket"></i>Add coupon code
+                  </div>
+                );
+              })}
+            </ul>
           </div>
-          <i
-            className="fa-solid fa-chevron-up"
-            onClick={() => {
-              chevronCouponCodeClicked();
-              console.log({ addCouponCodeIsClicked });
-            }}
-          ></i>
+          <div className="divForPriceAndTrash"></div>
         </div>
-        {addCouponCodeIsClicked ? (
-          <div className="containerForInputCouponInCart">
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <Controller
-                name="couponCode"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    className="inputToCouponInCart"
-                    placeholder="couponCode"
-                    size="lg"
-                    {...field}
-                  />
+        <div className="containerForCouponInCart">
+          <div className="textAddCouponInCart">
+            <div>
+              <i className="fa-solid fa-ticket"></i>Add coupon code
+            </div>
+            <i
+              className="fa-solid fa-chevron-up"
+              onClick={() => {
+                chevronCouponCodeClicked();
+                console.log({ addCouponCodeIsClicked });
+              }}
+            ></i>
+          </div>
+          {addCouponCodeIsClicked ? (
+            <div className="containerForInputCouponInCart">
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <Controller
+                  name="couponCode"
+                  control={control}
+                  render={({ field }) => (
+                    <Input
+                      className="inputToCouponInCart"
+                      placeholder="couponCode"
+                      size="lg"
+                      {...field}
+                    />
+                  )}
+                />
+              </form>
+
+              <button className="useCouponCodeButton">use</button>
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
+        <div className="containerForSumOrderAndBuy">
+          <div className="divForAmountToPay">
+            <div className="textAmountToPay">Amount to pay:</div>
+            <div className="divForSumAmountToPayAndDiscount">
+              <div className="savedMoney">saved money: {savedMoney}$</div>
+              <div className="amountToPayBeforeAndAfter">
+                {orderFullPrice ? (
+                  <>
+                    <div className="priceBefore">{orderFullPrice}$</div>
+                  </>
+                ) : (
+                  <></>
                 )}
-              />
-            </form>
 
-            <button className="useCouponCodeButton">use</button>
-          </div>
-        ) : (
-          <></>
-        )}
-      </div>
-      <div className="containerForSumOrderAndBuy">
-        <div className="divForAmountToPay">
-          <div className="textAmountToPay">Amount to pay:</div>
-          <div className="divForSumAmountToPayAndDiscount">
-            <div className="savedMoney">saved money: {savedMoney}$</div>
-            <div className="amountToPayBeforeAndAfter">
-              {orderFullPrice ? (
-                <>
-                  <div className="priceBefore">{orderFullPrice}$</div>
-                </>
-              ) : (
-                <></>
-              )}
-
-              <div className="priceAfter">{orderDiscountedPrice}$</div>
+                <div className="priceAfter">{orderDiscountedPrice}$</div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <button onClick={sendOrder} className="buttonBuy">
-          BUY
-        </button>
+          <button onClick={sendOrder} className="buttonBuy">
+            BUY
+          </button>
+        </div>
       </div>
     </div>
   );

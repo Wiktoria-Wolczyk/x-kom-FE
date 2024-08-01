@@ -15,7 +15,12 @@
   height: 100px;
   width: 100%;
   background-color: white;
-  border-bottom: 1px solid grey;
+  border-bottom: 5px solid black;
+  box-shadow: 0 4px 2px -2px lightgray;
+}
+
+.Navbar {
+  padding-bottom: 10px;
 }
 
 .title-User-Cart-Navbar {
@@ -27,6 +32,35 @@
   width: 100%;
   background-color: white;
   padding-top: 5px;
+  padding-left: 10px;
+}
+
+.chwilowy {
+  display: none;
+}
+
+.searchInputForDesktop {
+  display: none;
+}
+
+.borderDiv {
+  display: none;
+}
+
+.containerForDropdownInSearch {
+  display: none;
+}
+
+.searchInCategory {
+  display: none;
+}
+
+.DivForButtonSearch {
+  display: none;
+}
+
+.glass1 {
+  display: none;
 }
 
 .divForUserAndCart {
@@ -38,10 +72,41 @@
   padding-right: 10px;
 }
 
+.hiUser {
+  display: none;
+}
+
 .fa-user {
   display: flex;
   align-items: center;
   padding-right: 20px;
+}
+
+.fa-headset {
+  display: none;
+}
+
+.divForCart {
+  display: flex;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 10px;
+}
+
+.countProductsInCart {
+  width: 18px;
+  height: 18px;
+  border-radius: 18px;
+  background-color: rgb(219, 83, 83);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: -10px;
+  left: 25px;
 }
 
 .Navbar {
@@ -87,46 +152,6 @@
   font-size: 18px;
 }
 
-.Products {
-  margin-top: 0px;
-}
-
-.divForCart {
-  display: flex;
-  align-items: center;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  justify-content: flex-end;
-  padding-right: 10px;
-}
-
-.countProductsInCart {
-  width: 18px;
-  height: 18px;
-  border-radius: 18px;
-  background-color: rgb(219, 83, 83);
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: -10px;
-  left: 25px;
-}
-
-.divForUser {
-  display: flex;
-  justify-content: flex-end;
-  padding-right: 10px;
-  align-items: center;
-  height: 100%;
-  width: 20%;
-}
-
-.loginButtonClass {
-  border: 0px solid white;
-}
-
 .containerForLoginAndRegister {
   display: flex;
   justify-content: space-around;
@@ -152,7 +177,7 @@
   background-color: rgb(205, 234, 247);
 }
 
-.fa-magnifying-glass {
+.glass2 {
   color: gray;
   position: relative;
   left: 30px;
@@ -167,4 +192,279 @@
   margin-right: 20px;
   padding-left: 40px;
   padding-right: 10px;
+}
+
+.DivForButtonSearch {
+  display: none;
+}
+
+@media only screen and (min-width: 768px) {
+  .containerForRegister {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(212, 233, 246);
+  }
+
+  .containerForDesktop {
+    display: flex;
+    height: 100px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .containerForNavbar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+    align-items: center;
+    height: 100px;
+    width: 100%;
+    background-color: white;
+    border-bottom: 1px solid grey;
+    border: 1px solid black;
+  }
+
+  .title-User-Cart-Navbar {
+    display: flex;
+    flex-shrink: 0;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    background-color: white;
+  }
+
+  .LogoIMG {
+    margin-right: 50px;
+  }
+
+  .chwilowy {
+    display: grid;
+    /* justify-content: flex-start; */
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    position: relative;
+  }
+
+  #menu-button-test {
+    background-color: transparent !important;
+  }
+
+  .searchInputForDesktop {
+    /* margin-left: 150px; */
+    /* display: flex; */
+    /* width: 40%; */
+    /* height: 40px; */
+    /* border: 1px solid rgb(238, 238, 238);
+    background-color: rgb(238, 238, 238);
+   
+    margin-top: 5px;
+    margin-bottom: 5px; */
+    /* background-color: black; */
+    padding-left: 20px;
+    padding-right: 120px;
+    background-color: rgb(238, 238, 238);
+    border-radius: 5px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+  }
+
+  .containerForBorderDivAndActions {
+    display: flex;
+    align-self: center;
+    justify-self: flex-end;
+    height: 80%;
+  }
+
+  .borderDiv {
+    display: flex;
+    width: 1px;
+    z-index: 1;
+    border-right: 1px solid black;
+  }
+
+  .containerForDropdownInSearch {
+    display: flex;
+    align-self: center;
+    justify-self: flex-end;
+    padding-right: 50px;
+  }
+
+  .searchInCategory {
+    display: flex;
+  }
+
+  .menuListInDesktop {
+    z-index: 100;
+  }
+
+  .DivForButtonSearch {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 100%;
+    top: 0px;
+    right: 0px;
+    border: 1px solid black;
+    border-radius: 5px;
+    color: white;
+    background-color: black;
+  }
+
+  .divForUserAndCart {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 30%;
+    height: 100%;
+    padding-right: 10px;
+    margin-left: 10px;
+  }
+
+  .hiUser {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100px;
+    height: 50px;
+    margin-right: 20px;
+    font-size: 12px;
+  }
+
+  .fa-user {
+    display: flex;
+    align-items: center;
+    padding-right: 30px;
+  }
+
+  .fa-headset {
+    display: flex;
+    align-items: center;
+    padding-right: 20px;
+  }
+
+  .divForCart {
+    display: flex;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 10px;
+    padding-bottom: 5px;
+  }
+
+  .fa-cart-shopping {
+  }
+
+  .countProductsInCart {
+    width: 18px;
+    height: 18px;
+    border-radius: 18px;
+    background-color: rgb(219, 83, 83);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: -10px;
+    left: 25px;
+  }
+
+  .Navbar {
+    display: none;
+    flex-shrink: 0;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    background-color: white;
+  }
+
+  .divForHamburgerMenu {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    padding-left: 10px;
+  }
+
+  .menuList {
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100% - 50px;
+  }
+
+  .divForMenuCategories {
+    z-index: 2;
+    width: 200px;
+  }
+
+  .category {
+    display: flex;
+    justify-content: center;
+    width: 100px;
+    height: 70px;
+    border-bottom: 1px solid lightgray;
+    margin-top: 30px;
+    font-size: 18px;
+  }
+
+  .containerForLoginAndRegister {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    width: 100%;
+    height: 100px;
+    margin-top: 30px;
+  }
+
+  .buttonLoginInNavbar {
+    width: 40%;
+    height: 80%;
+    border: 1px solid gray;
+    border-radius: 10px;
+    background-color: rgb(205, 234, 247);
+  }
+
+  .buttonRegisterInNavbar {
+    width: 40%;
+    height: 80%;
+    border: 1px solid gray;
+    border-radius: 10px;
+    background-color: rgb(205, 234, 247);
+  }
+
+  .glass1 {
+    color: gray;
+    position: relative;
+    left: 30px;
+  }
+
+  .searchInput {
+    width: 80%;
+    height: 80%;
+    border: 1px solid rgb(238, 238, 238);
+    border-radius: 10px;
+    background-color: rgb(238, 238, 238);
+    margin-right: 20px;
+    padding-left: 40px;
+    padding-right: 10px;
+  }
 }

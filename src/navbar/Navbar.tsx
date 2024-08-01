@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Navbar.css";
-import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
-import { HamburgerIcon } from "@chakra-ui/icons";
+import { Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react";
+import { ChevronDownIcon, HamburgerIcon } from "@chakra-ui/icons";
 import { IconButton } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
@@ -112,93 +112,141 @@ function Navbar({ openAuthModal }: IProps) {
 
   return (
     <ChakraProvider>
-      <div className="containerForNavbar">
-        <div className="title-User-Cart-Navbar">
-          <img
-            src={imageToAdd}
-            alt="X-kom Logo"
-            width={120}
-            onClick={() => navigate("/")}
-          />
-
-          <div className="divForUserAndCart">
-            <i className="fa-regular fa-user fa-xl"></i>
-            <div className="divForCart" onClick={() => navigate("/cart")}>
-              <div className="countProductsInCart">
-                {arrayWithActualProducts?.length}
+      <div className="containerForDesktop">
+        <div className="containerForNavbar">
+          <div className="title-User-Cart-Navbar">
+            <img
+              className="LogoIMG"
+              src={imageToAdd}
+              alt="X-kom Logo"
+              width={120}
+              onClick={() => navigate("/")}
+            />
+            <div className="chwilowy">
+              <input
+                className="searchInputForDesktop"
+                type="search"
+                placeholder="Czego szukasz?"
+              ></input>
+              <div className="containerForBorderDivAndActions">
+                <div className="borderDiv"></div>
+                <div className="containerForDropdownInSearch">
+                  <Menu id="test">
+                    <MenuButton
+                      className="searchInCategory"
+                      as={Button}
+                      rightIcon={<ChevronDownIcon />}
+                    >
+                      Actions
+                    </MenuButton>
+                    <MenuList className="menuListInDesktop">
+                      <MenuItem>Download</MenuItem>
+                      <MenuItem>Create a Copy</MenuItem>
+                      <MenuItem>Mark as Draft</MenuItem>
+                      <MenuItem>Delete</MenuItem>
+                      <MenuItem>Attend a Workshop</MenuItem>
+                    </MenuList>
+                  </Menu>
+                </div>
               </div>
-              <i
-                className="fa-solid fa-cart-shopping fa-xl"
-                style={{ color: "#383838" }}
-              ></i>
+              <div className="DivForButtonSearch">
+                <i className="fa-solid fa-magnifying-glass fa-sm"></i>
+              </div>
+            </div>
+
+            <div className="divForUserAndCart">
+              <div className="hiUser">
+                <p>Cześć,</p>
+                <p>zaloguj się</p>{" "}
+              </div>
+              <i className="fa-regular fa-user fa-xl"></i>
+              <i className="fa-solid fa-headset fa-xl"></i>
+              <div className="divForCart" onClick={() => navigate("/cart")}>
+                <div className="countProductsInCart">
+                  {arrayWithActualProducts?.length}
+                </div>
+                <i
+                  className="fa-solid fa-cart-shopping fa-xl"
+                  style={{ color: "#383838" }}
+                ></i>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="Navbar">
-          <div className="divForHamburgerMenu">
-            <Menu isOpen={menuLoginIsOpen}>
-              <MenuButton
-                as={IconButton}
-                aria-label="Options"
-                icon={<HamburgerIcon />}
-                variant="outline"
-                onClick={() => {
-                  setMenuLoginIsOpen((prev) => !prev);
-                  setButtonLoginIsClicked(!menuLoginIsOpen);
-                }}
-              />
-              <MenuList className="menuList">
-                <div className="divForMenuCategories">
-                  <MenuItem className="category Products">Produkty</MenuItem>
-                  <MenuItem className="category ForHer">Dla niej</MenuItem>
-                  <MenuItem className="category ForHim">Dla niego</MenuItem>
-                  <MenuItem className="category AboutUs">O nas</MenuItem>
-                  <MenuItem className="category Contact">Kontakt</MenuItem>
-                  <MenuItem className="category Statue">Regulamin</MenuItem>
-                </div>
-                <div className="containerForLoginAndRegister">
-                  {userIsLoggedIn ? (
-                    <button
-                      onClick={() => {
-                        navigate("/list");
-                        setMenuLoginIsOpen(false);
-                      }}
-                    >
-                      {actualUser?.firstName} Zalogowana
-                    </button>
-                  ) : (
-                    <>
+          <div className="Navbar">
+            <div className="divForHamburgerMenu">
+              <Menu isOpen={menuLoginIsOpen}>
+                <MenuButton
+                  as={IconButton}
+                  aria-label="Options"
+                  icon={<HamburgerIcon />}
+                  variant="outline"
+                  onClick={() => {
+                    setMenuLoginIsOpen((prev) => !prev);
+                    setButtonLoginIsClicked(!menuLoginIsOpen);
+                  }}
+                />
+                <MenuList className="menuList">
+                  <div className="divForMenuCategories">
+                    <MenuItem className="category Products">Produkty</MenuItem>
+                    <MenuItem className="category ForHer">Dla niej</MenuItem>
+                    <MenuItem className="category ForHim">Dla niego</MenuItem>
+                    <MenuItem className="category AboutUs">O nas</MenuItem>
+                    <MenuItem className="category Contact">Kontakt</MenuItem>
+                    <MenuItem className="category Statue">Regulamin</MenuItem>
+                  </div>
+                  <div className="containerForLoginAndRegister">
+                    {userIsLoggedIn ? (
                       <button
                         onClick={() => {
+                          navigate("/list");
                           setMenuLoginIsOpen(false);
-                          navigate("/login");
                         }}
-                        className="buttonLoginInNavbar"
                       >
-                        Login
+                        {actualUser?.firstName} Zalogowana
                       </button>
-                      <button
-                        onClick={() => {
-                          handleChangeAuthMenuOpen();
-                          navigate("/register");
-                        }}
-                        className="buttonRegisterInNavbar"
-                      >
-                        Register
-                      </button>
-                    </>
-                  )}
-                </div>
-              </MenuList>
-            </Menu>
-            <i className="fa-solid fa-magnifying-glass fa-sm"></i>
+                    ) : (
+                      <>
+                        <button
+                          onClick={() => {
+                            setMenuLoginIsOpen(false);
+                            navigate("/login");
+                          }}
+                          className="buttonLoginInNavbar"
+                        >
+                          Login
+                        </button>
+                        <button
+                          onClick={() => {
+                            handleChangeAuthMenuOpen();
+                            navigate("/register");
+                          }}
+                          className="buttonRegisterInNavbar"
+                        >
+                          Register
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </MenuList>
+              </Menu>
+              <i className="fa-solid fa-magnifying-glass glass2 fa-sm"></i>
+            </div>
+            <input
+              className="searchInput"
+              type="search"
+              placeholder="Czego szukasz?"
+            ></input>
           </div>
-          <input
-            className="searchInput"
-            type="search"
-            placeholder="Czego szukasz?"
-          ></input>
         </div>
+        <div
+          style={{
+            marginTop: 10,
+            border: "1px solid transparent",
+            boxShadow: "0 4px 2px -2px lightgray",
+            width: "100%",
+            height: 10,
+          }}
+        ></div>
       </div>
     </ChakraProvider>
   );

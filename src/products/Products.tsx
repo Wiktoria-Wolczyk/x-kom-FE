@@ -57,8 +57,6 @@ function Products() {
     },
   });
 
-  //tutaj sie konczy to cudo
-
   // useEffect(() => {
   //   const fetchProducts = async () => {
   //     try {
@@ -122,40 +120,42 @@ function Products() {
       <p>{error.message}</p>
     </div>
   ) : (
-    <div className="containerForAllJeansTrousers">
-      <div className="containerForTrousersCards">
-        {productsArray?.map((el: IProductsArray) => (
-          <Card key={el.id} maxW="sm" className="categoryCard">
-            <CardBody>
-              <Image
-                src="https://c.stocksy.com/a/jpm700/z9/1856015.jpg"
-                alt="jeans picture"
-                borderRadius="lg"
-              />
-              <Stack mt="6" spacing="3">
-                <Heading size="md">{el.name}</Heading>
-                <Text color="blue.600" fontSize="2xl">
-                  {el.discountedPrice}$
-                </Text>
-              </Stack>
-            </CardBody>
-            <Divider />
-            <CardFooter>
-              <ButtonGroup spacing="2">
-                <Button
-                  onClick={() => addProductsToCart(el)}
-                  variant="solid"
-                  colorScheme="blue"
-                >
-                  Add to cart
-                </Button>
-                <div className="availableJeans">
-                  Available: <b className="available">{el.available}</b>
-                </div>
-              </ButtonGroup>
-            </CardFooter>
-          </Card>
-        ))}
+    <div className="divScrollingContainer">
+      <div className="containerForAllJeansTrousers">
+        <div className="containerForTrousersCards">
+          {productsArray?.map((el: IProductsArray) => (
+            <Card key={el.id} maxW="sm" className="categoryCard">
+              <CardBody>
+                <Image
+                  src="https://c.stocksy.com/a/jpm700/z9/1856015.jpg"
+                  alt="jeans picture"
+                  borderRadius="lg"
+                />
+                <Stack mt="6" spacing="3">
+                  <Heading size="md">{el.name}</Heading>
+                  <Text color="blue.600" fontSize="2xl">
+                    {el.discountedPrice}$
+                  </Text>
+                </Stack>
+              </CardBody>
+              <Divider />
+              <CardFooter>
+                <ButtonGroup spacing="2">
+                  <Button
+                    onClick={() => addProductsToCart(el)}
+                    variant="solid"
+                    colorScheme="blue"
+                  >
+                    Add to cart
+                  </Button>
+                  <div className="availableJeans">
+                    Available: <b className="available">{el.available}</b>
+                  </div>
+                </ButtonGroup>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
       </div>
     </div>
   );
