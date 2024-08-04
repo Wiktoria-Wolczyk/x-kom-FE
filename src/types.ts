@@ -33,5 +33,5 @@ export interface IProductsArray {
   discountedPrice: number;
   available: number;
   brand: string;
-  quantity?: number;
+  quantity: number;
 }

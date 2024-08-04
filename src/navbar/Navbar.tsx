@@ -240,11 +240,10 @@ function Navbar({ openAuthModal }: IProps) {
         </div>
         <div
           style={{
-            marginTop: 10,
             border: "1px solid transparent",
             boxShadow: "0 4px 2px -2px lightgray",
             width: "100%",
-            height: 10,
+            height: 5,
           }}
         ></div>
       </div>

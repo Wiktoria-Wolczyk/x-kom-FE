@@ -6,8 +6,9 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { ProductsContext } from "../context/loginContext/ProductsInCartContext";
 import { IProductsArray } from "../types";
-import PhotoClothes from "./Photos/clothesPhoto.jpeg";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import AppleIPhone from "../HomepageIcons/Apple iPhone 15 128GB Black.webp";
+import QuantityChanger from "./QuantityChanger";
 
 interface IProductsInCart {
   id: number;
@@ -19,9 +20,6 @@ interface IProductsInCart {
   quantity: number;
 }
 
-//1.przycisk
-//2. zrobic zamownienie na backendzie
-
 interface IFormInput {
   couponCode: string;
 }
@@ -29,13 +27,77 @@ interface IFormInput {
 function Cart() {
   const productsInCart = JSON.parse(localStorage.getItem("cart") || "[]");
 
-  // const [arrayWithActualProducts, setArrayWithActualProducts] =
-  //   useState(productsInCart);
-
   const { arrayWithActualProducts, setArrayWithActualProducts } =
     useContext(ProductsContext);
 
+  console.log({ arrayWithActualProducts });
+  const [cartProducts, setCartProducts] = useState(arrayWithActualProducts);
+
+  const [cartPrice, setCartPrice] = useState(
+    cartProducts.reduce((acc, curr) => {
+      acc += curr.price * curr.quantity;
+      return acc;
+    }, 0),
+  );
+
+  const [cartDiscountedPrice, setCartDiscountedPrice] = useState(
+    cartProducts.reduce((acc, curr) => {
+      acc += curr.discountedPrice * curr.quantity;
+      return acc;
+    }, 0),
+  );
+
+  console.log("prodddducts in cart", productsInCart);
+
+  const changeQuantity = (id: number, change: string) => {
+    // const arr = arrayWithActualProducts.map((el) => {
+    //   if (el.id === id) {
+    //     if (change === "add") {
+    //       el.quantity = el.quantity + 1;
+    //     } else if (change === "remove") {
+    //       el.quantity -= 1;
+    //     }
+    //   }
+
+    //   return el;
+    // });
+
+    setArrayWithActualProducts((prev: IProductsArray[]): IProductsArray[] =>
+      prev.map((el: IProductsArray) => {
+        if (el.id === id) {
+          if (change === "add") {
+            el.quantity = el.quantity + 1;
+          } else if (change === "remove") {
+            el.quantity -= 1;
+          }
+        }
+        return el;
+      }),
+    );
+  };
+
   const [addCouponCodeIsClicked, setAddCouponCodeIsClicked] = useState(false);
+  const [orderDiscountedPrice, setOrderDiscountedPrice] = useState(
+    arrayWithActualProducts.reduce((acc, obj) => {
+      const price = obj.discountedPrice;
+      const quantity = obj.quantity;
+
+      acc += price * quantity;
+      return acc;
+    }, 0),
+  );
+
+  const orderFullPrice = arrayWithActualProducts.reduce((acc, obj) => {
+    const price = obj.price;
+
+    acc += price;
+    return acc;
+  }, 0);
+
+  const savedMoney = 0;
+  // const savedMoney = orderFullPrice - orderDiscountedPrice;
+
+  const [savedMoneyInCart, setSavedMoneyInCart] = useState(0);
 
   const chevronCouponCodeClicked = () => {
     return setAddCouponCodeIsClicked((prev) => !prev);
@@ -49,22 +111,6 @@ function Cart() {
     acc += numberQuantity;
     return acc;
   }, 0);
-
-  const orderDiscountedPrice = arrayWithActualProducts.reduce((acc, obj) => {
-    const price = obj.discountedPrice;
-
-    acc += price;
-    return acc;
-  }, 0);
-
-  const orderFullPrice = arrayWithActualProducts.reduce((acc, obj) => {
-    const price = obj.price;
-
-    acc += price;
-    return acc;
-  }, 0);
-
-  const savedMoney = orderFullPrice - orderDiscountedPrice;
 
   const navigate = useNavigate();
 
@@ -135,14 +181,22 @@ function Cart() {
       <div className="containerForCart">
         <div className="divForCartInCartComponent">
           <span className="cartTextInCartComponent">
-            Cart
-            <p className="countProductsNextToCartText">
-              ({arrWithQuantites} products)
-            </p>
+            Koszyk
+            {arrWithQuantites > 1 ? (
+              <>
+                <p className="countProductsNextToCartText">
+                  ({arrWithQuantites} produkty)
+                </p>
+              </>
+            ) : (
+              <p className="countProductsNextToCartText">
+                ({arrWithQuantites} produkt)
+              </p>
+            )}
           </span>
           <div className="containerForSaveAndClearTrash">
             <div className="saveDiv">
-              <i className="fa-regular fa-heart"></i>Save
+              <i className="fa-regular fa-heart"></i>Zapisz
             </div>
             <div
               className="clearTrashDiv"
@@ -151,7 +205,7 @@ function Cart() {
                 clearCart();
               }}
             >
-              <i className="fa-regular fa-trash-can"></i>Clear cart
+              <i className="fa-regular fa-trash-can"></i>Wyczyść koszyk
             </div>
           </div>
           <div className="divForProductsInCart">
@@ -161,9 +215,9 @@ function Cart() {
                   <div key={el.id} className="containerForPhotoAndList">
                     <div className="containerForPhoto">
                       <img
-                        className="clothesPhotoClass"
-                        src={PhotoClothes}
-                        alt="clothesOnRail"
+                        className="productPhotoClass"
+                        src={AppleIPhone}
+                        alt="Apple IPhone photo"
                         width="100%"
                         height="100%"
                       />
@@ -199,18 +253,27 @@ function Cart() {
                           }}
                           className="buttonDeleteFromCart"
                         >
-                          <i className="fa-regular fa-trash-can fa-lg"></i>
+                          <i className="fa-solid fa-ellipsis-vertical"></i>
                         </button>
                       </div>
                       <div className="ContainerForElAvailableAndDiscountedPrice">
                         <div className="containerForQuantityButtons">
-                          <MinusPlusButtons
-                            value={el.quantity!}
-                            productId={el.id}
+                          <QuantityChanger
+                            quantity={el.quantity}
+                            id={el.id}
+                            changeQuantity={changeQuantity}
                           />
                         </div>
                         <span className="elDiscountedPrice">
-                          <b>price: </b> {el.discountedPrice}$
+                          <div className="earlierPriceDiv">
+                            <p>Najniższa cena:</p>
+                            <p style={{ textDecoration: "line-through" }}>
+                              {el.price} zł
+                            </p>
+                            <div>
+                              <b>cena: </b> {el.discountedPrice}zł
+                            </div>
+                          </div>
                         </span>
 
                         {/* <span className="elAvailable">
@@ -271,17 +334,19 @@ function Cart() {
           <div className="divForAmountToPay">
             <div className="textAmountToPay">Amount to pay:</div>
             <div className="divForSumAmountToPayAndDiscount">
-              <div className="savedMoney">saved money: {savedMoney}$</div>
+              <div className="savedMoney">
+                saved money: {savedMoneyInCart} zł
+              </div>
               <div className="amountToPayBeforeAndAfter">
                 {orderFullPrice ? (
                   <>
-                    <div className="priceBefore">{orderFullPrice}$</div>
+                    <div className="priceBefore">{orderFullPrice} zł</div>
                   </>
                 ) : (
                   <></>
                 )}
 
-                <div className="priceAfter">{orderDiscountedPrice}$</div>
+                <div className="priceAfter">{orderDiscountedPrice} zł</div>
               </div>
             </div>
           </div>
@@ -296,46 +361,3 @@ function Cart() {
 }
 
 export default Cart;
-
-const MinusPlusButtons = ({
-  value,
-  productId,
-}: {
-  value: number;
-  productId: number;
-}) => {
-  //1. value to moj number of quantity
-  const { arrayWithActualProducts } = useContext(ProductsContext);
-
-  const [newQuantityValue] = useState(value);
-
-  const handleAddButton = () => {
-    // setNewQuantityValue((prevValue) => prevValue + 1);
-    const itemToEdit = arrayWithActualProducts.find(
-      (value) => (value.id = productId),
-    );
-    console.log({ itemToEdit });
-  };
-
-  const handleRemoveButton = () => {
-    // setNewQuantityValue((prevValue) =>
-    //   prevValue > 1 ? prevValue - 1 : prevValue
-    // );
-  };
-
-  return (
-    <>
-      <button onClick={handleAddButton} className="plusQuantityButton">
-        +
-      </button>
-      <input
-        className="inputWithQuantityCount"
-        type="number"
-        value={newQuantityValue}
-      />
-      <button onClick={handleRemoveButton} className="minusQuantityButton">
-        -
-      </button>
-    </>
-  );
-};

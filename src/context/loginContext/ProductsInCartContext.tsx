@@ -4,7 +4,9 @@ import { IProductsArray } from "../../types";
 
 interface IProductsContext {
   arrayWithActualProducts: IProductsArray[];
-  setArrayWithActualProducts: (arr: IProductsArray[]) => void;
+  setArrayWithActualProducts: (
+    arr: IProductsArray[] | ((prev: IProductsArray[]) => IProductsArray[]),
+  ) => void;
   buttonLoginIsClicked: boolean;
   setButtonLoginIsClicked: (bool: boolean) => void;
 }
@@ -28,6 +30,15 @@ export const ProductsContextController = ({
   >(JSON.parse(localStorage.getItem("cart") || "[]") || []);
   const [buttonLoginIsClicked, setButtonLoginIsClicked] = useState(false);
 
+  const setArrayWithProductsInStateAndLocalStorage = (
+    newProducts:
+      | IProductsArray[]
+      | ((prev: IProductsArray[]) => IProductsArray[]),
+  ) => {
+    setArrayWithActualProducts(newProducts);
+    localStorage.setItem("cart", JSON.stringify(newProducts));
+  };
+
   useEffect(() => {
     console.log({ arrayWithActualProducts });
   }, [arrayWithActualProducts]);
@@ -36,7 +47,7 @@ export const ProductsContextController = ({
     <ProductsContext.Provider
       value={{
         arrayWithActualProducts,
-        setArrayWithActualProducts,
+        setArrayWithActualProducts: setArrayWithProductsInStateAndLocalStorage,
         buttonLoginIsClicked,
         setButtonLoginIsClicked,
       }}
