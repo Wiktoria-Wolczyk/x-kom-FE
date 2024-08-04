@@ -10,6 +10,7 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import AppleIPhone from "../HomepageIcons/Apple iPhone 15 128GB Black.webp";
 import QuantityChanger from "./QuantityChanger";
 import { LoginContext } from "../context/loginContext/LoginContext";
+import { useMutation } from "@tanstack/react-query";
 
 interface IProductsInCart {
   id: number;
@@ -125,25 +126,25 @@ function Cart() {
     return setArrayWithActualProducts(emptyArr);
   };
 
-  const sendOrder = async () => {
-    try {
-      await axios.post("http://localhost:3000/orders", {
+  const mutation = useMutation({
+    mutationFn: () => {
+      return axios.post("http://localhost:3000/orders", {
         userID: actualUser?.id,
         products: arrayWithActualProducts,
       });
-
-      // console.log("order", order);
+    },
+    onSuccess: () => {
       toast("Order created!", {
         icon: "👏",
       });
+      localStorage.removeItem("cart");
+      setArrayWithActualProducts([]);
+
       setTimeout(() => {
         navigate("/");
-      }, 4000);
-      localStorage.removeItem("cart");
-    } catch (error) {
-      console.error(error);
-    }
-  };
+      }, 1000);
+    },
+  });
 
   return (
     <div className="divScrollingContainer">
@@ -318,9 +319,31 @@ function Cart() {
             </div>
           </div>
 
-          <button onClick={sendOrder} className="buttonBuy">
-            BUY
+          <button
+            onClick={() => mutation.mutate()}
+            disabled={mutation.isPending}
+            className="buttonBuy"
+          >
+            {mutation.isPending ? "Loading..." : "Buy"}
           </button>
+          {mutation.isError ? (
+            <>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  width: 300,
+                  height: 50,
+                  color: "red",
+                  paddingBottom: 10,
+                }}
+              >
+                Wystąpił błąd przy składaniu zamówienia - spróbuj później
+              </div>
+            </>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </div>
