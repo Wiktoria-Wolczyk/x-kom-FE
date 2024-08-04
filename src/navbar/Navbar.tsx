@@ -237,6 +237,17 @@ function Navbar({ openAuthModal }: IProps) {
               placeholder="Czego szukasz?"
             ></input>
           </div>
+          <div className="containerForCategoriesOfProductsDesktop">
+            <button>Laptopy i komputery</button>
+            <button>Smartfony i smatwatche</button>
+            <button>Pozdespoły komputerowe</button>
+            <button>Gaming i streaming</button>
+            <button>Urządzenia peryferyjne</button>
+            <button>TV i audio</button>
+            <button>Smarthome i lifestyle</button>
+            <button>Akcesoria</button>
+            <button>Promocje i nowości</button>
+          </div>
         </div>
         <div
           style={{

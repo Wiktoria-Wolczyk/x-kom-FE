@@ -210,7 +210,8 @@
 
   .containerForDesktop {
     display: flex;
-    height: 100px;
+    height: 140px;
+    padding-top: 10px;
     width: 100%;
     justify-content: center;
   }
@@ -218,14 +219,15 @@
   .containerForNavbar {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    padding-bottom: 10px;
     flex-shrink: 0;
     align-items: center;
-    height: 100px;
+    height: 100%;
     width: 100%;
     background-color: white;
-    border-bottom: 1px solid grey;
-    border: 1px solid black;
+    border: 0px;
+    box-shadow: 0 4px 2px -2px lightgray;
   }
 
   .title-User-Cart-Navbar {
@@ -466,5 +468,17 @@
     margin-right: 20px;
     padding-left: 40px;
     padding-right: 10px;
+  }
+
+  .containerForCategoriesOfProductsDesktop {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 10px;
+    height: 40px;
+    padding: 0px 20px;
+    font-size: 14px;
   }
 }

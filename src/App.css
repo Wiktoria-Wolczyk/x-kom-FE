@@ -196,6 +196,10 @@
   display: none;
 }
 
+.containerForCategoriesOfProductsDesktop {
+  display: none;
+}
+
 .categoryContainerForIMGAndName {
   position: relative;
   display: flex;
@@ -679,4 +683,10 @@
   border-radius: 5px;
   margin-top: 5px;
   border: 2px solid rgb(15, 193, 63);
+}
+
+@media only screen and (min-width: 768px) {
+  .containerForCategoriesOfProducts {
+    display: none;
+  }
 }

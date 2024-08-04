@@ -37,6 +37,8 @@ import Yubico from "../src/HomepageIcons/kluczSprzętowyYubico.webp";
 import AppleIPhone from "../src/HomepageIcons/Apple iPhone 15 128GB Black.webp";
 import { IProductsArray } from "./types";
 import toast from "react-hot-toast";
+import CurrentPromotions1 from "../src/HomepageIcons/monitorywnizszychcenach.jpg";
+import CurrentPromotions2 from "../src/HomepageIcons/zlapakcesoriataniej.webp";
 
 // interface IProductsArrValues {
 //   category: string;
@@ -316,6 +318,7 @@ function Homepage() {
             <CategoryTile key={index} category={category} />
           ))}
         </div>
+
         <div className="containerForScrollablePromoPhotos">
           <div className="divForPhotos">
             <img
