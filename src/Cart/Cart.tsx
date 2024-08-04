@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import "./Cart.css";
 import toast from "react-hot-toast";
 import { Input } from "@chakra-ui/react";
@@ -9,6 +9,7 @@ import { IProductsArray } from "../types";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import AppleIPhone from "../HomepageIcons/Apple iPhone 15 128GB Black.webp";
 import QuantityChanger from "./QuantityChanger";
+import { LoginContext } from "../context/loginContext/LoginContext";
 
 interface IProductsInCart {
   id: number;
@@ -25,79 +26,50 @@ interface IFormInput {
 }
 
 function Cart() {
-  const productsInCart = JSON.parse(localStorage.getItem("cart") || "[]");
-
   const { arrayWithActualProducts, setArrayWithActualProducts } =
     useContext(ProductsContext);
 
-  console.log({ arrayWithActualProducts });
-  const [cartProducts, setCartProducts] = useState(arrayWithActualProducts);
+  const { actualUser } = useContext(LoginContext);
 
-  const [cartPrice, setCartPrice] = useState(
-    cartProducts.reduce((acc, curr) => {
-      acc += curr.price * curr.quantity;
-      return acc;
-    }, 0),
-  );
-
-  const [cartDiscountedPrice, setCartDiscountedPrice] = useState(
-    cartProducts.reduce((acc, curr) => {
-      acc += curr.discountedPrice * curr.quantity;
-      return acc;
-    }, 0),
-  );
-
-  console.log("prodddducts in cart", productsInCart);
-
-  const changeQuantity = (id: number, change: string) => {
-    // const arr = arrayWithActualProducts.map((el) => {
-    //   if (el.id === id) {
-    //     if (change === "add") {
-    //       el.quantity = el.quantity + 1;
-    //     } else if (change === "remove") {
-    //       el.quantity -= 1;
-    //     }
-    //   }
-
-    //   return el;
-    // });
-
-    setArrayWithActualProducts((prev: IProductsArray[]): IProductsArray[] =>
-      prev.map((el: IProductsArray) => {
-        if (el.id === id) {
-          if (change === "add") {
-            el.quantity = el.quantity + 1;
-          } else if (change === "remove") {
-            el.quantity -= 1;
-          }
-        }
-        return el;
-      }),
-    );
-  };
-
-  const [addCouponCodeIsClicked, setAddCouponCodeIsClicked] = useState(false);
-  const [orderDiscountedPrice, setOrderDiscountedPrice] = useState(
-    arrayWithActualProducts.reduce((acc, obj) => {
-      const price = obj.discountedPrice;
-      const quantity = obj.quantity;
-
-      acc += price * quantity;
-      return acc;
-    }, 0),
-  );
-
-  const orderFullPrice = arrayWithActualProducts.reduce((acc, obj) => {
-    const price = obj.price;
-
-    acc += price;
+  const cartPrice = arrayWithActualProducts.reduce((acc, curr) => {
+    console.log("obliczam cartPrice");
+    acc += curr.price * curr.quantity;
     return acc;
   }, 0);
 
-  const savedMoney = 0;
-  // const savedMoney = orderFullPrice - orderDiscountedPrice;
+  // const memoizedPrice = useMemo(() => {
+  //   return arrayWithActualProducts.reduce((acc, curr) => {
+  //     console.log("OBLICZAM MEMO CART PRICE");
+  //     acc += curr.price * curr.quantity;
+  //     return acc;
+  //   }, 0);
+  // }, [arrayWithActualProducts]);
+  // console.log({ memoizedPrice, cartPrice });
 
-  const [savedMoneyInCart, setSavedMoneyInCart] = useState(0);
+  const cartDiscountedPrice = arrayWithActualProducts.reduce((acc, curr) => {
+    acc += curr.discountedPrice * curr.quantity;
+    return acc;
+  }, 0);
+
+  const changeQuantity = (id: number, change: string) => {
+    const arr = arrayWithActualProducts.map((el) => {
+      if (el.id === id) {
+        if (change === "add") {
+          el.quantity = el.quantity + 1;
+        } else if (change === "remove") {
+          el.quantity -= 1;
+        }
+      }
+
+      return el;
+    });
+
+    setArrayWithActualProducts(arr);
+  };
+
+  const [addCouponCodeIsClicked, setAddCouponCodeIsClicked] = useState(false);
+
+  const savedMoney = cartPrice - cartDiscountedPrice;
 
   const chevronCouponCodeClicked = () => {
     return setAddCouponCodeIsClicked((prev) => !prev);
@@ -155,12 +127,9 @@ function Cart() {
 
   const sendOrder = async () => {
     try {
-      //chce miec liste uzytkownikow zeby znalezc tego konkretnego po tokenie,
-      //abym mogla wpisac ktory uzytkownik zamawia
-
       await axios.post("http://localhost:3000/orders", {
-        userID: 25,
-        products: productsInCart,
+        userID: actualUser?.id,
+        products: arrayWithActualProducts,
       });
 
       // console.log("order", order);
@@ -229,7 +198,7 @@ function Cart() {
                         </span>
                         <button
                           onClick={() => {
-                            const productsArr = [...productsInCart];
+                            const productsArr = arrayWithActualProducts;
                             const arrWithoutDeletedElement: IProductsArray[] =
                               productsArr.filter(
                                 (element: IProductsInCart) =>
@@ -334,19 +303,17 @@ function Cart() {
           <div className="divForAmountToPay">
             <div className="textAmountToPay">Amount to pay:</div>
             <div className="divForSumAmountToPayAndDiscount">
-              <div className="savedMoney">
-                saved money: {savedMoneyInCart} zł
-              </div>
+              <div className="savedMoney">saved money: {savedMoney} zł</div>
               <div className="amountToPayBeforeAndAfter">
-                {orderFullPrice ? (
+                {cartPrice ? (
                   <>
-                    <div className="priceBefore">{orderFullPrice} zł</div>
+                    <div className="priceBefore">{cartPrice} zł</div>
                   </>
                 ) : (
                   <></>
                 )}
 
-                <div className="priceAfter">{orderDiscountedPrice} zł</div>
+                <div className="priceAfter">{cartDiscountedPrice} zł</div>
               </div>
             </div>
           </div>
