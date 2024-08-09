@@ -1,8 +1,9 @@
 .App {
   display: flex;
   flex-direction: column;
-  width: 100vw;
-  height: 100vh;
+  margin: auto;
+  height: 100%;
+  width: 100%;
   background-color: white;
 }
 
@@ -200,6 +201,10 @@
   display: none;
 }
 
+.containerForScrollablePromoPhotosOnDesktop {
+  display: none;
+}
+
 .categoryContainerForIMGAndName {
   position: relative;
   display: flex;
@@ -239,6 +244,10 @@
   padding-left: 10px;
 }
 
+.containerForUnBoxAndRecommendedOnDesktop {
+  display: none;
+}
+
 .containerForUnBoxOnHomepage {
   width: 100%;
   height: 450px;
@@ -258,6 +267,7 @@
   box-shadow: 0 4px 2px -2px lightgray;
   border-radius: 20px;
   background-color: rgb(246, 243, 251);
+  padding: 0px 10px;
 }
 
 .divForBoxesTextAndButtonLottery {
@@ -266,12 +276,14 @@
   align-items: center;
   justify-content: space-between;
   height: 80%;
+  width: 100%;
   padding-bottom: 20px;
   padding-top: 10px;
 }
 
 .loterryButton {
-  width: 300px;
+  width: 100%;
+  margin: 0px 10px;
   height: 50px;
   border-radius: 10px;
   background-color: rgb(38, 135, 220);
@@ -685,8 +697,164 @@
   border: 2px solid rgb(15, 193, 63);
 }
 
+.containerForLotteryAndRecommendedProducts {
+  display: flex;
+  flex-direction: column;
+}
+
+.whereIsHotShotInformation {
+  display: none;
+}
+
 @media only screen and (min-width: 768px) {
+  .App {
+    display: flex;
+    flex-direction: column;
+    max-width: 1444px;
+    margin: 10px auto;
+    height: 100vh;
+    background-color: white;
+  }
+
+  .divScrollingContainer {
+    padding-left: 25px;
+    background-color: white;
+  }
+
   .containerForCategoriesOfProducts {
     display: none;
+  }
+
+  .containerForScrollablePromoPhotos {
+    display: none;
+  }
+
+  .containerForScrollablePromoPhotosOnDesktop {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 250px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    background-color: white;
+  }
+
+  .divForPhotosOnDesktop {
+    display: flex;
+    align-items: center;
+    position: relative;
+    border-radius: 5px;
+  }
+
+  .prevPictureButton {
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    position: absolute;
+    left: -25px;
+    background-color: rgb(241, 241, 241);
+    border-radius: 5px;
+  }
+
+  .centeredPhotoOnDesktop {
+    width: 100%;
+    height: 100%;
+  }
+
+  .nextPictureButton {
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    position: absolute;
+    right: -25px;
+    background-color: rgb(241, 241, 241);
+    border-radius: 5px;
+  }
+
+  .containerForUnBoxAndRecommendedOnDesktop {
+    display: flex;
+    width: 90%;
+    height: 600px;
+    margin-left: 50px;
+    background-color: white;
+  }
+
+  .containerForUnboxAndHotShotInformation {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+  }
+
+  .containerForRecommended {
+    margin: 0 15px;
+    border: 0px;
+    width: 990px;
+    height: 600px;
+    padding-left: 10px;
+  }
+
+  .containerForRecommendedProducts {
+    overflow: hidden;
+    flex-wrap: wrap;
+    height: 570px;
+    width: 100%;
+  }
+
+  .containerForLotteryAndRecommendedProducts {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+  }
+
+  .containerTorLotteryAndHotShotInformation {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .unBoxLoterryDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 320px;
+    height: 100%;
+    border: 1px solid lightgray;
+    box-shadow: 0 4px 2px -2px lightgray;
+    border-radius: 20px;
+    background-color: rgb(246, 243, 251);
+    padding: 0px 10px;
+  }
+
+  .whereIsHotShotInformation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 10px;
+    width: 100%;
+    height: 100px;
+    margin: 20px 0px;
+    background-color: rgb(241, 241, 241);
+    border-radius: 5px;
+    font-size: 14px;
+  }
+
+  .boldTextInWhereIsHotShot {
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .infoAboutRecommendedProduct {
+    display: flex;
+    align-items: center;
+    border: 1px solid gray;
+    margin-bottom: 5px;
+    font-size: 13px;
+    border-radius: 5px;
+    width: 60px;
+    height: 20px;
+    margin-top: 0px;
+    color: black;
+    justify-content: center;
+    background-color: white;
   }
 }

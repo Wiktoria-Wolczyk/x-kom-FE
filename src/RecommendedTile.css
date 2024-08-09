@@ -1,0 +1,50 @@
+.containerForProduct {
+  display: flex;
+  flex-shrink: 0;
+  width: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+  padding-top: 50px;
+  row-gap: 15px;
+}
+
+.infoAboutRecommendedProductInRecommended {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.containerForPriceInRecommended {
+  margin-top: auto;
+  padding-top: 45px;
+  position: relative;
+}
+
+@media only screen and (min-width: 768px) {
+  .containerForProduct {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0px;
+    width: 160px;
+    height: 280px;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding-top: 30px;
+    row-gap: 0px;
+  }
+
+  .infoAboutRecommendedProductInRecommended {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  }
+
+  .containerForPriceInRecommended {
+    margin-top: 0px;
+    padding-top: 0px;
+    position: relative;
+  }
+}

@@ -39,7 +39,7 @@ import { IProductsArray } from "./types";
 import toast from "react-hot-toast";
 import CurrentPromotions1 from "../src/HomepageIcons/monitorywnizszychcenach.jpg";
 import CurrentPromotions2 from "../src/HomepageIcons/zlapakcesoriataniej.webp";
-
+import CurrentPromotions3 from "../src/HomepageIcons/rentalPromotion.webp";
 // interface IProductsArrValues {
 //   category: string;
 //   count: number;
@@ -175,6 +175,8 @@ function Homepage() {
     seconds: 59,
   });
 
+  const [photoInSliderIndex, setPhotoInSliderIndex] = useState(0);
+
   // console.log("xyz", timeObj.seconds - 1);
 
   // setinterval, w ktorym co sekunde zmienia sie timeObj.seconds o 1 sekunde w dół
@@ -301,6 +303,32 @@ function Homepage() {
     toast.success("Added to cart!");
   }
 
+  const promoPicturesOnDesktopHomepage = [
+    {
+      name: "text: Emocje w każym pikselu. Monitory w najniższych cenach, and two monitors",
+      img: CurrentPromotions1,
+    },
+    {
+      name: "text: Małe rzeczy, wielkie rabaty. Złap akcesoria taniej do 65%, and road camera",
+      img: CurrentPromotions2,
+    },
+    {
+      name: "text: Nie musisz kupować żeby używać. Sprawdź usługę wynajmu sprzętu, and parts of few phones ",
+      img: CurrentPromotions3,
+    },
+  ];
+
+  useEffect(() => {
+    const intervalID = setInterval(() => {
+      if (photoInSliderIndex >= 2) {
+        return setPhotoInSliderIndex(0);
+      } else {
+        return setPhotoInSliderIndex((prev) => prev + 1);
+      }
+    }, 5000);
+    return () => clearInterval(intervalID);
+  }, [photoInSliderIndex]);
+
   return (
     <>
       <div className="divScrollingContainer">
@@ -318,7 +346,45 @@ function Homepage() {
             <CategoryTile key={index} category={category} />
           ))}
         </div>
-
+        <div className="containerForScrollablePromoPhotosOnDesktop">
+          <div className="divForPhotosOnDesktop">
+            <button
+              className="prevPictureButton"
+              onClick={() => {
+                if (photoInSliderIndex <= 0) {
+                  setPhotoInSliderIndex(0);
+                } else {
+                  setPhotoInSliderIndex((prev) => prev - 1);
+                }
+              }}
+            >
+              <i
+                className="fa-solid fa-chevron-left"
+                style={{ color: "#424242" }}
+              ></i>
+            </button>
+            <img
+              className="centeredPhotoOnDesktop"
+              src={promoPicturesOnDesktopHomepage[photoInSliderIndex].img}
+              alt={promoPicturesOnDesktopHomepage[photoInSliderIndex].name}
+            />
+            <button
+              className="nextPictureButton"
+              onClick={() => {
+                if (photoInSliderIndex < 2) {
+                  return setPhotoInSliderIndex((prev) => prev + 1);
+                } else {
+                  return setPhotoInSliderIndex(0);
+                }
+              }}
+            >
+              <i
+                className="fa-solid fa-chevron-right"
+                style={{ color: "#424242" }}
+              ></i>
+            </button>
+          </div>
+        </div>
         <div className="containerForScrollablePromoPhotos">
           <div className="divForPhotos">
             <img
@@ -348,36 +414,44 @@ function Homepage() {
             />
           </div>
         </div>
-        <div className="containerForUnBoxOnHomepage">
-          <div className="unBoxLoterryDiv">
-            <img
-              src={unboxTextAndIcon}
-              alt="unbox text and icon"
-              width={100}
-              style={{ paddingTop: 20 }}
-            />
-            <div className="divForBoxesTextAndButtonLottery">
-              <img src={UnboxPhoto} alt="photo of boxes" width={250} />
-              <img src={lotteryTextInside} alt="" width={210} />
-              <button className="loterryButton">
-                Losuj zniżki{" "}
-                <i
-                  className="fa-solid fa-chevron-right fa-xs"
-                  style={{ color: "white" }}
-                ></i>
-              </button>
+        <div className="containerForLotteryAndRecommendedProducts">
+          <div className="containerTorLotteryAndHotShotInformation">
+            <div className="unBoxLoterryDiv">
+              <img
+                src={unboxTextAndIcon}
+                alt="unbox text and icon"
+                width={100}
+                style={{ paddingTop: 20 }}
+              />
+              <div className="divForBoxesTextAndButtonLottery">
+                <img src={UnboxPhoto} alt="photo of boxes" width={250} />
+                <img src={lotteryTextInside} alt="" width={210} />
+                <button className="loterryButton">
+                  Losuj zniżki{" "}
+                  <i
+                    className="fa-solid fa-chevron-right fa-xs"
+                    style={{ color: "white" }}
+                  ></i>
+                </button>
+              </div>
+            </div>
+            <div className="whereIsHotShotInformation">
+              <p className="boldTextInWhereIsHotShot">
+                Gdzie jest gorący strzał
+              </p>
+              <p>Przenieśliśmy go niżej. Przewiń stronę w dół</p>
             </div>
           </div>
-        </div>
-        <div className="containerForRecommended">
-          <p className="weRecommendText">Polecamy</p>
-          <div className="containerForRecommendedProducts">
-            {recommendedProductsArray.map((recommendedProducts, index) => (
-              <RecommendedProducts
-                key={index}
-                recommendedProducts={recommendedProducts}
-              />
-            ))}
+          <div className="containerForRecommended">
+            <p className="weRecommendText">Polecamy</p>
+            <div className="containerForRecommendedProducts">
+              {recommendedProductsArray.map((recommendedProducts, index) => (
+                <RecommendedProducts
+                  key={index}
+                  recommendedProducts={recommendedProducts}
+                />
+              ))}
+            </div>
           </div>
         </div>
         <div className="containerWithPropositionForClient">

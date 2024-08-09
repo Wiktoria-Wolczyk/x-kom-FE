@@ -1,4 +1,5 @@
 import React from "react";
+import "./RecommendedTile.css";
 
 interface recommendedProducts {
   name: string;
@@ -15,21 +16,22 @@ const recommendedProducts = ({
 }) => {
   return (
     <div
-      style={{
-        flexShrink: 0,
-        width: 160,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "flex-start",
-        position: "relative",
-        paddingTop: 50,
-        rowGap: 15,
-      }}
+      className="containerForProduct"
+      // style={{
+      //   flexShrink: 0,
+      //   width: 160,
+      //   display: "flex",
+      //   flexDirection: "column",
+      //   justifyContent: "flex-start",
+      //   position: "relative",
+      //   paddingTop: 50,
+      //   rowGap: 15,
+      // }}
     >
       {recommendedProducts.information && (
         <span
-          className="infoAboutRecommendedProduct"
-          style={{ position: "absolute", top: 0, left: 0 }}
+          className="infoAboutRecommendedProductInRecommended"
+          // style={{ position: "absolute", top: 0, left: 0 }}
         >
           {recommendedProducts.information}
         </span>
@@ -44,7 +46,10 @@ const recommendedProducts = ({
       />
       <span>{recommendedProducts.name}</span>
 
-      <div style={{ marginTop: "auto", paddingTop: 45, position: "relative" }}>
+      <div
+        className="containerForPriceInRecommended"
+        // style={{ marginTop: "auto", paddingTop: 45, position: "relative" }}
+      >
         {recommendedProducts.oldPrice ? (
           <span
             style={{
