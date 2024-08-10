@@ -468,63 +468,80 @@ function Homepage() {
             ))}
           </div>
         </div>
-        <div className="containerForHotShotDiv">
-          <div className="hotShotDiv">
-            <p className="hotShotText">Gorący strzał</p>
-            <div className="saveXPercentDiv">
-              <p className="smallerTextSave">Oszczędź</p> 23%
-            </div>
-            <div className="containerForHotShotIMG">
-              <img
-                src={Yubico}
-                alt="Klucz sprzętowy Yubico"
-                width={200}
-                height={200}
-              />
-              <p className="nameOfHotShotProduct">
-                Klucz sprzętowy Yubico YubiKey 5C NFC
-              </p>
-            </div>
-            <div className="divForPriceInHotShot">
-              <p className="priceInHotShot">199,00 zł</p>
-              <div className="lowestPriceBeforeDiscountDiV">
-                <p className="lowestPriceBeforeDiscount">259,00 zł</p>
-                <p>- najniższa cena z 30 dni przed obniżką</p>
+        <div className="containerForHotShotAndWeekendHits">
+          <div className="containerForHotShotDiv">
+            <div className="hotShotDiv">
+              <p className="hotShotText">Gorący strzał</p>
+              <div className="saveXPercentDiv">
+                <p className="smallerTextSave">Oszczędź</p> 23%
               </div>
-            </div>
-            <div className="containerForProductsCountInHotShot">
-              <div className="divForCountProducts">
-                <div className="xOfThemLeftDiv">
-                  <p className="smallerTextInHotShot"> pozostało</p>800
-                </div>
-                <div className="xOfThemSoldDiv">
-                  <p className="smallerTextInHotShot"> sprzedano</p>200
+              <div className="containerForHotShotIMG">
+                <img
+                  src={Yubico}
+                  alt="Klucz sprzętowy Yubico"
+                  width={200}
+                  height={200}
+                />
+                <p className="nameOfHotShotProduct">
+                  Klucz sprzętowy Yubico YubiKey 5C NFC
+                </p>
+              </div>
+              <div className="divForPriceInHotShot">
+                <p className="priceInHotShot">199,00 zł</p>
+                <div className="lowestPriceBeforeDiscountDiV">
+                  <p className="lowestPriceBeforeDiscount">259,00 zł</p>
+                  <p>- najniższa cena z 30 dni przed obniżką</p>
                 </div>
               </div>
-              <div className="chwilowyContainerForPasek">
-                <div className="szaryPasek">
-                  <div className="chwilowyDivPasek"></div>
+              <div className="containerForProductsCountInHotShot">
+                <div className="divForCountProducts">
+                  <div className="xOfThemLeftDiv">
+                    <p className="smallerTextInHotShot"> pozostało</p>800
+                  </div>
+                  <div className="xOfThemSoldDiv">
+                    <p className="smallerTextInHotShot"> sprzedano</p>200
+                  </div>
+                </div>
+                <div className="chwilowyContainerForPasek">
+                  <div className="szaryPasek">
+                    <div className="chwilowyDivPasek"></div>
+                  </div>
+                </div>
+              </div>
+              <div className="containerForTimer">
+                <p className="textInTimer">Śpiesz się, oferta kończy się za:</p>
+                <div className="hotShotTimer">
+                  <div className="centerTimeText">
+                    <div className="hourInHotShotTimer">{timeObj.hour}</div>
+                    <p>godz.</p>
+                  </div>
+                  <p className="colonInTimer">:</p>
+                  <div className="centerTimeText">
+                    <div className="minuteInHotShotTimer">
+                      {timeObj.minutes}
+                    </div>
+                    <p>min.</p>
+                  </div>
+                  <p className="colonInTimer">:</p>
+                  <div className="centerTimeText">
+                    <div className="secondInHotShotTimer">
+                      {timeObj.seconds}
+                    </div>
+                    <p>sek.</p>
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="containerForTimer">
-              <p className="textInTimer">Śpiesz się, oferta kończy się za:</p>
-              <div className="hotShotTimer">
-                <div className="centerTimeText">
-                  <div className="hourInHotShotTimer">{timeObj.hour}</div>
-                  <p>godz.</p>
-                </div>
-                <p className="colonInTimer">:</p>
-                <div className="centerTimeText">
-                  <div className="minuteInHotShotTimer">{timeObj.minutes}</div>
-                  <p>min.</p>
-                </div>
-                <p className="colonInTimer">:</p>
-                <div className="centerTimeText">
-                  <div className="secondInHotShotTimer">{timeObj.seconds}</div>
-                  <p>sek.</p>
-                </div>
-              </div>
+          </div>
+          <div className="containerForTextAndProductsInWeekendHits">
+            <div className="textWeekendHits">Hity tygodnia</div>
+            <div className="containerForWeekendHits">
+              {recommendedProductsArray.map((recommendedProducts, index) => (
+                <RecommendedProducts
+                  key={index}
+                  recommendedProducts={recommendedProducts}
+                />
+              ))}
             </div>
           </div>
         </div>

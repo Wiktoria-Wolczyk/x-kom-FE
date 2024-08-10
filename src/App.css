@@ -609,6 +609,10 @@
   background-color: rgb(213, 213, 213);
 }
 
+.containerForTextAndProductsInWeekendHits {
+  display: none;
+}
+
 .ourProductsText {
   display: flex;
   justify-content: center;
@@ -863,5 +867,43 @@
     color: black;
     justify-content: center;
     background-color: white;
+  }
+
+  .containerForHotShotAndWeekendHits {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+
+  .containerForHotShotDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    height: 600px;
+  }
+
+  .containerForTextAndProductsInWeekendHits {
+    display: flex;
+    flex-direction: column;
+    margin-left: 40px;
+  }
+
+  .textWeekendHits {
+    font-size: 25px;
+    font-weight: 600;
+  }
+
+  .containerForWeekendHits {
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+    flex-wrap: wrap;
+    height: 570px;
+    width: 980px;
+    align-content: space-between;
+    margin-top: 10px;
   }
 }
