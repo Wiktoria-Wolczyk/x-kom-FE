@@ -14,7 +14,7 @@
   display: flex;
   justify-content: center;
   position: absolute;
-  top: 0px;
+  top: 15px;
   left: 0px;
   border: 1px solid gray;
   border-radius: 5px;
@@ -23,8 +23,27 @@
 
 .containerForPriceInRecommended {
   margin-top: auto;
-  padding-top: 45px;
+  padding-top: 0px;
   position: relative;
+}
+
+.containerForTextLowestPrice {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-right: 10px;
+  color: gray;
+
+  position: relative;
+  top: 0px;
+  left: 0px;
+  font-size: 14px;
+  width: 150px;
+  text-wrap: pretty;
+}
+
+.oldPrice {
+  text-decoration: line-through;
 }
 
 @media only screen and (min-width: 768px) {
@@ -32,13 +51,14 @@
     display: flex;
     flex-direction: column;
     flex-shrink: 0px;
-    width: 160px;
-    height: 280px;
+    width: 25%;
+    height: 270px;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
     position: relative;
     padding-top: 30px;
     row-gap: 0px;
+    padding-right: 10px;
   }
 
   .infoAboutRecommendedProductInRecommended {
@@ -52,9 +72,37 @@
 
   .containerForPriceInRecommended {
     display: flex;
+    flex-direction: column;
+    align-items: space-between;
     justify-content: center;
-    margin-top: 0px;
+    margin-top: auto;
     padding-top: 0px;
     position: relative;
+    width: 100%;
+  }
+
+  .containerForTextLowestPrice {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    width: 200px;
+    font-size: 14px;
+    padding-right: 10px;
+    text-wrap: pretty;
+    color: gray;
+  }
+
+  .oldPrice {
+    text-decoration: line-through;
+    padding-left: 5px;
+  }
+
+  .actualPriceUnderLowestPrice {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
   }
 }

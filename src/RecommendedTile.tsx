@@ -15,24 +15,9 @@ const recommendedProducts = ({
   recommendedProducts: recommendedProducts;
 }) => {
   return (
-    <div
-      className="containerForProduct"
-      // style={{
-      //   flexShrink: 0,
-      //   width: 160,
-      //   display: "flex",
-      //   flexDirection: "column",
-      //   justifyContent: "flex-start",
-      //   position: "relative",
-      //   paddingTop: 50,
-      //   rowGap: 15,
-      // }}
-    >
+    <div className="containerForProduct">
       {recommendedProducts.information && (
-        <span
-          className="infoAboutRecommendedProductInRecommended"
-          // style={{ position: "absolute", top: 0, left: 0 }}
-        >
+        <span className="infoAboutRecommendedProductInRecommended">
           {recommendedProducts.information}
         </span>
       )}
@@ -46,31 +31,19 @@ const recommendedProducts = ({
       />
       <span>{recommendedProducts.name}</span>
 
-      <div
-        className="containerForPriceInRecommended"
-        // style={{ marginTop: "auto", paddingTop: 45, position: "relative" }}
-      >
+      <div className="containerForPriceInRecommended">
         {recommendedProducts.oldPrice ? (
-          <span
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              fontSize: 14,
-              maxWidth: 100,
-              textWrap: "pretty",
-            }}
-          >
+          <div className="containerForTextLowestPrice">
             Najniższa cena{" "}
-            <span style={{ textDecoration: "line-through" }}>
-              {recommendedProducts.oldPrice}
-            </span>
-          </span>
+            <span className="oldPrice">{recommendedProducts.oldPrice}</span>
+          </div>
         ) : (
           <></>
         )}
 
-        <span>{recommendedProducts.price}</span>
+        <div className="actualPriceUnderLowestPrice">
+          {recommendedProducts.price}
+        </div>
       </div>
     </div>
   );
