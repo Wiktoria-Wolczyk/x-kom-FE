@@ -49,7 +49,7 @@ function Footer() {
             <i className="fa-brands fa-x-twitter fa-lg"></i>
           </div>
         </div>
-        <div className="OrdersFooter">
+        <div className="ordersFooter">
           {!orderArrowIsOpen ? (
             <div
               className="ordersButtonInFooter"
