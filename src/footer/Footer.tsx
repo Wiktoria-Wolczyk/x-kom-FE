@@ -50,49 +50,38 @@ function Footer() {
           </div>
         </div>
         <div className="ordersFooter">
-          {!orderArrowIsOpen ? (
+          <>
             <div
               className="ordersButtonInFooter"
-              style={{ borderBottom: "0.1px solid lightgray" }}
+              style={{ border: 0 }}
+              onClick={() => {
+                setOrderArrowIsOpen(!orderArrowIsOpen);
+                setSalesAndInspirationsAreOpen(false);
+                setXkomButtonIsOpen(false);
+              }}
             >
               <p>Zamówienia</p>
               <i
-                className="fa-solid fa-angle-down fa-sm"
-                onClick={() => {
-                  setOrderArrowIsOpen(true);
-                  setSalesAndInspirationsAreOpen(false);
-                  setXkomButtonIsOpen(false);
-                }}
+                className={`fa-solid fa-${orderArrowIsOpen ? "chevron-up" : "angle-down"} fa-sm`}
               ></i>
             </div>
-          ) : (
-            <>
-              <div className="ordersButtonInFooter" style={{ border: 0 }}>
-                <p>Zamówienia</p>
-                <i
-                  className="fa-solid fa-chevron-up fa-sm"
-                  onClick={() => {
-                    setOrderArrowIsOpen(false);
-                    setSalesAndInspirationsAreOpen(false);
-                    setXkomButtonIsOpen(false);
-                  }}
-                ></i>
-              </div>
-              <div className="containerForOrdersButtonInFooter">
-                <button className="buttonInFooter">Dostawa i płatność</button>
-                <button className="buttonInFooter">Raty</button>
-                <button className="buttonInFooter">Leasing</button>
-                <button className="buttonInFooter">Wynajem sprzętu</button>
-                <button className="buttonInFooter">Ubezpieczenia</button>
-                <button className="buttonInFooter">TaxFree</button>
-                <button className="buttonInFooter">Montaż</button>
-                <button className="buttonInFooter">Zwroty i reklamacje</button>
-                <button className="buttonInFooter">
-                  Najczęściej zadawane pytania
-                </button>
-              </div>
-            </>
-          )}
+            <div
+              className="containerForOrdersButtonInFooter"
+              style={{ display: orderArrowIsOpen ? "flex" : "none" }}
+            >
+              <button className="buttonInFooter">Dostawa i płatność</button>
+              <button className="buttonInFooter">Raty</button>
+              <button className="buttonInFooter">Leasing</button>
+              <button className="buttonInFooter">Wynajem sprzętu</button>
+              <button className="buttonInFooter">Ubezpieczenia</button>
+              <button className="buttonInFooter">TaxFree</button>
+              <button className="buttonInFooter">Montaż</button>
+              <button className="buttonInFooter">Zwroty i reklamacje</button>
+              <button className="buttonInFooter">
+                Najczęściej zadawane pytania
+              </button>
+            </div>
+          </>
           {!salesAndInspirationsAreOpen ? (
             <div
               className="salesAndInspirationsButtonInFooter"

@@ -479,9 +479,25 @@
 } */
 
 @media only screen and (min-width: 768px) {
+  .containerForFooter {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-left: 20px;
+  }
+
+  .divForFootersDetails {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 30px;
+    padding: 20px;
+    height: 600px;
+    background-color: rgb(215, 254, 254);
+  }
+
   .contact {
-    padding-left: 25px;
-    padding-top: 25px;
+    padding-left: 0px;
+    padding-top: 0cap;
   }
 
   .ordersFooter {
@@ -490,5 +506,13 @@
 
   .footer-companies {
     padding-left: 25px;
+  }
+
+  .ordersButtonInFooter i {
+    display: none;
+  }
+
+  .containerForOrdersButtonInFooter {
+    display: flex !important;
   }
 }
