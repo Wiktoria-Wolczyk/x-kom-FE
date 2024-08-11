@@ -15,17 +15,18 @@ const productsForClient = ({
 }) => {
   return (
     <div
-      style={{
-        flexShrink: 0,
-        width: 160,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "flex-start",
-        position: "relative",
-        paddingTop: 50,
-        rowGap: 15,
-        height: 140,
-      }}
+      className="containerForProductInSelectedForClient"
+      // style={{
+      //   flexShrink: 0,
+      //   width: 160,
+      //   display: "flex",
+      //   flexDirection: "column",
+      //   justifyContent: "flex-start",
+      //   position: "relative",
+      //   paddingTop: 50,
+      //   rowGap: 15,
+      //   height: 140,
+      // }}
     >
       {productsForClient.information && (
         <span

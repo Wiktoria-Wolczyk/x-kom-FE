@@ -50,7 +50,7 @@ function Footer() {
           </div>
         </div>
         <div className="ordersFooter">
-          <>
+          <div className="containerForFooterDetails">
             <div
               className="ordersButtonInFooter"
               style={{ border: 0 }}
@@ -81,88 +81,72 @@ function Footer() {
                 Najczęściej zadawane pytania
               </button>
             </div>
-          </>
-          {!salesAndInspirationsAreOpen ? (
+          </div>
+
+          <div className="containerForFooterDetails">
             <div
               className="salesAndInspirationsButtonInFooter"
-              style={{ borderBottom: "0.1px solid lightgray" }}
+              style={{ border: 0 }}
+              onClick={() => {
+                setSalesAndInspirationsAreOpen(!salesAndInspirationsAreOpen);
+                setOrderArrowIsOpen(false);
+                setXkomButtonIsOpen(false);
+              }}
             >
               <p>Promocje i inspiracje</p>
               <i
-                className="fa-solid fa-angle-down fa-sm"
-                onClick={() => {
-                  setSalesAndInspirationsAreOpen(true);
-                  setOrderArrowIsOpen(false);
-                  setXkomButtonIsOpen(false);
-                }}
+                className={`fa-solid fa-${salesAndInspirationsAreOpen ? "chevron-up" : "angle-down"} fa-sm`}
               ></i>
             </div>
-          ) : (
-            <>
-              <div
-                className="salesAndInspirationsButtonInFooter"
-                style={{ border: 0 }}
-              >
-                <p>Promocje i inspiracje</p>
-                <i
-                  className="fa-solid fa-chevron-up fa-sm"
-                  onClick={() => {
-                    setSalesAndInspirationsAreOpen(false);
-                    setOrderArrowIsOpen(false);
-                    setXkomButtonIsOpen(false);
-                  }}
-                ></i>
-              </div>
-              <div className="containerForSalesAndInspirationsButtonInFooter">
-                <button className="buttonInFooter">Wyprzedaż</button>
-                <button className="buttonInFooter">Gorący strzał</button>
-                <button className="buttonInFooter">un.Box</button>
-                <button className="buttonInFooter">Wynajem sprzętu</button>
-                <button className="buttonInFooter">Promocje</button>
-                <button className="buttonInFooter">Poradniki</button>
-                <button className="buttonInFooter">Aktualności</button>
-              </div>
-            </>
-          )}
-          {!xkomButtonIsOpen ? (
+            <div
+              className="containerForSalesAndInspirationsButtonInFooter"
+              style={{ display: salesAndInspirationsAreOpen ? "flex" : "none" }}
+            >
+              <button className="buttonInFooter">Wyprzedaż</button>
+              <button className="buttonInFooter">Gorący strzał</button>
+              <button className="buttonInFooter">un.Box</button>
+              <button className="buttonInFooter">Wynajem sprzętu</button>
+              <button className="buttonInFooter">Promocje</button>
+              <button className="buttonInFooter">Poradniki</button>
+              <button className="buttonInFooter">Aktualności</button>
+            </div>
+          </div>
+
+          <div className="containerForFooterDetails">
             <div
               className="xkomButtonInFooter"
-              style={{ borderBottom: "0.1px solid lightgray" }}
+              style={{ border: 0 }}
+              onClick={() => {
+                setXkomButtonIsOpen(!xkomButtonIsOpen);
+                setOrderArrowIsOpen(false);
+                setSalesAndInspirationsAreOpen(false);
+              }}
             >
               <p>x-kom</p>
               <i
-                className="fa-solid fa-angle-down fa-sm"
-                onClick={() => {
-                  setXkomButtonIsOpen(true);
-                  setOrderArrowIsOpen(false);
-                  setSalesAndInspirationsAreOpen(false);
-                }}
+                className={`fa-solid fa-${xkomButtonIsOpen ? "chevron-up" : "angle-down"} fa-sm`}
               ></i>
             </div>
-          ) : (
-            <>
-              <div className="xkomButtonInFooter" style={{ border: 0 }}>
-                <p>x-kom</p>
-                <i
-                  className="fa-solid fa-chevron-up fa-sm"
-                  onClick={() => {
-                    setXkomButtonIsOpen(false);
-                    setOrderArrowIsOpen(false);
-                    setSalesAndInspirationsAreOpen(false);
-                  }}
-                ></i>
-              </div>
-              <div className="containerForXkomButtonInFooter">
-                <button className="buttonInFooter">Wyprzedaż</button>
-                <button className="buttonInFooter">Gorący strzał</button>
-                <button className="buttonInFooter">un.Box</button>
-                <button className="buttonInFooter">Wynajem sprzętu</button>
-                <button className="buttonInFooter">Promocje</button>
-                <button className="buttonInFooter">Poradniki</button>
-                <button className="buttonInFooter">Aktualności</button>
-              </div>
-            </>
-          )}
+            <div
+              className="containerForXkomButtonInFooter"
+              style={{ display: xkomButtonIsOpen ? "flex" : "none" }}
+            >
+              <button className="buttonInFooterAboutUs">O nas</button>
+              <button className="buttonInFooter">Regulamin</button>
+              <button className="buttonInFooter">Polityka prywatności</button>
+              <button className="buttonInFooter">Polityka cookies</button>
+              <button className="buttonInFooter">Regulamin newslettera</button>
+              <button className="buttonInFooter">Biuro prasowe</button>
+              <button className="buttonInFooter">Zamówienia publiczne</button>
+              <button className="buttonInFooter">Zakupy dla firm</button>
+              <button className="buttonInFooter">Współpracamarketingowa</button>
+              <button className="buttonInFooter">Geex</button>
+              <button className="buttonInFooter">Forum</button>
+              <button className="buttonInFooter">Kariera</button>
+              <button className="buttonInFooter">Kontakt</button>
+              <button className="buttonInFooter">Realizowane projekty</button>
+            </div>
+          </div>
 
           {/* <Menu id="menuInOrders">
             <MenuButton

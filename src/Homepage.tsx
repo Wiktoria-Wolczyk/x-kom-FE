@@ -4,15 +4,15 @@ import { Image, Heading } from "@chakra-ui/react";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import { ProductsContext } from "./context/loginContext/ProductsInCartContext";
-import Computer from "../src/HomepageIcons/computer-icon.jpeg";
-import Smartphones from "../src/HomepageIcons/smartphone-icon.jpeg";
-import IC from "../src/HomepageIcons/integratedcircuit-icon.jpeg";
-import GamesAcc from "../src/HomepageIcons/Game-Controller-icon.jpeg";
-import Printer from "../src/HomepageIcons/Printer-icon.jpeg";
-import TV from "../src/HomepageIcons/tvIcon.webp";
-import Smarthome from "../src/HomepageIcons/Smarthome-icon.jpeg";
-import Accessories from "../src/HomepageIcons/-headphones-icon.jpeg";
-import Percent from "../src/HomepageIcons/percent-icon.jpeg";
+import Computer from "../src/HomepageIcons/laptopAndComputer.svg";
+import Smartphones from "../src/HomepageIcons/smartphoneAndWatch.svg";
+import IC from "../src/HomepageIcons/IC.svg";
+import GamesAcc from "../src/HomepageIcons/gameController.svg";
+import Printer from "../src/HomepageIcons/printer.svg";
+import TV from "../src/HomepageIcons/tvAndAudio.svg";
+import Smarthome from "../src/HomepageIcons/smarthome.svg";
+import Accessories from "../src/HomepageIcons/accessories.svg";
+import Percent from "../src/HomepageIcons/percent.svg";
 import ComponentsWithDiscounts from "../src/HomepageIcons/komponenty z rabatami.webp";
 import G4MER from "../src/HomepageIcons/G4MER promo.webp";
 import HotDrop from "../src/HomepageIcons/hot drops.webp";
@@ -40,15 +40,12 @@ import toast from "react-hot-toast";
 import CurrentPromotions1 from "../src/HomepageIcons/monitorywnizszychcenach.jpg";
 import CurrentPromotions2 from "../src/HomepageIcons/zlapakcesoriataniej.webp";
 import CurrentPromotions3 from "../src/HomepageIcons/rentalPromotion.webp";
+import ArrowButton from "./ArrowButton";
+import Timer from "./Timer";
 // interface IProductsArrValues {
 //   category: string;
 //   count: number;
 // }
-interface ItimeObj {
-  hour: number;
-  minutes: number;
-  seconds: number;
-}
 
 interface IElement {
   id: number;
@@ -57,41 +54,41 @@ interface IElement {
 const categories = [
   {
     name: "Laptopy i komputery",
-    img: Computer,
+    img: "Computer",
   },
-  {
-    name: "Smartfony i smartwatche",
-    img: Smartphones,
-    oldPrice: "1679,00 zł",
-  },
-  {
-    name: "Podzespoły komputerowe",
-    img: IC,
-  },
-  {
-    name: "Gaming i streaming",
-    img: GamesAcc,
-  },
-  {
-    name: "Urządzenia peryferyjne",
-    img: Printer,
-  },
-  {
-    name: "Tv i audio",
-    img: TV,
-  },
-  {
-    name: "Smarthome i lifestyle",
-    img: Smarthome,
-  },
-  {
-    name: "Akcesoria",
-    img: Accessories,
-  },
-  {
-    name: "Promocje i nowości",
-    img: Percent,
-  },
+  // {
+  //   name: "Smartfony i smartwatche",
+  //   img: Smartphones,
+  //   oldPrice: "1679,00 zł",
+  // },
+  // {
+  //   name: "Podzespoły komputerowe",
+  //   img: IC,
+  // },
+  // {
+  //   name: "Gaming i streaming",
+  //   img: GamesAcc,
+  // },
+  // {
+  //   name: "Urządzenia peryferyjne",
+  //   img: Printer,
+  // },
+  // {
+  //   name: "Tv i audio",
+  //   img: TV,
+  // },
+  // {
+  //   name: "Smarthome i lifestyle",
+  //   img: Smarthome,
+  // },
+  // {
+  //   name: "Akcesoria",
+  //   img: Accessories,
+  // },
+  // {
+  //   name: "Promocje i nowości",
+  //   img: Percent,
+  // },
 ];
 
 const recommendedProductsArray = [
@@ -169,11 +166,6 @@ const productsForClientArray = [
 
 function Homepage() {
   const [productsArr, setProductsArr] = useState([]);
-  const [timeObj, setTimeObj] = useState<ItimeObj>({
-    hour: 7,
-    minutes: 59,
-    seconds: 59,
-  });
 
   const [photoInSliderIndex, setPhotoInSliderIndex] = useState(0);
 
@@ -181,77 +173,9 @@ function Homepage() {
 
   // setinterval, w ktorym co sekunde zmienia sie timeObj.seconds o 1 sekunde w dół
 
-  useEffect(() => {
-    if (timeObj.seconds === 0 && timeObj.minutes === 0 && timeObj.hour === 0) {
-      return;
-    } else {
-      const interval = setInterval(() => {
-        const fullSeconds = 59;
-        const fullMinutes = 59;
-
-        let newObj = {
-          ...timeObj,
-        };
-
-        if (timeObj.seconds !== 0) {
-          newObj = {
-            ...timeObj,
-            seconds: timeObj.seconds - 1,
-          };
-          setTimeObj(newObj);
-        } else if (timeObj.minutes === 0) {
-          newObj = {
-            ...timeObj,
-            hour: timeObj.hour - 1,
-            minutes: fullMinutes,
-            seconds: fullSeconds,
-          };
-          setTimeObj(newObj);
-        } else if (timeObj.seconds === 0) {
-          newObj = {
-            ...timeObj,
-            minutes: timeObj.minutes - 1,
-            seconds: fullSeconds,
-          };
-          setTimeObj(newObj);
-        } else if (timeObj.hour === 0) {
-          newObj = {
-            ...timeObj,
-            hour: 0,
-            minutes: fullMinutes,
-            seconds: timeObj.seconds - 1,
-          };
-          setTimeObj(newObj);
-        }
-
-        // if (timeObj.minutes !== 0) {
-        //   newObj = {
-        //     ...timeObj,
-        //     minutes: timeObj.minutes - 1,
-        //   };
-        //   setTimeObj(newObj);
-        // } else {
-        //   newObj = {
-        //     ...timeObj,
-        //     hour: timeObj.hour - 1,
-        //     minutes: 0,
-        //   };
-        //   setTimeObj(newObj);
-        // }
-      }, 1000);
-
-      return () => clearInterval(interval);
-    }
-  }, [timeObj]);
-
-  const { buttonLoginIsClicked } = useContext(ProductsContext);
   const { setArrayWithActualProducts } = useContext(ProductsContext);
 
-  useEffect(() => {
-    console.log("buttonLoginIsClicked", buttonLoginIsClicked);
-  }, []);
-
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -329,18 +253,11 @@ function Homepage() {
     return () => clearInterval(intervalID);
   }, [photoInSliderIndex]);
 
+  console.log("czy to on");
+
   return (
     <>
       <div className="divScrollingContainer">
-        {/* <div
-          className="divForActualCoupon"
-          style={{ zIndex: buttonLoginIsClicked ? 0 : 1 }}
-        >
-          <div className="coupon couponName">tutaj NAZWA KUPONU</div>
-          <div className="coupon couponCode">
-            tutaj KOD DO OTRZYMANIA KUPONU
-          </div>
-        </div> */}
         <div className="containerForCategoriesOfProducts">
           {categories.map((category, index) => (
             <CategoryTile key={index} category={category} />
@@ -348,41 +265,35 @@ function Homepage() {
         </div>
         <div className="containerForScrollablePromoPhotosOnDesktop">
           <div className="divForPhotosOnDesktop">
-            <button
-              className="prevPictureButton"
-              onClick={() => {
-                if (photoInSliderIndex <= 0) {
-                  setPhotoInSliderIndex(0);
-                } else {
-                  setPhotoInSliderIndex((prev) => prev - 1);
-                }
-              }}
-            >
-              <i
-                className="fa-solid fa-chevron-left"
-                style={{ color: "#424242" }}
-              ></i>
-            </button>
+            <div className="prevPictureButton">
+              <ArrowButton
+                direction="left"
+                onClick={() => {
+                  if (photoInSliderIndex <= 0) {
+                    setPhotoInSliderIndex(0);
+                  } else {
+                    setPhotoInSliderIndex((prev) => prev - 1);
+                  }
+                }}
+              />
+            </div>
+
             <img
               className="centeredPhotoOnDesktop"
               src={promoPicturesOnDesktopHomepage[photoInSliderIndex].img}
               alt={promoPicturesOnDesktopHomepage[photoInSliderIndex].name}
             />
-            <button
-              className="nextPictureButton"
-              onClick={() => {
-                if (photoInSliderIndex < 2) {
-                  return setPhotoInSliderIndex((prev) => prev + 1);
-                } else {
-                  return setPhotoInSliderIndex(0);
-                }
-              }}
-            >
-              <i
-                className="fa-solid fa-chevron-right"
-                style={{ color: "#424242" }}
-              ></i>
-            </button>
+            <div className="nextPictureButton">
+              <ArrowButton
+                onClick={() => {
+                  if (photoInSliderIndex < 2) {
+                    return setPhotoInSliderIndex((prev) => prev + 1);
+                  } else {
+                    return setPhotoInSliderIndex(0);
+                  }
+                }}
+              />
+            </div>
           </div>
         </div>
         <div className="containerForScrollablePromoPhotos">
@@ -466,7 +377,28 @@ function Homepage() {
                 productsForClient={productsForClient}
               />
             ))}
+            {productsForClientArray.map((productsForClient, index) => (
+              <ProductsForClientTile
+                key={index}
+                productsForClient={productsForClient}
+              />
+            ))}
+            {productsForClientArray.map((productsForClient, index) => (
+              <ProductsForClientTile
+                key={index}
+                productsForClient={productsForClient}
+              />
+            ))}
           </div>
+          {/* <button className="nextPictureButtonInSelectedForYou"> */}
+          <div className="nextListButton">
+            <ArrowButton />
+          </div>
+          {/* <i
+            className="fa-solid fa-chevron-right"
+            style={{ color: "#424242" }}
+          ></i> */}
+          {/* </button> */}
         </div>
         <div className="containerForHotShotAndWeekendHits">
           <div className="containerForHotShotDiv">
@@ -508,29 +440,7 @@ function Homepage() {
                   </div>
                 </div>
               </div>
-              <div className="containerForTimer">
-                <p className="textInTimer">Śpiesz się, oferta kończy się za:</p>
-                <div className="hotShotTimer">
-                  <div className="centerTimeText">
-                    <div className="hourInHotShotTimer">{timeObj.hour}</div>
-                    <p>godz.</p>
-                  </div>
-                  <p className="colonInTimer">:</p>
-                  <div className="centerTimeText">
-                    <div className="minuteInHotShotTimer">
-                      {timeObj.minutes}
-                    </div>
-                    <p>min.</p>
-                  </div>
-                  <p className="colonInTimer">:</p>
-                  <div className="centerTimeText">
-                    <div className="secondInHotShotTimer">
-                      {timeObj.seconds}
-                    </div>
-                    <p>sek.</p>
-                  </div>
-                </div>
-              </div>
+              <Timer />
             </div>
           </div>
           <div className="containerForTextAndProductsInWeekendHits">

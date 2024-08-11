@@ -1,4 +1,5 @@
 import React from "react";
+import Icons from "./Icons";
 
 interface Category {
   name: string;
@@ -9,13 +10,7 @@ interface Category {
 const CategoryTile = ({ category }: { category: Category }) => {
   return (
     <div className="categoryContainerForIMGAndName">
-      <img
-        className="imgCategoryIcon"
-        src={category.img}
-        alt={category.name}
-        width={70}
-        height={70}
-      />
+      <Icons name={category.img} style={{ height: 30 }} />
       <span className="centeredText" style={category?.spanStyle}>
         {category.name}
       </span>

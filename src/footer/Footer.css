@@ -7,7 +7,7 @@
 
 .contact {
   padding-left: 0px;
-  padding-top: 0px;
+  padding-top: 10px;
 }
 
 .contactText {
@@ -489,19 +489,28 @@
   .divForFootersDetails {
     display: flex;
     flex-direction: row-reverse;
+    justify-content: space-around;
     margin-top: 30px;
     padding: 20px;
     height: 600px;
-    background-color: rgb(215, 254, 254);
   }
 
   .contact {
     padding-left: 0px;
-    padding-top: 0cap;
+    padding-top: 0px;
   }
 
   .ordersFooter {
-    padding-left: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-left: 0px;
+    width: 70%;
+  }
+
+  .containerForFooterDetails {
+    display: flex;
+    flex-direction: column;
   }
 
   .footer-companies {
@@ -514,5 +523,26 @@
 
   .containerForOrdersButtonInFooter {
     display: flex !important;
+  }
+
+  .salesAndInspirationsButtonInFooter i {
+    display: none;
+  }
+
+  .containerForSalesAndInspirationsButtonInFooter {
+    display: flex !important;
+  }
+
+  .xkomButtonInFooter i {
+    display: none;
+  }
+
+  .containerForXkomButtonInFooter {
+    display: flex !important;
+  }
+
+  .footer-companies {
+    display: flex;
+    justify-content: center;
   }
 }
