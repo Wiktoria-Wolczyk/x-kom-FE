@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 import { ProductsContext } from "../context/loginContext/ProductsInCartContext";
 import { IProductsArray } from "../types";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import AppleIPhone from "../HomepageIcons/Apple iPhone 15 128GB Black.webp";
+// import AppleIPhone from "../HomepageIcons/Apple iPhone 15 128GB Black.webp";
 import QuantityChanger from "./QuantityChanger";
 import { LoginContext } from "../context/loginContext/LoginContext";
 import { useMutation } from "@tanstack/react-query";
@@ -186,7 +186,7 @@ function Cart() {
                     <div className="containerForPhoto">
                       <img
                         className="productPhotoClass"
-                        src={AppleIPhone}
+                        src={""}
                         alt="Apple IPhone photo"
                         width="100%"
                         height="100%"

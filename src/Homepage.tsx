@@ -4,15 +4,6 @@ import { Image, Heading } from "@chakra-ui/react";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import { ProductsContext } from "./context/loginContext/ProductsInCartContext";
-import Computer from "../src/HomepageIcons/laptopAndComputer.svg";
-import Smartphones from "../src/HomepageIcons/smartphoneAndWatch.svg";
-import IC from "../src/HomepageIcons/IC.svg";
-import GamesAcc from "../src/HomepageIcons/gameController.svg";
-import Printer from "../src/HomepageIcons/printer.svg";
-import TV from "../src/HomepageIcons/tvAndAudio.svg";
-import Smarthome from "../src/HomepageIcons/smarthome.svg";
-import Accessories from "../src/HomepageIcons/accessories.svg";
-import Percent from "../src/HomepageIcons/percent.svg";
 import ComponentsWithDiscounts from "../src/HomepageIcons/komponenty z rabatami.webp";
 import G4MER from "../src/HomepageIcons/G4MER promo.webp";
 import HotDrop from "../src/HomepageIcons/hot drops.webp";
@@ -23,18 +14,9 @@ import unboxTextAndIcon from "../src/HomepageIcons/unboxImg.png";
 import lotteryTextInside from "../src/HomepageIcons/promoLottery.png";
 import CategoryTile from "./CategoryTile";
 import RecommendedProducts from "./RecommendedTile";
-import SamsungGalaxyZFlip from "../src/HomepageIcons/recommendedProducts/galaxyZFlip.webp";
-import NothingPhone from "../src/HomepageIcons/recommendedProducts/NothingPhone.webp";
-import DeliAlienware from "../src/HomepageIcons/recommendedProducts/DellAlienware.webp";
-import AMBRyzen from "../src/HomepageIcons/recommendedProducts/AMDRyzen7.webp";
-import Nubia from "../src/HomepageIcons/recommendedProducts/NubiaZ60Ultra5G.webp";
-import Samsung from "../src/HomepageIcons/recommendedProducts/samsungQE55QN92D.webp";
-import Logitech from "../src/HomepageIcons/recommendedProducts/LogitechG309.webp";
-import Keychron from "../src/HomepageIcons/recommendedProducts/KeychronK5proA1.webp";
+
 import ProductsForClientTile from "./ProductsForClientTile";
-import SamsungQE55Q80D from "../src/HomepageIcons/Samsung QE55Q80D55QLED4K120Hz.webp";
-import Yubico from "../src/HomepageIcons/kluczSprzętowyYubico.webp";
-import AppleIPhone from "../src/HomepageIcons/Apple iPhone 15 128GB Black.webp";
+
 import { IProductsArray } from "./types";
 import toast from "react-hot-toast";
 import CurrentPromotions1 from "../src/HomepageIcons/monitorywnizszychcenach.jpg";
@@ -93,75 +75,89 @@ const categories = [
 
 const recommendedProductsArray = [
   {
-    name: "Samsung Galaxy Z Flip6 5G 12/256GB miętowy",
-    img: SamsungGalaxyZFlip,
-    price: "5199,00 zł",
+    name: "x",
+    img: "",
+    price: "5",
     information: "Nowość",
   },
-  {
-    name: "Nothing Phone (2a) 5G 12/256GB Black120Hz",
-    img: NothingPhone,
-    oldPrice: "1679,00 zł",
-    price: "5199,00 zł",
-    information: "+ Gratis",
-  },
-  {
-    name: "Deli Alienware AW3225QF OLED",
-    img: DeliAlienware,
-    price: "4999,00 zł",
-    information: "Nowość",
-  },
-  {
-    name: "AMD Ryzen 7 5800X3D",
-    img: AMBRyzen,
-    price: "1299,00 zł",
-  },
-  {
-    name: "Nubia Z60 Ultra 5G 16/512GB Black 120Hz",
-    img: Nubia,
-    price: "3999,00 zł",
-    information: "+ Gratis",
-  },
-  {
-    name: "Samsung QE55QN92D 5'' QLED 4K 120 Hz",
-    img: Samsung,
-    price: "6299,00 zł",
-  },
-  {
-    name: "Logitech G309 Lightspeed czarny",
-    img: Logitech,
-    price: "359,00 zł",
-    information: "Nowość",
-  },
-  {
-    name: "Keychron K5 Pro A1 Low Profile Gateron Red White Backlight",
-    img: Keychron,
-    price: "529,00 zł",
-  },
+
+  // {
+  //   name: "Samsung Galaxy Z Flip6 5G 12/256GB miętowy",
+  //   img: SamsungGalaxyZFlip,
+  //   price: "5199,00 zł",
+  //   information: "Nowość",
+  // },
+  // {
+  //   name: "Nothing Phone (2a) 5G 12/256GB Black120Hz",
+  //   img: NothingPhone,
+  //   oldPrice: "1679,00 zł",
+  //   price: "5199,00 zł",
+  //   information: "+ Gratis",
+  // },
+  // {
+  //   name: "Deli Alienware AW3225QF OLED",
+  //   img: DeliAlienware,
+  //   price: "4999,00 zł",
+  //   information: "Nowość",
+  // },
+  // {
+  //   name: "AMD Ryzen 7 5800X3D",
+  //   img: AMBRyzen,
+  //   price: "1299,00 zł",
+  // },
+  // {
+  //   name: "Nubia Z60 Ultra 5G 16/512GB Black 120Hz",
+  //   img: Nubia,
+  //   price: "3999,00 zł",
+  //   information: "+ Gratis",
+  // },
+  // {
+  //   name: "Samsung QE55QN92D 5'' QLED 4K 120 Hz",
+  //   img: Samsung,
+  //   price: "6299,00 zł",
+  // },
+  // {
+  //   name: "Logitech G309 Lightspeed czarny",
+  //   img: Logitech,
+  //   price: "359,00 zł",
+  //   information: "Nowość",
+  // },
+  // {
+  //   name: "Keychron K5 Pro A1 Low Profile Gateron Red White Backlight",
+  //   img: Keychron,
+  //   price: "529,00 zł",
+  // },
 ];
 
 const productsForClientArray = [
   {
-    name: "Nubia Z60 Ultra 5G 16/512GB Black 120Hz",
-    img: Nubia,
-    price: "3999,00 zł",
-    information: "+ Gratis",
+    name: "N",
+    img: "",
+    price: "39",
+    information: "+ Gr",
   },
-  {
-    name: "Nothing Phone (2a) 5G 12/256GB Black120Hz",
-    img: SamsungQE55Q80D,
-    price: "4599,00 zł",
-  },
-  {
-    name: "Keychron K5 Pro A1 Low Profile Gateron Red White Backlight",
-    img: Keychron,
-    price: "529,00 zł",
-  },
-  {
-    name: "AMD Ryzen 7 5800X3D",
-    img: AMBRyzen,
-    price: "1299,00 zł",
-  },
+
+  // {
+  //   name: "Nubia Z60 Ultra 5G 16/512GB Black 120Hz",
+  //   img: Nubia,
+  //   price: "3999,00 zł",
+  //   information: "+ Gratis",
+  // },
+  // {
+  //   name: "Nothing Phone (2a) 5G 12/256GB Black120Hz",
+  //   img: SamsungQE55Q80D,
+  //   price: "4599,00 zł",
+  // },
+  // {
+  //   name: "Keychron K5 Pro A1 Low Profile Gateron Red White Backlight",
+  //   img: Keychron,
+  //   price: "529,00 zł",
+  // },
+  // {
+  //   name: "AMD Ryzen 7 5800X3D",
+  //   img: AMBRyzen,
+  //   price: "1299,00 zł",
+  // },
 ];
 
 function Homepage() {
@@ -409,7 +405,7 @@ function Homepage() {
               </div>
               <div className="containerForHotShotIMG">
                 <img
-                  src={Yubico}
+                  src={""}
                   alt="Klucz sprzętowy Yubico"
                   width={200}
                   height={200}
@@ -487,7 +483,7 @@ function Homepage() {
                 <>
                   <div className="containerForCardWithProduct">
                     <div className="containerForPhotoInHomepageProductCart">
-                      <img src={AppleIPhone} alt="Apple IPhone Photo" />
+                      <img src={"A"} alt="Apple IPhone Photo" />
                     </div>
                     <div className="productDetails">
                       <p className="productName">{el.name}</p>
@@ -549,7 +545,7 @@ function Homepage() {
                 <>
                   <div className="containerForCardWithProduct">
                     <div className="containerForPhotoInHomepageProductCart">
-                      <img src={AppleIPhone} alt="Apple IPhone Photo" />
+                      <img src={""} alt="Apple IPhone Photo" />
                     </div>
                     <div className="productDetails">
                       <p className="productName">{el.name}</p>
