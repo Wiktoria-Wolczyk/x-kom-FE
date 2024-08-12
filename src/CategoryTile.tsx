@@ -10,7 +10,7 @@ interface Category {
 const CategoryTile = ({ category }: { category: Category }) => {
   return (
     <div className="categoryContainerForIMGAndName">
-      <Icons name={category.img} style={{ height: 30 }} />
+      <Icons name={category.img} style={{ height: 50 }} />
       <span className="centeredText" style={category?.spanStyle}>
         {category.name}
       </span>

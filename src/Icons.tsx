@@ -15,6 +15,18 @@ const Icons = ({ name, style = {} }: { name: string; style: any }) => {
       return <Computer style={style} />;
     case "Smartphones":
       return <Smartphones style={style} />;
+    case "IC":
+      return <IC style={style} />;
+    case "GamesAcc":
+      return <GamesAcc style={style} />;
+    case "Printer":
+      return <Printer style={style} />;
+    case "TV":
+      return <TV style={style} />;
+    case "Smarthome":
+      return <Smarthome style={style} />;
+    case "Accessories":
+      return <Accessories style={style} />;
     default:
       return <Percent style={style} />;
   }
