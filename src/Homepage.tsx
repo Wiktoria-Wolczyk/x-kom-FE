@@ -24,54 +24,12 @@ import CurrentPromotions2 from "../src/HomepageIcons/zlapakcesoriataniej.webp";
 import CurrentPromotions3 from "../src/HomepageIcons/rentalPromotion.webp";
 import ArrowButton from "./ArrowButton";
 import Timer from "./Timer";
-// interface IProductsArrValues {
-//   category: string;
-//   count: number;
-// }
+import { categories } from "./constants";
+import Promotional from "./Promotional";
 
 interface IElement {
   id: number;
 }
-
-const categories = [
-  {
-    name: "Laptopy i komputery",
-    img: "Computer",
-  },
-  {
-    name: "Smartfony i smartwatche",
-    img: "Smartphones",
-    oldPrice: "1679,00 zł",
-  },
-  {
-    name: "Podzespoły komputerowe",
-    img: "IC",
-  },
-  {
-    name: "Gaming i streaming",
-    img: "GamesAcc",
-  },
-  {
-    name: "Urządzenia peryferyjne",
-    img: "Printer",
-  },
-  {
-    name: "Tv i audio",
-    img: "TV",
-  },
-  {
-    name: "Smarthome i lifestyle",
-    img: "Smarthome",
-  },
-  {
-    name: "Akcesoria",
-    img: "Accessories",
-  },
-  {
-    name: "Promocje i nowości",
-    img: "Percent",
-  },
-];
 
 const recommendedProductsArray = [
   {
@@ -80,53 +38,6 @@ const recommendedProductsArray = [
     price: "5",
     information: "Nowość",
   },
-
-  // {
-  //   name: "Samsung Galaxy Z Flip6 5G 12/256GB miętowy",
-  //   img: SamsungGalaxyZFlip,
-  //   price: "5199,00 zł",
-  //   information: "Nowość",
-  // },
-  // {
-  //   name: "Nothing Phone (2a) 5G 12/256GB Black120Hz",
-  //   img: NothingPhone,
-  //   oldPrice: "1679,00 zł",
-  //   price: "5199,00 zł",
-  //   information: "+ Gratis",
-  // },
-  // {
-  //   name: "Deli Alienware AW3225QF OLED",
-  //   img: DeliAlienware,
-  //   price: "4999,00 zł",
-  //   information: "Nowość",
-  // },
-  // {
-  //   name: "AMD Ryzen 7 5800X3D",
-  //   img: AMBRyzen,
-  //   price: "1299,00 zł",
-  // },
-  // {
-  //   name: "Nubia Z60 Ultra 5G 16/512GB Black 120Hz",
-  //   img: Nubia,
-  //   price: "3999,00 zł",
-  //   information: "+ Gratis",
-  // },
-  // {
-  //   name: "Samsung QE55QN92D 5'' QLED 4K 120 Hz",
-  //   img: Samsung,
-  //   price: "6299,00 zł",
-  // },
-  // {
-  //   name: "Logitech G309 Lightspeed czarny",
-  //   img: Logitech,
-  //   price: "359,00 zł",
-  //   information: "Nowość",
-  // },
-  // {
-  //   name: "Keychron K5 Pro A1 Low Profile Gateron Red White Backlight",
-  //   img: Keychron,
-  //   price: "529,00 zł",
-  // },
 ];
 
 const productsForClientArray = [
@@ -136,43 +47,14 @@ const productsForClientArray = [
     price: "39",
     information: "+ Gr",
   },
-
-  // {
-  //   name: "Nubia Z60 Ultra 5G 16/512GB Black 120Hz",
-  //   img: Nubia,
-  //   price: "3999,00 zł",
-  //   information: "+ Gratis",
-  // },
-  // {
-  //   name: "Nothing Phone (2a) 5G 12/256GB Black120Hz",
-  //   img: SamsungQE55Q80D,
-  //   price: "4599,00 zł",
-  // },
-  // {
-  //   name: "Keychron K5 Pro A1 Low Profile Gateron Red White Backlight",
-  //   img: Keychron,
-  //   price: "529,00 zł",
-  // },
-  // {
-  //   name: "AMD Ryzen 7 5800X3D",
-  //   img: AMBRyzen,
-  //   price: "1299,00 zł",
-  // },
 ];
 
 function Homepage() {
   const [productsArr, setProductsArr] = useState([]);
-
   const [photoInSliderIndex, setPhotoInSliderIndex] = useState(0);
-
-  // console.log("xyz", timeObj.seconds - 1);
-
-  // setinterval, w ktorym co sekunde zmienia sie timeObj.seconds o 1 sekunde w dół
-
   const { setArrayWithActualProducts } = useContext(ProductsContext);
 
-  // const navigate = useNavigate();
-
+  // zmienic na react query
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -196,6 +78,7 @@ function Homepage() {
     JSON.parse(localStorage.getItem("cart") || "[]") || [],
   );
 
+  // przerobic na es6
   function addProductsToCart(el: IProductsArray) {
     const arrWithProductsInCart = [...cart]; // to bedzie cart z usestate'a
     const foundProduct = arrWithProductsInCart.find(
@@ -241,15 +124,13 @@ function Homepage() {
   useEffect(() => {
     const intervalID = setInterval(() => {
       if (photoInSliderIndex >= 2) {
-        return setPhotoInSliderIndex(0);
+        setPhotoInSliderIndex(0);
       } else {
-        return setPhotoInSliderIndex((prev) => prev + 1);
+        setPhotoInSliderIndex((prev) => prev + 1);
       }
     }, 5000);
     return () => clearInterval(intervalID);
   }, [photoInSliderIndex]);
-
-  console.log("czy to on");
 
   return (
     <>
@@ -259,68 +140,10 @@ function Homepage() {
             <CategoryTile key={index} category={category} />
           ))}
         </div>
-        <div className="containerForScrollablePromoPhotosOnDesktop">
-          <div className="divForPhotosOnDesktop">
-            <div className="prevPictureButton">
-              <ArrowButton
-                direction="left"
-                onClick={() => {
-                  if (photoInSliderIndex <= 0) {
-                    setPhotoInSliderIndex(0);
-                  } else {
-                    setPhotoInSliderIndex((prev) => prev - 1);
-                  }
-                }}
-              />
-            </div>
+        <Promotional />
 
-            <img
-              className="centeredPhotoOnDesktop"
-              src={promoPicturesOnDesktopHomepage[photoInSliderIndex].img}
-              alt={promoPicturesOnDesktopHomepage[photoInSliderIndex].name}
-            />
-            <div className="nextPictureButton">
-              <ArrowButton
-                onClick={() => {
-                  if (photoInSliderIndex < 2) {
-                    return setPhotoInSliderIndex((prev) => prev + 1);
-                  } else {
-                    return setPhotoInSliderIndex(0);
-                  }
-                }}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="containerForScrollablePromoPhotos">
-          <div className="divForPhotos">
-            <img
-              className="centeredPhoto"
-              src={ComponentsWithDiscounts}
-              alt="zdjęcie Odkryj komponenty z rabatami do 46%"
-            />
-            <img
-              className="centeredPhoto"
-              src={G4MER}
-              alt="zdjęcie G4MER - Twój komputer. Teraz taniej nawet do 2700 zł"
-            />
-            <img
-              className="centeredPhoto"
-              src={HotDrop}
-              alt="zdjęcie zgarniaj imprezowe hot dropy - my zorganizujemy Ci festwial"
-            />
-            <img
-              className="centeredPhoto"
-              src={Opinion}
-              alt="zdjęcie zostaw opinię ze zdjęciem i zyskaj nawet 400 zł na kolejne zakupy"
-            />
-            <img
-              className="centeredPhoto"
-              src={BuyLaptop}
-              alt="zdjęcie Kup wybrany laptop Gigabyte i otrzymaj do 500 zł zwrotu na konto"
-            />
-          </div>
-        </div>
+        {/* <LotteryAndRecommended/> // w srodku ma byc <Lottery> i <Recommended> */}
+        {/* TODO 2: osobny komponent */}
         <div className="containerForLotteryAndRecommendedProducts">
           <div className="containerTorLotteryAndHotShotInformation">
             <div className="unBoxLoterryDiv">
@@ -361,6 +184,9 @@ function Homepage() {
             </div>
           </div>
         </div>
+
+        {/* <ForYou/> */}
+        {/* TODO 3: osobny komponent */}
         <div className="containerWithPropositionForClient">
           <p className="selectedForYouText">Wybrane dla Ciebie</p>
           <p className="textUnderSelectedForYouText">
@@ -396,6 +222,9 @@ function Homepage() {
           ></i> */}
           {/* </button> */}
         </div>
+
+        {/* <HotShotAndHits /> */}
+        {/* TODO 4: osobny komponent */}
         <div className="containerForHotShotAndWeekendHits">
           <div className="containerForHotShotDiv">
             <div className="hotShotDiv">
@@ -451,6 +280,7 @@ function Homepage() {
             </div>
           </div>
         </div>
+
         <span className="ourProductsText">Nasze Produkty</span>
         <div className="containerForCardsWithProducts">
           {/* {productsArr?.map((el: IProductsArrValues, index) => (
