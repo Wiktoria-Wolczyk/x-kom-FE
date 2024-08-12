@@ -1,6 +1,6 @@
 import React from "react";
-import { recommendedProductsArray } from "./constants";
-import RecommendedProducts from "./RecommendedTile";
+import { recommendedProductsArray as recommendedProducts } from "./constants";
+import RecommendedProduct from "./RecommendedTile";
 
 const Recommended = () => {
   return (
@@ -8,11 +8,8 @@ const Recommended = () => {
       <div className="containerForRecommended">
         <p className="weRecommendText">Polecamy</p>
         <div className="containerForRecommendedProducts">
-          {recommendedProductsArray.map((recommendedProducts, index) => (
-            <RecommendedProducts
-              key={index}
-              recommendedProducts={recommendedProducts}
-            />
+          {recommendedProducts.map((product, index) => (
+            <RecommendedProduct key={index} product={product} />
           ))}
         </div>
       </div>

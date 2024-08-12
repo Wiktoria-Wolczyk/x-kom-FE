@@ -28,6 +28,7 @@ import { categories, recommendedProductsArray } from "./constants";
 import Promotional from "./Promotional";
 import LotteryAndRecommended from "./LotteryAndRecommended";
 import ForYou from "./ForYou";
+import HotShotAndHits from "./HotShotAndHits";
 
 interface IElement {
   id: number;
@@ -136,37 +137,12 @@ function Homepage() {
 
         <Promotional />
         <LotteryAndRecommended />
-
-        {/* <ForYou/> */}
-        {/* TODO 3: osobny komponent */}
         <ForYou />
-        {/* <div className="containerWithPropositionForClient">
-          <p className="selectedForYouText">Wybrane dla Ciebie</p>
-          <p className="textUnderSelectedForYouText">
-            Na podstawie ostatnio oglądanych produktów
-          </p>
-          <div className="divWithPropositionForClient">
-            {productsForClientArray.map((productsForClient, index) => (
-              <ProductsForClientTile
-                key={index}
-                productsForClient={productsForClient}
-              />
-            ))}
-          </div> */}
-        {/* <button className="nextPictureButtonInSelectedForYou"> */}
-        {/* <div className="nextListButton">
-            <ArrowButton />
-          </div> */}
-        {/* <i
-            className="fa-solid fa-chevron-right"
-            style={{ color: "#424242" }}
-          ></i> */}
-        {/* </button> */}
-        {/* </div> */}
+        <HotShotAndHits />
 
         {/* <HotShotAndHits /> */}
         {/* TODO 4: osobny komponent */}
-        <div className="containerForHotShotAndWeekendHits">
+        {/* <div className="containerForHotShotAndWeekendHits">
           <div className="containerForHotShotDiv">
             <div className="hotShotDiv">
               <p className="hotShotText">Gorący strzał</p>
@@ -220,11 +196,10 @@ function Homepage() {
               ))}
             </div>
           </div>
-        </div>
-
-        <span className="ourProductsText">Nasze Produkty</span>
-        <div className="containerForCardsWithProducts">
-          {/* {productsArr?.map((el: IProductsArrValues, index) => (
+        </div> */}
+        {/* <span className="ourProductsText">Nasze Produkty</span> */}
+        {/* <div className="containerForCardsWithProducts"> */}
+        {/* {productsArr?.map((el: IProductsArrValues, index) => (
             <Card key={index} className="categoryCard" maxW="sm">
               <CardBody>
                 <Image
@@ -248,7 +223,7 @@ function Homepage() {
             </Card>
           ))} */}
 
-          {productsArr?.map((el: IProductsArray) => {
+        {/* {productsArr?.map((el: IProductsArray) => {
             if (el.discountedPrice >= 150) {
               return (
                 <>
@@ -383,7 +358,7 @@ function Homepage() {
               );
             }
           })}
-        </div>
+        </div> */}
       </div>
     </>
   );

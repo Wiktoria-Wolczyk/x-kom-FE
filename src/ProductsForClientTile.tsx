@@ -1,21 +1,10 @@
 import React from "react";
-
-interface productsForClient {
-  name: string;
-  img: string;
-  price: number;
-  oldPrice?: number;
-  discountedPrice?: number | null;
-  information?: string;
-  tag?: string | null;
-  isHotShot?: boolean | null;
-  brand?: string;
-}
+import { IProduct } from "./types";
 
 const productsForClient = ({
   productsForClient,
 }: {
-  productsForClient: productsForClient;
+  productsForClient: IProduct;
 }) => {
   const add3Dots = () => {
     const productName = productsForClient.name;
@@ -30,26 +19,13 @@ const productsForClient = ({
   };
 
   return (
-    <div
-      className="containerForProductInSelectedForClient"
-      // style={{
-      //   flexShrink: 0,
-      //   width: 160,
-      //   display: "flex",
-      //   flexDirection: "column",
-      //   justifyContent: "flex-start",
-      //   position: "relative",
-      //   paddingTop: 50,
-      //   rowGap: 15,
-      //   height: 140,
-      // }}
-    >
-      {productsForClient.information && (
+    <div className="containerForProductInSelectedForClient">
+      {productsForClient.tag && (
         <span
           className="infoAboutProductsForClient"
           style={{ position: "absolute", top: 0, left: 0 }}
         >
-          {productsForClient.information}
+          {productsForClient.tag}
         </span>
       )}
 
@@ -65,7 +41,7 @@ const productsForClient = ({
       <span>{add3Dots()}</span>
 
       <div style={{ marginTop: "auto", paddingTop: 0, position: "relative" }}>
-        {productsForClient.oldPrice ? (
+        {productsForClient.discountedPrice ? (
           <span
             style={{
               position: "absolute",
@@ -85,7 +61,9 @@ const productsForClient = ({
           <></>
         )}
 
-        <span>{productsForClient.price} zł</span>
+        <span>
+          {productsForClient.discountedPrice || productsForClient.price} zł
+        </span>
       </div>
     </div>
   );

@@ -9,10 +9,13 @@ export interface IProduct {
   id: number;
   name: string;
   price: number;
-  discountedPrice: number;
+  discountedPrice?: number | null;
   category: string;
   brand: string;
   available: number;
+  tag?: string | null;
+  isHotShot?: boolean | null;
+  img: string;
 }
 
 export interface IOrderValues {

@@ -1,52 +1,40 @@
 import React from "react";
 import "./RecommendedTile.css";
+import { IProduct } from "./types";
 
-interface recommendedProducts {
-  name: string;
-  img: string;
-  price: number;
-  discountedPrice?: number | null;
-  information?: string;
-}
-
-const recommendedProducts = ({
-  recommendedProducts,
-}: {
-  recommendedProducts: recommendedProducts;
-}) => {
+const RecommendedProduct = ({ product }: { product: IProduct }) => {
   return (
     <div className="containerForProduct">
-      {recommendedProducts.information && (
+      {product.tag && (
         <span className="infoAboutRecommendedProductInRecommended">
-          {recommendedProducts.information}
+          {product.tag}
         </span>
       )}
 
       <img
         className="imgRecommended"
-        src={recommendedProducts.img}
-        alt={recommendedProducts.name}
+        src={product.img}
+        alt={product.name}
         width={150}
         height={150}
       />
-      <span>{recommendedProducts.name}</span>
+      <span>{product.name}</span>
 
       <div className="containerForPriceInRecommended">
-        {recommendedProducts.discountedPrice ? (
+        {product.discountedPrice ? (
           <div className="containerForTextLowestPrice">
-            Najniższa cena{" "}
-            <span className="oldPrice">{recommendedProducts.price}</span>
+            Najniższa cena <span className="oldPrice">{product.price}</span>
           </div>
         ) : (
           <></>
         )}
 
         <div className="actualPriceUnderLowestPrice">
-          {recommendedProducts.discountedPrice || recommendedProducts.price} zł
+          {product.discountedPrice || product.price} zł
         </div>
       </div>
     </div>
   );
 };
 
-export default recommendedProducts;
+export default RecommendedProduct;
