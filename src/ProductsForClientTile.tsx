@@ -3,9 +3,13 @@ import React from "react";
 interface productsForClient {
   name: string;
   img: string;
-  price: string;
-  oldPrice?: string;
+  price: number;
+  oldPrice?: number;
+  discountedPrice?: number | null;
   information?: string;
+  tag?: string | null;
+  isHotShot?: boolean | null;
+  brand?: string;
 }
 
 const productsForClient = ({
@@ -13,6 +17,18 @@ const productsForClient = ({
 }: {
   productsForClient: productsForClient;
 }) => {
+  const add3Dots = () => {
+    const productName = productsForClient.name;
+    const dots = "...";
+    const productNameWithDots = productName.substring(0, 25) + dots;
+
+    if (productName.length > 25) {
+      return productNameWithDots;
+    } else {
+      return productName;
+    }
+  };
+
   return (
     <div
       className="containerForProductInSelectedForClient"
@@ -41,10 +57,12 @@ const productsForClient = ({
         className="imgProductsForClient"
         src={productsForClient.img}
         alt={productsForClient.name}
-        width={150}
-        height={150}
+        width={"100%"}
+        height={"100%"}
+        style={{ maxWidth: "150px", maxHeight: "130px" }}
       />
-      <span>{productsForClient.name}</span>
+      {/* <span>{productsForClient.name}</span> */}
+      <span>{add3Dots()}</span>
 
       <div style={{ marginTop: "auto", paddingTop: 0, position: "relative" }}>
         {productsForClient.oldPrice ? (
@@ -60,14 +78,14 @@ const productsForClient = ({
           >
             Najniższa cena{" "}
             <span style={{ textDecoration: "line-through" }}>
-              {productsForClient.oldPrice}
+              {productsForClient.price} zł
             </span>
           </span>
         ) : (
           <></>
         )}
 
-        <span>{productsForClient.price}</span>
+        <span>{productsForClient.price} zł</span>
       </div>
     </div>
   );

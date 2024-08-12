@@ -885,6 +885,10 @@
     padding-bottom: 50px;
   }
 
+  .divWithPropositionForClient {
+    height: 300px;
+  }
+
   .containerForProductInSelectedForClient {
     flex-shrink: 0;
     width: 160px;
@@ -894,7 +898,7 @@
     position: relative;
     padding-top: 50px;
     row-gap: 15px;
-    height: 140px;
+    height: 100%;
     margin-right: 40px;
   }
 

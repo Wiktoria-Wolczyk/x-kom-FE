@@ -27,6 +27,7 @@ import Timer from "./Timer";
 import { categories, recommendedProductsArray } from "./constants";
 import Promotional from "./Promotional";
 import LotteryAndRecommended from "./LotteryAndRecommended";
+import ForYou from "./ForYou";
 
 interface IElement {
   id: number;
@@ -136,50 +137,10 @@ function Homepage() {
         <Promotional />
         <LotteryAndRecommended />
 
-        {/* <div className="containerForLotteryAndRecommendedProducts">
-          <div className="containerTorLotteryAndHotShotInformation">
-            <div className="unBoxLoterryDiv">
-              <img
-                src={unboxTextAndIcon}
-                alt="unbox text and icon"
-                width={100}
-                style={{ paddingTop: 20 }}
-              />
-              <div className="divForBoxesTextAndButtonLottery">
-                <img src={UnboxPhoto} alt="photo of boxes" width={250} />
-                <img src={lotteryTextInside} alt="" width={210} />
-                <button className="loterryButton">
-                  Losuj zniżki{" "}
-                  <i
-                    className="fa-solid fa-chevron-right fa-xs"
-                    style={{ color: "white" }}
-                  ></i>
-                </button>
-              </div>
-            </div>
-            <div className="whereIsHotShotInformation">
-              <p className="boldTextInWhereIsHotShot">
-                Gdzie jest gorący strzał
-              </p>
-              <p>Przenieśliśmy go niżej. Przewiń stronę w dół</p>
-            </div>
-          </div>
-          <div className="containerForRecommended">
-            <p className="weRecommendText">Polecamy</p>
-            <div className="containerForRecommendedProducts">
-              {recommendedProductsArray.map((recommendedProducts, index) => (
-                <RecommendedProducts
-                  key={index}
-                  recommendedProducts={recommendedProducts}
-                />
-              ))}
-            </div>
-          </div>
-        </div> */}
-
         {/* <ForYou/> */}
         {/* TODO 3: osobny komponent */}
-        <div className="containerWithPropositionForClient">
+        <ForYou />
+        {/* <div className="containerWithPropositionForClient">
           <p className="selectedForYouText">Wybrane dla Ciebie</p>
           <p className="textUnderSelectedForYouText">
             Na podstawie ostatnio oglądanych produktów
@@ -191,29 +152,17 @@ function Homepage() {
                 productsForClient={productsForClient}
               />
             ))}
-            {productsForClientArray.map((productsForClient, index) => (
-              <ProductsForClientTile
-                key={index}
-                productsForClient={productsForClient}
-              />
-            ))}
-            {productsForClientArray.map((productsForClient, index) => (
-              <ProductsForClientTile
-                key={index}
-                productsForClient={productsForClient}
-              />
-            ))}
-          </div>
-          {/* <button className="nextPictureButtonInSelectedForYou"> */}
-          <div className="nextListButton">
+          </div> */}
+        {/* <button className="nextPictureButtonInSelectedForYou"> */}
+        {/* <div className="nextListButton">
             <ArrowButton />
-          </div>
-          {/* <i
+          </div> */}
+        {/* <i
             className="fa-solid fa-chevron-right"
             style={{ color: "#424242" }}
           ></i> */}
-          {/* </button> */}
-        </div>
+        {/* </button> */}
+        {/* </div> */}
 
         {/* <HotShotAndHits /> */}
         {/* TODO 4: osobny komponent */}
