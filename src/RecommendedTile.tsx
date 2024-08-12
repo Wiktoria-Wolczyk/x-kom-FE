@@ -4,8 +4,8 @@ import "./RecommendedTile.css";
 interface recommendedProducts {
   name: string;
   img: string;
-  price: string;
-  oldPrice?: string;
+  price: number;
+  discountedPrice?: number | null;
   information?: string;
 }
 
@@ -32,17 +32,17 @@ const recommendedProducts = ({
       <span>{recommendedProducts.name}</span>
 
       <div className="containerForPriceInRecommended">
-        {recommendedProducts.oldPrice ? (
+        {recommendedProducts.discountedPrice ? (
           <div className="containerForTextLowestPrice">
             Najniższa cena{" "}
-            <span className="oldPrice">{recommendedProducts.oldPrice}</span>
+            <span className="oldPrice">{recommendedProducts.price}</span>
           </div>
         ) : (
           <></>
         )}
 
         <div className="actualPriceUnderLowestPrice">
-          {recommendedProducts.price}
+          {recommendedProducts.discountedPrice || recommendedProducts.price} zł
         </div>
       </div>
     </div>

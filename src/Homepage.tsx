@@ -24,21 +24,13 @@ import CurrentPromotions2 from "../src/HomepageIcons/zlapakcesoriataniej.webp";
 import CurrentPromotions3 from "../src/HomepageIcons/rentalPromotion.webp";
 import ArrowButton from "./ArrowButton";
 import Timer from "./Timer";
-import { categories } from "./constants";
+import { categories, recommendedProductsArray } from "./constants";
 import Promotional from "./Promotional";
+import LotteryAndRecommended from "./LotteryAndRecommended";
 
 interface IElement {
   id: number;
 }
-
-const recommendedProductsArray = [
-  {
-    name: "x",
-    img: "",
-    price: "5",
-    information: "Nowość",
-  },
-];
 
 const productsForClientArray = [
   {
@@ -140,11 +132,11 @@ function Homepage() {
             <CategoryTile key={index} category={category} />
           ))}
         </div>
-        <Promotional />
 
-        {/* <LotteryAndRecommended/> // w srodku ma byc <Lottery> i <Recommended> */}
-        {/* TODO 2: osobny komponent */}
-        <div className="containerForLotteryAndRecommendedProducts">
+        <Promotional />
+        <LotteryAndRecommended />
+
+        {/* <div className="containerForLotteryAndRecommendedProducts">
           <div className="containerTorLotteryAndHotShotInformation">
             <div className="unBoxLoterryDiv">
               <img
@@ -183,7 +175,7 @@ function Homepage() {
               ))}
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* <ForYou/> */}
         {/* TODO 3: osobny komponent */}
