@@ -303,6 +303,8 @@
   height: 400px;
   padding-left: 10px;
   background-color: white;
+  display: flex;
+  flex-direction: column;
 }
 
 .weRecommendText {
@@ -315,7 +317,7 @@
   justify-content: space-between;
   height: 350px;
   padding-left: 10px;
-  overflow: auto;
+  overflow-x: scroll;
   background-color: white;
 }
 

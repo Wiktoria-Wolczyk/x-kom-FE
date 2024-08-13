@@ -1,26 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ArrowButton from "./ArrowButton";
 import CurrentPromotions1 from "../src/HomepageIcons/monitorywnizszychcenach.jpg";
 import CurrentPromotions2 from "../src/HomepageIcons/zlapakcesoriataniej.webp";
 import CurrentPromotions3 from "../src/HomepageIcons/rentalPromotion.webp";
 
+const promoPicturesOnDesktopHomepage = [
+  {
+    name: "text: Emocje w każym pikselu. Monitory w najniższych cenach, and two monitors",
+    img: CurrentPromotions1,
+  },
+  {
+    name: "text: Małe rzeczy, wielkie rabaty. Złap akcesoria taniej do 65%, and road camera",
+    img: CurrentPromotions2,
+  },
+  {
+    name: "text: Nie musisz kupować żeby używać. Sprawdź usługę wynajmu sprzętu, and parts of few phones ",
+    img: CurrentPromotions3,
+  },
+];
+
 const PromoPhotosOnDesktop = () => {
   const [photoInSliderIndex, setPhotoInSliderIndex] = useState(0);
 
-  const promoPicturesOnDesktopHomepage = [
-    {
-      name: "text: Emocje w każym pikselu. Monitory w najniższych cenach, and two monitors",
-      img: CurrentPromotions1,
-    },
-    {
-      name: "text: Małe rzeczy, wielkie rabaty. Złap akcesoria taniej do 65%, and road camera",
-      img: CurrentPromotions2,
-    },
-    {
-      name: "text: Nie musisz kupować żeby używać. Sprawdź usługę wynajmu sprzętu, and parts of few phones ",
-      img: CurrentPromotions3,
-    },
-  ];
+  useEffect(() => {
+    const intervalID = setInterval(() => {
+      if (photoInSliderIndex >= 2) {
+        setPhotoInSliderIndex(0);
+      } else {
+        setPhotoInSliderIndex((prev) => prev + 1);
+      }
+    }, 5000);
+    return () => clearInterval(intervalID);
+  }, [photoInSliderIndex]);
 
   return (
     <>

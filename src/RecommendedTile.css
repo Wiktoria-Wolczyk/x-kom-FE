@@ -2,11 +2,9 @@
   display: flex;
   flex-shrink: 0;
   width: 160px;
-  display: flex;
   flex-direction: column;
   justify-content: flex-start;
   position: relative;
-  padding-top: 50px;
   row-gap: 15px;
 }
 
@@ -23,7 +21,6 @@
 
 .containerForPriceInRecommended {
   margin-top: auto;
-  padding-top: 0px;
   position: relative;
 }
 
