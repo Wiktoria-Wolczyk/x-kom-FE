@@ -23,7 +23,14 @@ const productsForClient = ({
       {productsForClient.tag && (
         <span
           className="infoAboutProductsForClient"
-          style={{ position: "absolute", top: 0, left: 0 }}
+          style={{
+            width: 80,
+            height: 30,
+            fontSize: 14,
+            position: "absolute",
+            top: 0,
+            left: 0,
+          }}
         >
           {productsForClient.tag}
         </span>
@@ -45,11 +52,12 @@ const productsForClient = ({
           <span
             style={{
               position: "absolute",
-              top: 0,
+              bottom: 30,
               left: 0,
               fontSize: 14,
               maxWidth: 100,
               textWrap: "pretty",
+              color: "gray",
             }}
           >
             Najniższa cena{" "}

@@ -173,69 +173,69 @@ function Navbar({ openAuthModal }: IProps) {
             </div>
           </div>
           <div className="Navbar">
-            <div className="divForHamburgerMenu">
-              <Menu isOpen={menuLoginIsOpen}>
-                <MenuButton
-                  as={IconButton}
-                  aria-label="Options"
-                  icon={<HamburgerIcon />}
-                  variant="outline"
-                  onClick={() => {
-                    setMenuLoginIsOpen((prev) => !prev);
-                    setButtonLoginIsClicked(!menuLoginIsOpen);
-                  }}
-                />
-                <MenuList className="menuList">
-                  <div className="divForMenuCategories">
-                    <MenuItem className="category Products">Produkty</MenuItem>
-                    <MenuItem className="category ForHer">Dla niej</MenuItem>
-                    <MenuItem className="category ForHim">Dla niego</MenuItem>
-                    <MenuItem className="category AboutUs">O nas</MenuItem>
-                    <MenuItem className="category Contact">Kontakt</MenuItem>
-                    <MenuItem className="category Statue">Regulamin</MenuItem>
-                  </div>
-                  <div className="containerForLoginAndRegister">
-                    {userIsLoggedIn ? (
+            <Menu isOpen={menuLoginIsOpen}>
+              <MenuButton
+                as={IconButton}
+                aria-label="Options"
+                icon={<HamburgerIcon />}
+                variant="outline"
+                onClick={() => {
+                  setMenuLoginIsOpen((prev) => !prev);
+                  setButtonLoginIsClicked(!menuLoginIsOpen);
+                }}
+              />
+              <MenuList className="menuList">
+                <div className="divForMenuCategories">
+                  <MenuItem className="category Products">Produkty</MenuItem>
+                  <MenuItem className="category ForHer">Dla niej</MenuItem>
+                  <MenuItem className="category ForHim">Dla niego</MenuItem>
+                  <MenuItem className="category AboutUs">O nas</MenuItem>
+                  <MenuItem className="category Contact">Kontakt</MenuItem>
+                  <MenuItem className="category Statue">Regulamin</MenuItem>
+                </div>
+                <div className="containerForLoginAndRegister">
+                  {userIsLoggedIn ? (
+                    <button
+                      onClick={() => {
+                        navigate("/list");
+                        setMenuLoginIsOpen(false);
+                      }}
+                    >
+                      {actualUser?.firstName} Zalogowana
+                    </button>
+                  ) : (
+                    <>
                       <button
                         onClick={() => {
-                          navigate("/list");
                           setMenuLoginIsOpen(false);
+                          navigate("/login");
                         }}
+                        className="buttonLoginInNavbar"
                       >
-                        {actualUser?.firstName} Zalogowana
+                        Login
                       </button>
-                    ) : (
-                      <>
-                        <button
-                          onClick={() => {
-                            setMenuLoginIsOpen(false);
-                            navigate("/login");
-                          }}
-                          className="buttonLoginInNavbar"
-                        >
-                          Login
-                        </button>
-                        <button
-                          onClick={() => {
-                            handleChangeAuthMenuOpen();
-                            navigate("/register");
-                          }}
-                          className="buttonRegisterInNavbar"
-                        >
-                          Register
-                        </button>
-                      </>
-                    )}
-                  </div>
-                </MenuList>
-              </Menu>
+                      <button
+                        onClick={() => {
+                          handleChangeAuthMenuOpen();
+                          navigate("/register");
+                        }}
+                        className="buttonRegisterInNavbar"
+                      >
+                        Register
+                      </button>
+                    </>
+                  )}
+                </div>
+              </MenuList>
+            </Menu>
+            <div className="containerForMagnifierAndSearchInput">
               <i className="fa-solid fa-magnifying-glass glass2 fa-sm"></i>
+              <input
+                className="searchInput"
+                type="search"
+                placeholder="Czego szukasz?"
+              ></input>
             </div>
-            <input
-              className="searchInput"
-              type="search"
-              placeholder="Czego szukasz?"
-            ></input>
           </div>
           <div className="containerForCategoriesOfProductsDesktop">
             <button>Laptopy i komputery</button>
@@ -249,14 +249,14 @@ function Navbar({ openAuthModal }: IProps) {
             <button>Promocje i nowości</button>
           </div>
         </div>
-        <div
+        {/* <div
           style={{
             border: "1px solid transparent",
             boxShadow: "0 4px 2px -2px lightgray",
             width: "100%",
             height: 5,
           }}
-        ></div>
+        ></div> */}
       </div>
     </ChakraProvider>
   );

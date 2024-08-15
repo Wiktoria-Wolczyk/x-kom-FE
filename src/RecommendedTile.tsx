@@ -23,7 +23,7 @@ const RecommendedProduct = ({ product }: { product: IProduct }) => {
       <div className="containerForPriceInRecommended">
         {product.discountedPrice ? (
           <div className="containerForTextLowestPrice">
-            Najniższa cena <span className="oldPrice">{product.price}</span>
+            Najniższa cena <span className="oldPrice">{product.price} zł</span>
           </div>
         ) : (
           <></>

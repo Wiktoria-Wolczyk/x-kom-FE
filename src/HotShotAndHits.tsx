@@ -79,9 +79,9 @@ const HotShotAndHits = () => {
         </div>
       </div>
 
-      <span className="ourProductsText">Nasze Produkty</span>
-      <div className="containerForCardsWithProducts">
-        {/* {productsArr?.map((el: IProductsArrValues, index) => (
+      {/* <span className="ourProductsText">Nasze Produkty</span> */}
+      {/* <div className="containerForCardsWithProducts"> */}
+      {/* {productsArr?.map((el: IProductsArrValues, index) => (
             <Card key={index} className="categoryCard" maxW="sm">
               <CardBody>
                 <Image
@@ -105,7 +105,7 @@ const HotShotAndHits = () => {
             </Card>
           ))} */}
 
-        {productsArr?.map((el: IProductsArray) => {
+      {/* {productsArr?.map((el: IProductsArray) => {
           if (el.discountedPrice >= 150) {
             return (
               <>
@@ -237,7 +237,7 @@ const HotShotAndHits = () => {
             );
           }
         })}
-      </div>
+      </div> */}
     </>
   );
 };
