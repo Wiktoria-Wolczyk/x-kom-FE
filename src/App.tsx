@@ -13,9 +13,11 @@ function App() {
     <div className="App">
       <>
         <Navbar openAuthModal={state?.openAuthModal} />
-        <Chat />
-        <Outlet />
-        <Footer />
+        <div className="appWithMargin">
+          <Chat />
+          <Outlet />
+          <Footer />
+        </div>
       </>
     </div>
   );

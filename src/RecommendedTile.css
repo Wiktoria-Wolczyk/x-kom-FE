@@ -47,15 +47,17 @@
   .containerForProduct {
     display: flex;
     flex-direction: column;
-    flex-shrink: 0px;
-    width: 25%;
-    height: 270px;
+    width: calc(25% - 15px);
+    height: calc(50% - 10px);
     display: flex;
     align-items: center;
     position: relative;
     padding-top: 30px;
     row-gap: 0px;
-    padding-right: 10px;
+  }
+
+  .containerForProduct:hover {
+    outline: 1px solid lightgreen;
   }
 
   .infoAboutRecommendedProductInRecommended {

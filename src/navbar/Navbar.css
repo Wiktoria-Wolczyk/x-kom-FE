@@ -230,6 +230,8 @@
     margin-bottom: 15px;
     width: 100%;
     justify-content: center;
+    box-shadow: 8px 7px 24px 0px rgba(66, 68, 90, 0.2);
+    position: relative;
   }
 
   .containerForNavbar {
@@ -240,10 +242,9 @@
     flex-shrink: 0;
     align-items: center;
     height: 100%;
-    width: 1444px;
+    width: 100%;
     background-color: white;
     border: 0px;
-    box-shadow: 0 4px 2px -2px lightgray;
   }
 
   .title-User-Cart-Navbar {
@@ -489,7 +490,7 @@
   }
 
   .containerForCategoriesOfProductsDesktop {
-    width: 1444px;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
