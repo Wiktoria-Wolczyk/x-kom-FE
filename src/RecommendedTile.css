@@ -49,21 +49,44 @@
     flex-direction: column;
     width: calc(25% - 15px);
     height: calc(50% - 10px);
-    display: flex;
     align-items: center;
     position: relative;
+    /* padding: 30px 20px; */
     padding-top: 30px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
     row-gap: 0px;
   }
 
   .containerForProduct:hover {
-    outline: 1px solid lightgreen;
+    box-shadow:
+      rgba(0, 0, 0, 0.08) 0px 2px 4px 0px,
+      rgba(0, 0, 0, 0.08) 0px 0px 2px 1px;
+    border-radius: 10px;
+
+    .cartOnHover {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid lightgray;
+      padding: 5px;
+      border-radius: 5px;
+      width: 40px;
+      height: 40px;
+      padding: 0px 10px;
+      cursor: pointer;
+    }
+
+    .cartInProductsContainer {
+      color: rgb(15, 193, 63);
+    }
   }
 
   .infoAboutRecommendedProductInRecommended {
     position: absolute;
-    top: 0px;
-    left: 0px;
+    top: 10px;
+    left: 20px;
     border: 1px solid gray;
     border-radius: 5px;
     width: 70px;
@@ -103,5 +126,25 @@
     display: flex;
     justify-content: flex-start;
     width: 100%;
+  }
+
+  .cartOnHover {
+    display: none;
+  }
+
+  .cartOnHover:hover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid lightgray;
+    padding: 5px;
+    border-radius: 5px;
+    width: 40px;
+    height: 40px;
+    background-color: rgb(15, 193, 63);
+
+    .cartInProductsContainer {
+      color: white;
+    }
   }
 }

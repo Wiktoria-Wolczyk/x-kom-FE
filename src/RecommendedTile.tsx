@@ -28,9 +28,19 @@ const RecommendedProduct = ({ product }: { product: IProduct }) => {
         ) : (
           <></>
         )}
-
-        <div className="actualPriceUnderLowestPrice">
-          {product.discountedPrice || product.price} zł
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-end",
+          }}
+        >
+          <div className="actualPriceUnderLowestPrice">
+            {product.discountedPrice || product.price} zł
+          </div>
+          <div className="cartOnHover">
+            <i className="fa-solid fa-cart-shopping fa-lg cartInProductsContainer"></i>
+          </div>
         </div>
       </div>
     </div>

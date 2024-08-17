@@ -237,7 +237,7 @@ function Navbar({ openAuthModal }: IProps) {
               ></input>
             </div>
           </div>
-          <div className="containerForCategoriesOfProductsDesktop">
+          <div className="navbarContainerForCategoriesOfProductsDesktop">
             <button>Laptopy i komputery</button>
             <button>Smartfony i smatwatche</button>
             <button>Pozdespoły komputerowe</button>
