@@ -92,11 +92,7 @@ function Navbar({ openAuthModal }: IProps) {
     setMenuLoginIsOpen((prev) => !prev);
   };
 
-  const { arrayWithActualProducts } = useContext(CartContext);
-
-  useEffect(() => {
-    // console.log("arrayWithActualProductsInNavbar", arrayWithActualProducts);
-  }, [arrayWithActualProducts]);
+  const { products } = useContext(CartContext);
 
   // useEffect(() => {
   //   let productsInLocalstorage: string | null = localStorage.getItem("cart");
@@ -162,9 +158,7 @@ function Navbar({ openAuthModal }: IProps) {
               <i className="fa-regular fa-user fa-xl"></i>
               <i className="fa-solid fa-headset fa-xl"></i>
               <div className="divForCart" onClick={() => navigate("/cart")}>
-                <div className="countProductsInCart">
-                  {arrayWithActualProducts?.length}
-                </div>
+                <div className="countProductsInCart">{products.length}</div>
                 <i
                   className="fa-solid fa-cart-shopping fa-xl"
                   style={{ color: "#383838" }}

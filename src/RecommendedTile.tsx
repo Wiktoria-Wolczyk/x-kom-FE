@@ -10,24 +10,25 @@ const RecommendedProduct = ({ product }: { product: IProduct }) => {
 
   const addProductsToCart = (el: IProduct) => {
     const product: ICartProduct = { ...el, quantity: 1 };
+    const newProducts = [...products];
 
-    const foundProduct = products.find((element) => element.id === el.id);
+    const foundProduct = newProducts.find((element) => element.id === el.id);
 
     if (foundProduct && foundProduct.quantity) {
       foundProduct.quantity += 1;
 
-      const index = products.findIndex(
+      const index = newProducts.findIndex(
         (product) => product.id === foundProduct!.id,
       );
 
       if (index !== -1) {
-        products[index] = foundProduct;
+        newProducts[index] = foundProduct;
       }
     } else {
-      products.push(product);
+      newProducts.push(product);
     }
 
-    setArrayWithActualProducts(products);
+    setArrayWithActualProducts(newProducts);
     toast.success("Added to cart!");
   };
 

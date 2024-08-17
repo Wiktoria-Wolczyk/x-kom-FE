@@ -35,8 +35,8 @@ export const CartContextController = ({
   const setArrayWithProductsInStateAndLocalStorage = (
     newProducts: ICartProduct[] | ((prev: ICartProduct[]) => ICartProduct[]),
   ) => {
-    setArrayWithActualProducts(newProducts);
     localStorage.setItem("cart", JSON.stringify(newProducts));
+    setArrayWithActualProducts(newProducts);
   };
 
   return (
