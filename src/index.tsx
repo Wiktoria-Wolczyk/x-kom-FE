@@ -20,7 +20,7 @@ import List from "./List/List";
 import Orders from "./Profile/Orders";
 import UserDetails from "./Profile/UserDetails";
 import ChangeUserName from "./Profile/Edition/ChangeUserName";
-import { ProductsContextController } from "./context/loginContext/ProductsInCartContext";
+import { CartContextController } from "./context/loginContext/CartContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const root = ReactDOM.createRoot(
@@ -33,7 +33,7 @@ export const TestContext = createContext({});
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <ProductsContextController>
+      <CartContextController>
         <LoginContextController>
           <ChakraProvider>
             <Toaster position="top-center" reverseOrder={false} />
@@ -61,7 +61,7 @@ root.render(
             </BrowserRouter>
           </ChakraProvider>
         </LoginContextController>
-      </ProductsContextController>
+      </CartContextController>
     </QueryClientProvider>
   </React.StrictMode>,
 );

@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { recommendedProductsArray } from "./constants";
 import RecommendedProducts from "./RecommendedTile";
-import { IProductsArray } from "./types";
-import { ProductsContext } from "./context/loginContext/ProductsInCartContext";
+import { ICartProduct } from "./types";
+import { CartContext } from "./context/loginContext/CartContext";
 import toast from "react-hot-toast";
 import axios from "axios";
 import HotShot from "./HotShot";
@@ -13,11 +13,11 @@ interface IElement {
 
 const HotShotAndHits = () => {
   const [productsArr, setProductsArr] = useState([]);
-  const [cart, setCart] = useState<IProductsArray[]>(
+  const [cart, setCart] = useState<ICartProduct[]>(
     JSON.parse(localStorage.getItem("cart") || "[]") || [],
   );
 
-  const { setArrayWithActualProducts } = useContext(ProductsContext);
+  const { setArrayWithActualProducts } = useContext(CartContext);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -38,7 +38,7 @@ const HotShotAndHits = () => {
     fetchProducts();
   }, []);
 
-  function addProductsToCart(el: IProductsArray) {
+  function addProductsToCart(el: ICartProduct) {
     const arrWithProductsInCart = [...cart]; // to bedzie cart z usestate'a
     const foundProduct = arrWithProductsInCart.find(
       (element: IElement) => element.id === el.id,
@@ -105,7 +105,7 @@ const HotShotAndHits = () => {
             </Card>
           ))} */}
 
-      {/* {productsArr?.map((el: IProductsArray) => {
+      {/* {productsArr?.map((el: ICartProduct) => {
           if (el.discountedPrice >= 150) {
             return (
               <>

@@ -9,7 +9,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 // import toast from "react-hot-toast";
 // import { useForm, SubmitHandler } from "react-hook-form";
 import { LoginContext } from "../context/loginContext/LoginContext";
-import { ProductsContext } from "../context/loginContext/ProductsInCartContext";
+import { CartContext } from "../context/loginContext/CartContext";
 import imageToAdd from "./xKom.png";
 
 interface IProps {
@@ -36,7 +36,7 @@ function Navbar({ openAuthModal }: IProps) {
 
   const { userIsLoggedIn, actualUser } = useContext(LoginContext);
 
-  const { setButtonLoginIsClicked } = useContext(ProductsContext);
+  const { setButtonLoginIsClicked } = useContext(CartContext);
 
   // const onSubmit: SubmitHandler<IFormValues> = async (data) => {
   //   try {
@@ -92,7 +92,7 @@ function Navbar({ openAuthModal }: IProps) {
     setMenuLoginIsOpen((prev) => !prev);
   };
 
-  const { arrayWithActualProducts } = useContext(ProductsContext);
+  const { arrayWithActualProducts } = useContext(CartContext);
 
   useEffect(() => {
     // console.log("arrayWithActualProductsInNavbar", arrayWithActualProducts);

@@ -29,12 +29,6 @@ export interface IOrderValues {
   user: IUser;
 }
 
-export interface IProductsArray {
-  id: number;
-  name: string;
-  price: number;
-  discountedPrice: number;
-  available: number;
-  brand: string;
+export interface ICartProduct extends IProduct {
   quantity: number;
 }

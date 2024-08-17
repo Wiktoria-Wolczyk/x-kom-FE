@@ -4,23 +4,13 @@ import toast from "react-hot-toast";
 import { Input } from "@chakra-ui/react";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import { ProductsContext } from "../context/loginContext/ProductsInCartContext";
-import { IProductsArray } from "../types";
+import { CartContext } from "../context/loginContext/CartContext";
+import { ICartProduct } from "../types";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 // import AppleIPhone from "../HomepageIcons/Apple iPhone 15 128GB Black.webp";
 import QuantityChanger from "./QuantityChanger";
 import { LoginContext } from "../context/loginContext/LoginContext";
 import { useMutation } from "@tanstack/react-query";
-
-interface IProductsInCart {
-  id: number;
-  name: string;
-  price: number;
-  discountedPrice: number;
-  available: number;
-  brand: string;
-  quantity: number;
-}
 
 interface IFormInput {
   couponCode: string;
@@ -28,12 +18,11 @@ interface IFormInput {
 
 function Cart() {
   const { arrayWithActualProducts, setArrayWithActualProducts } =
-    useContext(ProductsContext);
+    useContext(CartContext);
 
   const { actualUser } = useContext(LoginContext);
 
   const cartPrice = arrayWithActualProducts.reduce((acc, curr) => {
-    console.log("obliczam cartPrice");
     acc += curr.price * curr.quantity;
     return acc;
   }, 0);
@@ -48,7 +37,8 @@ function Cart() {
   // console.log({ memoizedPrice, cartPrice });
 
   const cartDiscountedPrice = arrayWithActualProducts.reduce((acc, curr) => {
-    acc += curr.discountedPrice * curr.quantity;
+    acc += (curr.discountedPrice || curr.price) * curr.quantity;
+
     return acc;
   }, 0);
 
@@ -180,7 +170,7 @@ function Cart() {
           </div>
           <div className="divForProductsInCart">
             <ul className="ulForProductsInCart">
-              {arrayWithActualProducts.map((el: IProductsArray) => {
+              {arrayWithActualProducts.map((el: ICartProduct) => {
                 return (
                   <div key={el.id} className="containerForPhotoAndList">
                     <div className="containerForPhoto">
@@ -200,10 +190,9 @@ function Cart() {
                         <button
                           onClick={() => {
                             const productsArr = arrayWithActualProducts;
-                            const arrWithoutDeletedElement: IProductsArray[] =
+                            const arrWithoutDeletedElement: ICartProduct[] =
                               productsArr.filter(
-                                (element: IProductsInCart) =>
-                                  element.id !== el.id,
+                                (element: ICartProduct) => element.id !== el.id,
                               );
 
                             // console.log(

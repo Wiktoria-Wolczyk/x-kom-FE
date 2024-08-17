@@ -1,6 +1,6 @@
 // {
 //    <div className="divScrollingContainer">
-//       {productsArray?.map((el: IProductsArray) => (
+//       {productsArray?.map((el: ICartProduct) => (
 //         <>
 //           <div className="containerForCardWithProduct">
 //             <div className="containerForPhoto">

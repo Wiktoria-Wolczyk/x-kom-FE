@@ -1,8 +1,36 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./RecommendedTile.css";
 import { IProduct } from "./types";
+import { ICartProduct } from "./types";
+import toast from "react-hot-toast";
+import { CartContext } from "./context/loginContext/CartContext";
 
 const RecommendedProduct = ({ product }: { product: IProduct }) => {
+  const { setArrayWithActualProducts, products } = useContext(CartContext);
+
+  const addProductsToCart = (el: IProduct) => {
+    const product: ICartProduct = { ...el, quantity: 1 };
+
+    const foundProduct = products.find((element) => element.id === el.id);
+
+    if (foundProduct && foundProduct.quantity) {
+      foundProduct.quantity += 1;
+
+      const index = products.findIndex(
+        (product) => product.id === foundProduct!.id,
+      );
+
+      if (index !== -1) {
+        products[index] = foundProduct;
+      }
+    } else {
+      products.push(product);
+    }
+
+    setArrayWithActualProducts(products);
+    toast.success("Added to cart!");
+  };
+
   return (
     <div className="containerForProduct">
       {product.tag && (
@@ -38,7 +66,10 @@ const RecommendedProduct = ({ product }: { product: IProduct }) => {
           <div className="actualPriceUnderLowestPrice">
             {product.discountedPrice || product.price} zł
           </div>
-          <div className="cartOnHover">
+          <div
+            className="cartOnHover"
+            onClick={() => addProductsToCart(product)}
+          >
             <i className="fa-solid fa-cart-shopping fa-lg cartInProductsContainer"></i>
           </div>
         </div>

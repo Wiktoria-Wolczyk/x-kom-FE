@@ -15,8 +15,8 @@ import {
   Button,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { IProductsArray } from "../types";
-import { ProductsContext } from "../context/loginContext/ProductsInCartContext";
+import { ICartProduct } from "../types";
+import { CartContext } from "../context/loginContext/CartContext";
 import { useQuery } from "@tanstack/react-query";
 
 interface IElement {
@@ -38,11 +38,11 @@ function Products() {
   const { categoryName } = useParams();
 
   const category = categoryName?.replaceAll("_", " ");
-  const [cart, setCart] = useState<IProductsArray[]>(
+  const [cart, setCart] = useState<ICartProduct[]>(
     JSON.parse(localStorage.getItem("cart") || "[]") || [],
   );
 
-  const { setArrayWithActualProducts } = useContext(ProductsContext);
+  const { setArrayWithActualProducts } = useContext(CartContext);
 
   const {
     error,
@@ -78,7 +78,7 @@ function Products() {
   //   fetchProducts();
   // }, []);
 
-  function addProductsToCart(el: IProductsArray) {
+  function addProductsToCart(el: ICartProduct) {
     const arrWithProductsInCart = [...cart]; // to bedzie cart z usestate'a
     const foundProduct = arrWithProductsInCart.find(
       (element: IElement) => element.id === el.id,
@@ -123,7 +123,7 @@ function Products() {
     <div className="divScrollingContainer">
       <div className="containerForAllJeansTrousers">
         <div className="containerForTrousersCards">
-          {productsArray?.map((el: IProductsArray) => (
+          {productsArray?.map((el: ICartProduct) => (
             <Card key={el.id} maxW="sm" className="categoryCard">
               <CardBody>
                 <Image

@@ -1,24 +1,26 @@
 import React, { ReactNode, createContext, useEffect, useState } from "react";
 import "../../types";
-import { IProductsArray } from "../../types";
+import { ICartProduct } from "../../types";
 
-interface IProductsContext {
-  arrayWithActualProducts: IProductsArray[];
+interface ICartContext {
+  products: ICartProduct[];
+  arrayWithActualProducts: ICartProduct[];
   setArrayWithActualProducts: (
-    arr: IProductsArray[] | ((prev: IProductsArray[]) => IProductsArray[]),
+    arr: ICartProduct[] | ((prev: ICartProduct[]) => ICartProduct[]),
   ) => void;
   buttonLoginIsClicked: boolean;
   setButtonLoginIsClicked: (bool: boolean) => void;
 }
 
-export const ProductsContext = createContext<IProductsContext>({
+export const CartContext = createContext<ICartContext>({
+  products: [],
   arrayWithActualProducts: [],
   setArrayWithActualProducts: () => [],
   buttonLoginIsClicked: false,
   setButtonLoginIsClicked: () => {},
 });
 
-export const ProductsContextController = ({
+export const CartContextController = ({
   children,
 }: {
   children: ReactNode;
@@ -26,26 +28,21 @@ export const ProductsContextController = ({
   // let cartString = localStorage.getItem("cart");
   // let productsInCart = cartString ? JSON.parse(cartString) : null;
   const [arrayWithActualProducts, setArrayWithActualProducts] = useState<
-    IProductsArray[]
+    ICartProduct[]
   >(JSON.parse(localStorage.getItem("cart") || "[]") || []);
   const [buttonLoginIsClicked, setButtonLoginIsClicked] = useState(false);
 
   const setArrayWithProductsInStateAndLocalStorage = (
-    newProducts:
-      | IProductsArray[]
-      | ((prev: IProductsArray[]) => IProductsArray[]),
+    newProducts: ICartProduct[] | ((prev: ICartProduct[]) => ICartProduct[]),
   ) => {
     setArrayWithActualProducts(newProducts);
     localStorage.setItem("cart", JSON.stringify(newProducts));
   };
 
-  useEffect(() => {
-    console.log({ arrayWithActualProducts });
-  }, [arrayWithActualProducts]);
-
   return (
-    <ProductsContext.Provider
+    <CartContext.Provider
       value={{
+        products: arrayWithActualProducts,
         arrayWithActualProducts,
         setArrayWithActualProducts: setArrayWithProductsInStateAndLocalStorage,
         buttonLoginIsClicked,
@@ -53,6 +50,6 @@ export const ProductsContextController = ({
       }}
     >
       {children}
-    </ProductsContext.Provider>
+    </CartContext.Provider>
   );
 };
