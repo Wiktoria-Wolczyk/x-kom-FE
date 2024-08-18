@@ -8,6 +8,10 @@
   row-gap: 15px;
 }
 
+.cartOnHover {
+  display: none;
+}
+
 .infoAboutRecommendedProductInRecommended {
   display: flex;
   justify-content: center;
