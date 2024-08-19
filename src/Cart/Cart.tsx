@@ -11,6 +11,9 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import QuantityChanger from "./QuantityChanger";
 import { LoginContext } from "../context/loginContext/LoginContext";
 import { useMutation } from "@tanstack/react-query";
+import Icons from "../Icons";
+import CategoryTile from "../CategoryTile";
+import { categories } from "../constants";
 
 interface IFormInput {
   couponCode: string;
@@ -156,7 +159,8 @@ function Cart() {
           </span>
           <div className="containerForSaveAndClearTrash">
             <div className="saveDiv">
-              <i className="fa-regular fa-heart"></i>Zapisz
+              <i className="fa-regular fa-heart fa-lg"></i>
+              <p className="paddingNextToText">Zapisz</p>
             </div>
             <div
               className="clearTrashDiv"
@@ -165,7 +169,8 @@ function Cart() {
                 clearCart();
               }}
             >
-              <i className="fa-regular fa-trash-can"></i>Wyczyść koszyk
+              <i className="fa-regular fa-trash-can fa-lg"></i>
+              <p className="paddingNextToText">Wyczyść koszyk</p>
             </div>
           </div>
           <div className="divForProductsInCart">
@@ -176,16 +181,14 @@ function Cart() {
                     <div className="containerForPhoto">
                       <img
                         className="productPhotoClass"
-                        src={""}
+                        src={el.img}
                         alt="Apple IPhone photo"
-                        width="100%"
-                        height="100%"
                       />
                     </div>
                     <li className="listInCart">
                       <div className="ContainerForElNameAndButton">
                         <span className="elName">
-                          <p>{el.name}</p>
+                          <div>{el.name}</div>
                         </span>
                         <button
                           onClick={() => {
@@ -212,7 +215,7 @@ function Cart() {
                           }}
                           className="buttonDeleteFromCart"
                         >
-                          <i className="fa-solid fa-ellipsis-vertical"></i>
+                          <i className="fa-regular fa-trash-can fa-lg"></i>
                         </button>
                       </div>
                       <div className="ContainerForElAvailableAndDiscountedPrice">
@@ -225,12 +228,60 @@ function Cart() {
                         </div>
                         <span className="elDiscountedPrice">
                           <div className="earlierPriceDiv">
-                            <p>Najniższa cena:</p>
-                            <p style={{ textDecoration: "line-through" }}>
-                              {el.price} zł
+                            {el.discountedPrice === null ? (
+                              <>
+                                <div style={{ visibility: "hidden" }}>
+                                  <p style={{ fontSize: 14 }}>
+                                    Najniższa cena:
+                                  </p>
+                                  <p
+                                    style={{
+                                      textDecoration: "line-through",
+                                      fontSize: 14,
+                                    }}
+                                  >
+                                    {el.price} zł
+                                  </p>
+                                </div>
+                                <p style={{ fontSize: 16, fontWeight: 500 }}>
+                                  {el.price}zł
+                                </p>
+                              </>
+                            ) : (
+                              <>
+                                <p style={{ fontSize: 14 }}>Najniższa cena:</p>
+                                <p
+                                  style={{
+                                    textDecoration: "line-through",
+                                    fontSize: 14,
+                                  }}
+                                >
+                                  {el.price} zł
+                                </p>
+                                <p style={{ fontSize: 16, fontWeight: 500 }}>
+                                  {el.discountedPrice}zł
+                                </p>
+                              </>
+                            )}
+                            {/* <p style={{ fontSize: 13, marginTop: 5 }}>
+                              Najniższa cena:
                             </p>
+                            <p
+                              style={{
+                                textDecoration: "line-through",
+                                fontSize: 13,
+                              }}
+                            >
+                              {el.price} zł
+                            </p> */}
                             <div>
-                              <b>cena: </b> {el.discountedPrice}zł
+                              {/* {el.discountedPrice ? (
+                                <p style={{ fontSize: 15 }}>
+                                  {el.discountedPrice}zł
+                                </p>
+                              ) : (
+                                <p style={{ fontSize: 15 }}>{el.price}zł</p>
+                              )} */}
                             </div>
                           </div>
                         </span>
@@ -253,57 +304,72 @@ function Cart() {
           </div>
           <div className="divForPriceAndTrash"></div>
         </div>
-        <div className="containerForCouponInCart">
-          <div className="textAddCouponInCart">
-            <div>
-              <i className="fa-solid fa-ticket"></i>Add coupon code
-            </div>
-            <i
-              className="fa-solid fa-chevron-up"
-              onClick={() => {
-                chevronCouponCodeClicked();
-                console.log({ addCouponCodeIsClicked });
-              }}
-            ></i>
-          </div>
-          {addCouponCodeIsClicked ? (
-            <div className="containerForInputCouponInCart">
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <Controller
-                  name="couponCode"
-                  control={control}
-                  render={({ field }) => (
-                    <Input
-                      className="inputToCouponInCart"
-                      placeholder="couponCode"
-                      size="lg"
-                      {...field}
-                    />
-                  )}
-                />
-              </form>
 
-              <button className="useCouponCodeButton">use</button>
-            </div>
-          ) : (
-            <></>
-          )}
+        <div
+          className="textAddCouponInCart"
+          onClick={() => {
+            chevronCouponCodeClicked();
+            console.log({ addCouponCodeIsClicked });
+          }}
+        >
+          <div className="centerCouponWithText">
+            <Icons name="Coupon" style={{ height: 20 }} />
+            <p style={{ paddingLeft: 10 }}>Masz kupon promocyjny?</p>
+          </div>
+          <i
+            className={`fa-solid ${addCouponCodeIsClicked ? "fa-chevron-up" : "fa-chevron-down"} chevronInCouponCode`}
+          ></i>
         </div>
+        {addCouponCodeIsClicked ? (
+          <div className="containerForInputCouponInCart">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              style={{ width: "100%", paddingRight: 20 }}
+            >
+              <Controller
+                name="couponCode"
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    className="inputToCouponInCart"
+                    placeholder="Kod promocyjny"
+                    {...field}
+                  />
+                )}
+              />
+            </form>
+
+            <button className="useCouponCodeButton">Aktywuj</button>
+          </div>
+        ) : (
+          <></>
+        )}
+
         <div className="containerForSumOrderAndBuy">
           <div className="divForAmountToPay">
-            <div className="textAmountToPay">Amount to pay:</div>
+            <div className="containerForTextAmountToPayAndSavedMoney">
+              <p>Do zapłaty</p>
+            </div>
             <div className="divForSumAmountToPayAndDiscount">
-              <div className="savedMoney">saved money: {savedMoney} zł</div>
               <div className="amountToPayBeforeAndAfter">
                 {cartPrice ? (
-                  <>
-                    <div className="priceBefore">{cartPrice} zł</div>
-                  </>
+                  <div className="divForSavedMoney">
+                    <div className="savedMoney">
+                      Oszczędzasz {savedMoney} zł
+                    </div>
+                  </div>
                 ) : (
                   <></>
                 )}
-
-                <div className="priceAfter">{cartDiscountedPrice} zł</div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-end",
+                  }}
+                >
+                  <span className="priceBefore">{cartPrice} zł</span>
+                  <span className="priceAfter">{cartDiscountedPrice} zł</span>
+                </div>
               </div>
             </div>
           </div>
@@ -313,7 +379,8 @@ function Cart() {
             disabled={mutation.isPending}
             className="buttonBuy"
           >
-            {mutation.isPending ? "Loading..." : "Buy"}
+            {mutation.isPending ? "Loading..." : "Przejdź do dostawy"}
+            <i className="fa-solid fa-chevron-right chevronInbuttonBuy"></i>
           </button>
           {mutation.isError ? (
             <>

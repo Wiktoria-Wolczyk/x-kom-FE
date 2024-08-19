@@ -12,22 +12,23 @@ const QuantityChanger = ({
   return (
     <>
       <button
-        onClick={() => changeQuantity(id, "add")}
-        className="plusQuantityButton"
+        disabled={quantity === 1}
+        onClick={() => changeQuantity(id, "remove")}
+        className="minusQuantityButton"
       >
-        +
+        -
       </button>
+
       <input
         className="inputWithQuantityCount"
         type="number"
         value={quantity}
       />
       <button
-        disabled={quantity === 1}
-        onClick={() => changeQuantity(id, "remove")}
-        className="minusQuantityButton"
+        onClick={() => changeQuantity(id, "add")}
+        className="plusQuantityButton"
       >
-        -
+        +
       </button>
     </>
   );

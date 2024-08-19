@@ -8,6 +8,7 @@ import { ReactComponent as TV } from "../src/HomepageIcons/tvAndAudio.svg";
 import { ReactComponent as Smarthome } from "../src/HomepageIcons/smarthome.svg";
 import { ReactComponent as Accessories } from "../src/HomepageIcons/accessories.svg";
 import { ReactComponent as Percent } from "../src/HomepageIcons/percent.svg";
+import { ReactComponent as CouponSVG } from "../src/HomepageIcons/coupon.svg";
 
 const Icons = ({ name, style = {} }: { name: string; style: any }) => {
   switch (name) {
@@ -27,6 +28,8 @@ const Icons = ({ name, style = {} }: { name: string; style: any }) => {
       return <Smarthome style={style} />;
     case "Accessories":
       return <Accessories style={style} />;
+    case "Coupon":
+      return <CouponSVG style={style} />;
     default:
       return <Percent style={style} />;
   }

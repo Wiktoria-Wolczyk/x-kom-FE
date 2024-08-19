@@ -143,7 +143,7 @@
 .divScrollingContainer {
   display: flex;
   flex-direction: column;
-  background-color: rgb(245, 244, 244);
+  background-color: rgb(247, 247, 247);
   /* overflow: auto; */
 }
 
