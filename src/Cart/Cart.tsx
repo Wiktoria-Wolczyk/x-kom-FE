@@ -143,34 +143,36 @@ function Cart() {
     <div className="divScrollingContainer">
       <div className="containerForCart">
         <div className="divForCartInCartComponent">
-          <span className="cartTextInCartComponent">
-            Koszyk
-            {arrWithQuantites > 1 ? (
-              <>
+          <div className="containerForCartTextAndSaveClearButtons">
+            <span className="cartTextInCartComponent">
+              Koszyk
+              {arrWithQuantites > 1 ? (
+                <>
+                  <p className="countProductsNextToCartText">
+                    ({arrWithQuantites} produkty)
+                  </p>
+                </>
+              ) : (
                 <p className="countProductsNextToCartText">
-                  ({arrWithQuantites} produkty)
+                  ({arrWithQuantites} produkt)
                 </p>
-              </>
-            ) : (
-              <p className="countProductsNextToCartText">
-                ({arrWithQuantites} produkt)
-              </p>
-            )}
-          </span>
-          <div className="containerForSaveAndClearTrash">
-            <div className="saveDiv">
-              <i className="fa-regular fa-heart fa-lg"></i>
-              <p className="paddingNextToText">Zapisz</p>
-            </div>
-            <div
-              className="clearTrashDiv"
-              onClick={() => {
-                localStorage.removeItem("cart");
-                clearCart();
-              }}
-            >
-              <i className="fa-regular fa-trash-can fa-lg"></i>
-              <p className="paddingNextToText">Wyczyść koszyk</p>
+              )}
+            </span>
+            <div className="containerForSaveAndClearTrash">
+              <div className="saveDiv">
+                <i className="fa-regular fa-heart fa-lg"></i>
+                <p className="paddingNextToText">Zapisz</p>
+              </div>
+              <div
+                className="clearTrashDiv"
+                onClick={() => {
+                  localStorage.removeItem("cart");
+                  clearCart();
+                }}
+              >
+                <i className="fa-regular fa-trash-can fa-lg"></i>
+                <p className="paddingNextToText">Wyczyść koszyk</p>
+              </div>
             </div>
           </div>
           <div className="divForProductsInCart">
@@ -185,7 +187,8 @@ function Cart() {
                         alt="Apple IPhone photo"
                       />
                     </div>
-                    <li className="listInCart">
+
+                    <div className="listInCart">
                       <div className="ContainerForElNameAndButton">
                         <span className="elName">
                           <div>{el.name}</div>
@@ -228,9 +231,12 @@ function Cart() {
                         </div>
                         <span className="elDiscountedPrice">
                           <div className="earlierPriceDiv">
-                            {el.discountedPrice === null ? (
+                            {!el.discountedPrice ? (
                               <>
-                                <div style={{ visibility: "hidden" }}>
+                                <div
+                                  className="displayNoneOnDesktop"
+                                  style={{ visibility: "hidden" }}
+                                >
                                   <p style={{ fontSize: 14 }}>
                                     Najniższa cena:
                                   </p>
@@ -291,7 +297,34 @@ function Cart() {
                       {el.quantity}
                     </span> */}
                       </div>
-                    </li>
+                      <div className="trashInProductsCardOnDesktop">
+                        <i
+                          className="fa-regular fa-trash-can fa-lg"
+                          onClick={() => {
+                            const productsArr = arrayWithActualProducts;
+                            const arrWithoutDeletedElement: ICartProduct[] =
+                              productsArr.filter(
+                                (element: ICartProduct) => element.id !== el.id,
+                              );
+
+                            // console.log(
+                            //   "tu ma się usuwać całe zamównienie",
+                            //   arrWithoutDeletedElement
+                            // );
+
+                            setArrayWithActualProducts(
+                              arrWithoutDeletedElement,
+                            );
+
+                            const cartWithElements = JSON.stringify(
+                              arrWithoutDeletedElement,
+                            );
+
+                            localStorage.setItem("cart", cartWithElements);
+                          }}
+                        ></i>
+                      </div>
+                    </div>
 
                     {/* <div className="CartProductNameText">Product Name:</div>
               <div className="ProductNameText">{el.name}</div>
@@ -305,101 +338,107 @@ function Cart() {
           <div className="divForPriceAndTrash"></div>
         </div>
 
-        <div
-          className="textAddCouponInCart"
-          onClick={() => {
-            chevronCouponCodeClicked();
-            console.log({ addCouponCodeIsClicked });
-          }}
-        >
-          <div className="centerCouponWithText">
-            <Icons name="Coupon" style={{ height: 20 }} />
-            <p style={{ paddingLeft: 10 }}>Masz kupon promocyjny?</p>
-          </div>
-          <i
-            className={`fa-solid ${addCouponCodeIsClicked ? "fa-chevron-up" : "fa-chevron-down"} chevronInCouponCode`}
-          ></i>
-        </div>
-        {addCouponCodeIsClicked ? (
-          <div className="containerForInputCouponInCart">
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              style={{ width: "100%", paddingRight: 20 }}
+        <div className="parentContainerForSummaryOrderAndCoupon">
+          <div className="conatinerForCouponAndSummaryOrder">
+            <div
+              className="textAddCouponInCart"
+              onClick={() => {
+                chevronCouponCodeClicked();
+                console.log({ addCouponCodeIsClicked });
+              }}
             >
-              <Controller
-                name="couponCode"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    className="inputToCouponInCart"
-                    placeholder="Kod promocyjny"
-                    {...field}
-                  />
-                )}
-              />
-            </form>
-
-            <button className="useCouponCodeButton">Aktywuj</button>
-          </div>
-        ) : (
-          <></>
-        )}
-
-        <div className="containerForSumOrderAndBuy">
-          <div className="divForAmountToPay">
-            <div className="containerForTextAmountToPayAndSavedMoney">
-              <p>Do zapłaty</p>
+              <div className="centerCouponWithText">
+                <Icons name="Coupon" style={{ height: 20 }} />
+                <p style={{ paddingLeft: 10 }}>Masz kupon promocyjny?</p>
+              </div>
+              <i
+                className={`fa-solid ${addCouponCodeIsClicked ? "fa-chevron-up" : "fa-chevron-down"} chevronInCouponCode`}
+              ></i>
             </div>
-            <div className="divForSumAmountToPayAndDiscount">
-              <div className="amountToPayBeforeAndAfter">
-                {cartPrice ? (
-                  <div className="divForSavedMoney">
-                    <div className="savedMoney">
-                      Oszczędzasz {savedMoney} zł
+            {addCouponCodeIsClicked ? (
+              <div className="containerForInputCouponInCart">
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  style={{ width: "100%", paddingRight: 20 }}
+                >
+                  <Controller
+                    name="couponCode"
+                    control={control}
+                    render={({ field }) => (
+                      <Input
+                        className="inputToCouponInCart"
+                        placeholder="Kod promocyjny"
+                        {...field}
+                      />
+                    )}
+                  />
+                </form>
+
+                <button className="useCouponCodeButton">Aktywuj</button>
+              </div>
+            ) : (
+              <></>
+            )}
+
+            <div className="containerForSumOrderAndBuy">
+              <div className="divForAmountToPay">
+                <div className="containerForTextAmountToPayAndSavedMoney">
+                  <p>Do zapłaty</p>
+                </div>
+                <div className="divForSumAmountToPayAndDiscount">
+                  <div className="amountToPayBeforeAndAfter">
+                    {cartPrice ? (
+                      <div className="divForSavedMoney">
+                        <div className="savedMoney">
+                          Oszczędzasz {savedMoney} zł
+                        </div>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "flex-end",
+                      }}
+                    >
+                      <span className="priceBefore">{cartPrice} zł</span>
+                      <span className="priceAfter">
+                        {cartDiscountedPrice} zł
+                      </span>
                     </div>
                   </div>
-                ) : (
-                  <></>
-                )}
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "flex-end",
-                  }}
-                >
-                  <span className="priceBefore">{cartPrice} zł</span>
-                  <span className="priceAfter">{cartDiscountedPrice} zł</span>
                 </div>
               </div>
+
+              <button
+                onClick={() => mutation.mutate()}
+                disabled={mutation.isPending}
+                className="buttonBuy"
+              >
+                {mutation.isPending ? "Loading..." : "Przejdź do dostawy"}
+                <i className="fa-solid fa-chevron-right chevronInbuttonBuy"></i>
+              </button>
+              {mutation.isError ? (
+                <>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      width: 300,
+                      height: 50,
+                      color: "red",
+                      paddingBottom: 10,
+                    }}
+                  >
+                    Wystąpił błąd przy składaniu zamówienia - spróbuj później
+                  </div>
+                </>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
-
-          <button
-            onClick={() => mutation.mutate()}
-            disabled={mutation.isPending}
-            className="buttonBuy"
-          >
-            {mutation.isPending ? "Loading..." : "Przejdź do dostawy"}
-            <i className="fa-solid fa-chevron-right chevronInbuttonBuy"></i>
-          </button>
-          {mutation.isError ? (
-            <>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  width: 300,
-                  height: 50,
-                  color: "red",
-                  paddingBottom: 10,
-                }}
-              >
-                Wystąpił błąd przy składaniu zamówienia - spróbuj później
-              </div>
-            </>
-          ) : (
-            <></>
-          )}
         </div>
       </div>
     </div>

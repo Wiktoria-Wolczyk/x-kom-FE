@@ -734,13 +734,14 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
-    background-color: white;
+    background-color: rgb(247, 247, 247);
   }
 
   .appWithMargin {
     display: flex;
     flex-direction: column;
     max-width: 1444px;
+    width: 100%;
     align-self: center;
     margin: 0 20px;
   }
