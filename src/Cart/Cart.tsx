@@ -26,8 +26,8 @@ function Cart() {
   const { actualUser } = useContext(LoginContext);
 
   const mutationPrice = useMutation({
-    mutationFn: (arrayWithActualProducts: ICartProduct[]) => {
-      return axios.post(
+    mutationFn: async (arrayWithActualProducts: ICartProduct[]) => {
+      const response = await axios.post(
         "http://localhost:3000/orders/calculate-price",
         {
           products: arrayWithActualProducts,
@@ -38,6 +38,7 @@ function Cart() {
           },
         },
       );
+      return response.data.message;
     },
   });
 
@@ -45,7 +46,7 @@ function Cart() {
     mutationPrice.mutate(arrayWithActualProducts);
   }, [arrayWithActualProducts]);
 
-  // console.log("mutation", mutationPrice)
+  console.log("mutation", mutationPrice.data?.discountedPrice);
 
   // const calculatedProductsFromCart = async () => {
   //   const response = await axios.post(
@@ -60,10 +61,10 @@ function Cart() {
   //   return response.data;
   // };
 
-  const cartPrice = arrayWithActualProducts.reduce((acc, curr) => {
-    acc += curr.price * curr.quantity;
-    return acc;
-  }, 0);
+  // const cartPrice = arrayWithActualProducts.reduce((acc, curr) => {
+  //   acc += curr.price * curr.quantity;
+  //   return acc;
+  // }, 0);
 
   // const memoizedPrice = useMemo(() => {
   //   return arrayWithActualProducts.reduce((acc, curr) => {
@@ -74,11 +75,11 @@ function Cart() {
   // }, [arrayWithActualProducts]);
   // console.log({ memoizedPrice, cartPrice });
 
-  const cartDiscountedPrice = arrayWithActualProducts.reduce((acc, curr) => {
-    acc += (curr.discountedPrice || curr.price) * curr.quantity;
+  // const cartDiscountedPrice = arrayWithActualProducts.reduce((acc, curr) => {
+  //   acc += (curr.discountedPrice || curr.price) * curr.quantity;
 
-    return acc;
-  }, 0);
+  //   return acc;
+  // }, 0);
 
   const changeQuantity = (id: number, change: string) => {
     const arr = arrayWithActualProducts.map((el) => {
@@ -98,7 +99,8 @@ function Cart() {
 
   const [addCouponCodeIsClicked, setAddCouponCodeIsClicked] = useState(false);
 
-  const savedMoney = cartPrice - cartDiscountedPrice;
+  const savedMoney =
+    mutationPrice.data?.price - mutationPrice.data?.discountedPrice;
 
   const chevronCouponCodeClicked = () => {
     return setAddCouponCodeIsClicked((prev) => !prev);
@@ -436,15 +438,21 @@ function Cart() {
                   <p>Do zapłaty</p>
                 </div>
                 <div className="divForSumAmountToPayAndDiscount">
-                  <div className="amountToPayBeforeAndAfter">
-                    {cartPrice ? (
+                  <div
+                    className="amountToPayBeforeAndAfter"
+                    style={{
+                      display: "flex",
+                      justifyContent: !savedMoney
+                        ? "flex-end"
+                        : "space-between",
+                    }}
+                  >
+                    {savedMoney !== 0 && (
                       <div className="divForSavedMoney">
                         <div className="savedMoney">
                           Oszczędzasz {savedMoney} zł
                         </div>
                       </div>
-                    ) : (
-                      <></>
                     )}
                     <div
                       style={{
@@ -452,9 +460,13 @@ function Cart() {
                         alignItems: "flex-end",
                       }}
                     >
-                      <span className="priceBefore">{cartPrice} zł</span>
+                      {savedMoney !== 0 && (
+                        <span className="priceBefore">
+                          {mutationPrice.data?.price} zł
+                        </span>
+                      )}
                       <span className="priceAfter">
-                        {cartDiscountedPrice} zł
+                        {mutationPrice.data?.discountedPrice} zł
                       </span>
                     </div>
                   </div>
