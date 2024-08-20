@@ -20,6 +20,7 @@ interface IFormInput {
 }
 
 function Cart() {
+  const [couponCode, setCouponCode] = useState("");
   const { arrayWithActualProducts, setArrayWithActualProducts } =
     useContext(CartContext);
 
@@ -31,6 +32,7 @@ function Cart() {
         "http://localhost:3000/orders/calculate-price",
         {
           products: arrayWithActualProducts,
+          couponCode: couponCode,
         },
         {
           headers: {
@@ -45,41 +47,6 @@ function Cart() {
   useEffect(() => {
     mutationPrice.mutate(arrayWithActualProducts);
   }, [arrayWithActualProducts]);
-
-  console.log("mutation", mutationPrice.data?.discountedPrice);
-
-  // const calculatedProductsFromCart = async () => {
-  //   const response = await axios.post(
-  //     "http://localhost:3000/orders/calculate-price",
-  //     {
-  //       products: arrayWithActualProducts,
-  //     }, {headers: {
-  //       Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //     }}
-  //   );
-
-  //   return response.data;
-  // };
-
-  // const cartPrice = arrayWithActualProducts.reduce((acc, curr) => {
-  //   acc += curr.price * curr.quantity;
-  //   return acc;
-  // }, 0);
-
-  // const memoizedPrice = useMemo(() => {
-  //   return arrayWithActualProducts.reduce((acc, curr) => {
-  //     console.log("OBLICZAM MEMO CART PRICE");
-  //     acc += curr.price * curr.quantity;
-  //     return acc;
-  //   }, 0);
-  // }, [arrayWithActualProducts]);
-  // console.log({ memoizedPrice, cartPrice });
-
-  // const cartDiscountedPrice = arrayWithActualProducts.reduce((acc, curr) => {
-  //   acc += (curr.discountedPrice || curr.price) * curr.quantity;
-
-  //   return acc;
-  // }, 0);
 
   const changeQuantity = (id: number, change: string) => {
     const arr = arrayWithActualProducts.map((el) => {
@@ -123,37 +90,12 @@ function Cart() {
     },
   });
 
-  //   const { isPending, error, data } = useQuery({
-  //   queryKey: [""],
-  //   queryFn: () => calculateProductsFromCart(),
-  // });
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    if (data.couponCode) {
+      setCouponCode(data.couponCode);
+    }
 
-  const onSubmit: SubmitHandler<IFormInput> = async () => {
-    // try {
-    //   console.log("data", data);
-    //   let response = await axios.post("http://localhost:3000/auth/login", {
-    //     email: data.email,
-    //     password: data.password,
-    //   });
-    //   let token = response.data.message?.token;
-    //   let user = response.data.message?.user;
-    //   let userName = response.data.message?.user.firstName;
-    //   let userString = JSON.stringify(user);
-    //   console.log(userString);
-    //   localStorage.setItem("token", token);
-    //   localStorage.setItem("user", userString);
-    //   toast(`Hello ${userName} !`, {
-    //     icon: "👏",
-    //   });
-    //   setUserIsLoggedIn(true);
-    //   setActualUser(user);
-    //   setTimeout(() => {
-    //     navigate("/");
-    //   }, 1000);
-    //   reset();
-    // } catch (err) {
-    //   console.error(err);
-    // }
+    mutationPrice.mutate(arrayWithActualProducts);
   };
 
   const clearCart = () => {
@@ -181,10 +123,6 @@ function Cart() {
     },
   });
 
-  useEffect(() => {
-    console.log("arrWithActualProducts", arrayWithActualProducts);
-  }, [arrayWithActualProducts]);
-
   return (
     <div className="divScrollingContainer">
       <div className="containerForCart">
@@ -205,10 +143,6 @@ function Cart() {
               )}
             </span>
             <div className="containerForSaveAndClearTrash">
-              {/* <div className="saveDiv" >
-                <i className="fa-regular fa-heart fa-lg"></i>
-                <p className="paddingNextToText">Zapisz</p>
-              </div> */}
               <div
                 className="clearTrashDiv"
                 onClick={() => {
@@ -246,11 +180,6 @@ function Cart() {
                               productsArr.filter(
                                 (element: ICartProduct) => element.id !== el.id,
                               );
-
-                            // console.log(
-                            //   "tu ma się usuwać całe zamównienie",
-                            //   arrWithoutDeletedElement
-                            // );
 
                             setArrayWithActualProducts(
                               arrWithoutDeletedElement,
@@ -343,11 +272,6 @@ function Cart() {
                             </div>
                           </div>
                         </span>
-
-                        {/* <span className="elAvailable">
-                      <b>quantity: </b>
-                      {el.quantity}
-                    </span> */}
                       </div>
                       <div className="trashInProductsCardOnDesktop">
                         <i
@@ -377,11 +301,6 @@ function Cart() {
                         ></i>
                       </div>
                     </div>
-
-                    {/* <div className="CartProductNameText">Product Name:</div>
-              <div className="ProductNameText">{el.name}</div>
-              <div className="CartSelectedProducts">Selected Products</div>
-              <div className="ProductSelectedText"></div> */}
                   </div>
                 );
               })}
@@ -409,10 +328,7 @@ function Cart() {
             </div>
             {addCouponCodeIsClicked ? (
               <div className="containerForInputCouponInCart">
-                <form
-                  onSubmit={handleSubmit(onSubmit)}
-                  style={{ width: "100%", paddingRight: 20 }}
-                >
+                <form className="couponForm" onSubmit={handleSubmit(onSubmit)}>
                   <Controller
                     name="couponCode"
                     control={control}
@@ -424,9 +340,9 @@ function Cart() {
                       />
                     )}
                   />
-                </form>
 
-                <button className="useCouponCodeButton">Aktywuj</button>
+                  <button className="useCouponCodeButton">Aktywuj</button>
+                </form>
               </div>
             ) : (
               <></>
