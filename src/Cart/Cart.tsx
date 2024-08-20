@@ -5,7 +5,7 @@ import { Input } from "@chakra-ui/react";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { CartContext } from "../context/loginContext/CartContext";
-import { ICartProduct } from "../types";
+import { ICartProduct, IProduct } from "../types";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 // import AppleIPhone from "../HomepageIcons/Apple iPhone 15 128GB Black.webp";
 import QuantityChanger from "./QuantityChanger";
@@ -24,6 +24,41 @@ function Cart() {
     useContext(CartContext);
 
   const { actualUser } = useContext(LoginContext);
+
+  const mutationPrice = useMutation({
+    mutationFn: (arrayWithActualProducts: ICartProduct[]) => {
+      return axios.post(
+        "http://localhost:3000/orders/calculate-price",
+        {
+          products: arrayWithActualProducts,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+      );
+    },
+  });
+
+  useEffect(() => {
+    mutationPrice.mutate(arrayWithActualProducts);
+  }, [arrayWithActualProducts]);
+
+  // console.log("mutation", mutationPrice)
+
+  // const calculatedProductsFromCart = async () => {
+  //   const response = await axios.post(
+  //     "http://localhost:3000/orders/calculate-price",
+  //     {
+  //       products: arrayWithActualProducts,
+  //     }, {headers: {
+  //       Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //     }}
+  //   );
+
+  //   return response.data;
+  // };
 
   const cartPrice = arrayWithActualProducts.reduce((acc, curr) => {
     acc += curr.price * curr.quantity;
@@ -86,6 +121,11 @@ function Cart() {
     },
   });
 
+  //   const { isPending, error, data } = useQuery({
+  //   queryKey: [""],
+  //   queryFn: () => calculateProductsFromCart(),
+  // });
+
   const onSubmit: SubmitHandler<IFormInput> = async () => {
     // try {
     //   console.log("data", data);
@@ -139,6 +179,10 @@ function Cart() {
     },
   });
 
+  useEffect(() => {
+    console.log("arrWithActualProducts", arrayWithActualProducts);
+  }, [arrayWithActualProducts]);
+
   return (
     <div className="divScrollingContainer">
       <div className="containerForCart">
@@ -159,10 +203,10 @@ function Cart() {
               )}
             </span>
             <div className="containerForSaveAndClearTrash">
-              <div className="saveDiv">
+              {/* <div className="saveDiv" >
                 <i className="fa-regular fa-heart fa-lg"></i>
                 <p className="paddingNextToText">Zapisz</p>
-              </div>
+              </div> */}
               <div
                 className="clearTrashDiv"
                 onClick={() => {
@@ -264,7 +308,13 @@ function Cart() {
                                 >
                                   {el.price} zł
                                 </p>
-                                <p style={{ fontSize: 16, fontWeight: 500 }}>
+                                <p
+                                  style={{
+                                    fontSize: 16,
+                                    fontWeight: 500,
+                                    paddingTop: 4,
+                                  }}
+                                >
                                   {el.discountedPrice}zł
                                 </p>
                               </>

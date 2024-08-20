@@ -1,9 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import "./RecommendedTile.css";
 import { IProduct } from "./types";
 import { ICartProduct } from "./types";
 import toast from "react-hot-toast";
 import { CartContext } from "./context/loginContext/CartContext";
+import axios from "axios";
+import { useQuery } from "@chakra-ui/react";
 
 const RecommendedProduct = ({ product }: { product: IProduct }) => {
   const { setArrayWithActualProducts, products } = useContext(CartContext);

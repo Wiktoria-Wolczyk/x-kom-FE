@@ -522,7 +522,7 @@
 
   .trashInProductsCardOnDesktop {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     width: 10%;
     height: 100%;
