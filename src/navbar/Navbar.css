@@ -226,18 +226,6 @@
     background-color: rgb(212, 233, 246);
   }
 
-  .containerForDesktop {
-    display: flex;
-    height: 140px;
-    padding-top: 10px;
-    padding-bottom: 0;
-    margin-bottom: 15px;
-    width: 100%;
-    justify-content: center;
-    box-shadow: 8px 7px 24px 0px rgba(66, 68, 90, 0.2);
-    position: relative;
-  }
-
   .containerForNavbar {
     display: flex;
     flex-direction: column;
@@ -245,10 +233,13 @@
     padding-bottom: 10px;
     flex-shrink: 0;
     align-items: center;
-    height: 100%;
     width: 100%;
     background-color: white;
     border: 0px;
+    height: 140px;
+    box-shadow: 8px 7px 24px 0px rgba(66, 68, 90, 0.2);
+    position: relative;
+    margin-bottom: 10px;
   }
 
   .title-User-Cart-Navbar {
