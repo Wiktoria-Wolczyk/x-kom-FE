@@ -12,8 +12,13 @@ interface IFormInput {
   password: string;
 }
 
-function Login() {
-  const { control, handleSubmit, reset } = useForm({
+function Login({ destination }: { destination?: string }) {
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { isDirty, dirtyFields, errors, isValid },
+  } = useForm({
     defaultValues: {
       email: "",
       password: "",
@@ -27,9 +32,8 @@ function Login() {
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    console.log("data is dirty", !data);
     try {
-      console.log("data", data);
-
       const response = await axios.post("http://localhost:3000/auth/login", {
         email: data.email,
         password: data.password,
@@ -54,7 +58,7 @@ function Login() {
       setActualUser(user);
 
       setTimeout(() => {
-        navigate("/cart/login/order-and-payment");
+        navigate(`${destination || "/"}`);
       }, 1000);
 
       reset();
@@ -63,6 +67,8 @@ function Login() {
     }
   };
 
+  console.log("isDirty", !isDirty);
+
   return (
     <div className="divForLoginInputsInLogin">
       <div className="divForLogInText">Zaloguj się</div>
@@ -70,25 +76,28 @@ function Login() {
         <Controller
           name="email"
           control={control}
+          rules={{ required: true, minLength: 6 }}
           render={({ field }) => (
-            <Input
-              className="loginEmail"
-              placeholder="Email lub login"
-              size="lg"
-              {...field}
-            />
+            <div className="loginInput flex flex-col">
+              <Input placeholder="Email lub login" size="lg" {...field} />
+              {errors.email?.type === "required" && (
+                <span role="alert">Email lub login wymagany</span>
+              )}
+            </div>
           )}
         />
+
         <Controller
           name="password"
           control={control}
+          rules={{ required: true, minLength: 6 }}
           render={({ field }) => (
-            <Input
-              className="loginEmail"
-              placeholder="Hasło"
-              size="lg"
-              {...field}
-            />
+            <div className="loginInput flex flex-col">
+              <Input placeholder="Hasło" size="lg" {...field} />
+              {errors.password?.type === "required" && (
+                <span role="alert">Hasło jest wymagane</span>
+              )}
+            </div>
           )}
         />
         <button
@@ -100,7 +109,11 @@ function Login() {
         </button>
 
         <div className="divForLoginButtonsInLogin">
-          <Input type="submit" className="buttonLoginInLogin" />
+          <Input
+            type="submit"
+            className="buttonLoginInLogin"
+            disabled={!isValid}
+          />
         </div>
       </form>
     </div>

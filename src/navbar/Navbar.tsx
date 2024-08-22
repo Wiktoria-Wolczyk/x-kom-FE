@@ -27,10 +27,10 @@ interface IProps {
 }
 
 const steps = [
-  { title: "Koszyk" },
-  { title: "Logowanie lub rejestracja" },
-  { title: "Dostawa i płatność" },
-  { title: "Podsumowanie" },
+  { title: "Koszyk", id: "cart" },
+  { title: "Logowanie lub rejestracja", id: "auth" },
+  { title: "Dostawa i płatność", id: "delivery" },
+  { title: "Podsumowanie", id: "summary" },
 ];
 
 function Navbar({ openAuthModal }: IProps) {
@@ -125,7 +125,17 @@ function Navbar({ openAuthModal }: IProps) {
                           position: "relative",
                         }}
                       >
-                        <StepIndicator>
+                        <StepIndicator
+                          onClick={() => {
+                            if (step.id === "cart") {
+                              navigate("/cart");
+                            } else if (step.id === "auth") {
+                              navigate("/cart/login");
+                            } else {
+                              return;
+                            }
+                          }}
+                        >
                           <StepStatus
                             complete={<StepIcon />}
                             incomplete={<StepNumber />}

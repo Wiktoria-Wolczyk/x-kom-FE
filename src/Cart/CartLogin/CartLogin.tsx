@@ -6,8 +6,7 @@ import Login from "../../Login/Login";
 const CartLogin = () => {
   return (
     <div className="container">
-      {/* destination="/cart/delivery" */}
-      <Login />
+      <Login destination="/cart/delivery" />
       <div className="flex-col justify-start w-11/12 ml-5">
         <h1 className="text-2xl font-bold mt-8 mb-3">
           Załóż konto w 20 sekund

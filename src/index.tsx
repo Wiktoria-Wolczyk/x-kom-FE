@@ -47,10 +47,7 @@ root.render(
                   <Route path="/register" element={<Register />} />
                   <Route path="/cart" element={<Cart />} />
                   <Route path="/cart/login" element={<CartLogin />} />
-                  <Route
-                    path="/cart/login/order-and-payment"
-                    element={<OrderAndPayment />}
-                  />
+                  <Route path="/cart/delivery" element={<OrderAndPayment />} />
                   <Route path="/list" element={<List />} />
                   <Route path="/orders" element={<Orders />} />
                   <Route path="/user_details" element={<UserDetails />} />
