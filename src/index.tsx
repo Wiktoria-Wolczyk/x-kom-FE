@@ -22,6 +22,8 @@ import UserDetails from "./Profile/UserDetails";
 import ChangeUserName from "./Profile/Edition/ChangeUserName";
 import { CartContextController } from "./context/loginContext/CartContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import CartLogin from "./Cart/CartLogin/CartLogin";
+import OrderAndPayment from "./products/Payment/OrderAndPayment";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
@@ -44,6 +46,11 @@ root.render(
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Register />} />
                   <Route path="/cart" element={<Cart />} />
+                  <Route path="/cart/login" element={<CartLogin />} />
+                  <Route
+                    path="/cart/login/order-and-payment"
+                    element={<OrderAndPayment />}
+                  />
                   <Route path="/list" element={<List />} />
                   <Route path="/orders" element={<Orders />} />
                   <Route path="/user_details" element={<UserDetails />} />

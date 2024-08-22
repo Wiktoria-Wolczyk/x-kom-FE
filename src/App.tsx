@@ -9,26 +9,33 @@ import Chat from "./chat/chatComponent";
 function App() {
   const { state } = useLocation();
 
-  const cartPath = "/cart";
   const actualPath = window.location.pathname;
 
-  // bg-gray
+  const shouldBeGray = actualPath.startsWith("/cart");
   return (
     <>
       {/* <div className="App"> */}
-      <div className={cartPath === actualPath ? "App bg-gray" : "App"}>
+      <div
+        className={
+          // cartPath === actualPath || cartLoginPath === actualPath
+          shouldBeGray ? "App bg-gray" : "App"
+        }
+      >
         <>
           <Navbar openAuthModal={state?.openAuthModal} />
           <div className="appWithMargin">
             <Chat />
             <Outlet />
-            {cartPath === actualPath ? (
-              <div style={{ display: "none" }}>
+            {
+              // cartPath === actualPath || cartLoginPath === actualPath
+              shouldBeGray ? (
+                <div style={{ display: "none" }}>
+                  <Footer />
+                </div>
+              ) : (
                 <Footer />
-              </div>
-            ) : (
-              <Footer />
-            )}
+              )
+            }
           </div>
         </>
       </div>

@@ -54,7 +54,7 @@ function Login() {
       setActualUser(user);
 
       setTimeout(() => {
-        navigate("/");
+        navigate("/cart/login/order-and-payment");
       }, 1000);
 
       reset();
@@ -64,42 +64,45 @@ function Login() {
   };
 
   return (
-    <div className="containerForLogin">
-      <div className="divForLoginInputsInLogin">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Controller
-            name="email"
-            control={control}
-            render={({ field }) => (
-              <Input
-                className="loginEmail"
-                placeholder="Email"
-                size="lg"
-                {...field}
-              />
-            )}
-          />
-          <Controller
-            name="password"
-            control={control}
-            render={({ field }) => (
-              <Input
-                className="loginEmail"
-                placeholder="Password"
-                size="lg"
-                {...field}
-              />
-            )}
-          />
+    <div className="divForLoginInputsInLogin">
+      <div className="divForLogInText">Zaloguj się</div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Controller
+          name="email"
+          control={control}
+          render={({ field }) => (
+            <Input
+              className="loginEmail"
+              placeholder="Email lub login"
+              size="lg"
+              {...field}
+            />
+          )}
+        />
+        <Controller
+          name="password"
+          control={control}
+          render={({ field }) => (
+            <Input
+              className="loginEmail"
+              placeholder="Hasło"
+              size="lg"
+              {...field}
+            />
+          )}
+        />
+        <button
+          type="button"
+          className="underlineButton"
+          onClick={() => console.log("nie pamiętam hasła")}
+        >
+          Nie pamiętasz hasła?
+        </button>
 
-          <div className="divForLoginButtonsInLogin">
-            <Input type="submit" className="buttonLoginInLogin" />
-            <button className="buttonForgotPasswordInLogin">
-              Forgot password
-            </button>
-          </div>
-        </form>
-      </div>
+        <div className="divForLoginButtonsInLogin">
+          <Input type="submit" className="buttonLoginInLogin" />
+        </div>
+      </form>
     </div>
   );
 }

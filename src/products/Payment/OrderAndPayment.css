@@ -1,0 +1,41 @@
+.contanerForOrderAndPaymentComponent {
+  width: 100%;
+  background-color: white;
+  padding: 0px 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.deliveryAndPayment {
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 50px;
+}
+
+.textDeliveryMethod {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 30px;
+}
+
+.containerForDeliveryMethod {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid lightgray;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+.radio-div {
+  padding: 10px;
+}
+
+.radioStack > label:hover {
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.selectedRadio {
+  border: 1px solid black;
+  border-radius: 10px;
+}
