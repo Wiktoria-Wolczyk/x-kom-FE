@@ -72,41 +72,73 @@ function Login({ destination }: { destination?: string }) {
   return (
     <div className="divForLoginInputsInLogin">
       <div className="divForLogInText">Zaloguj się</div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Controller
-          name="email"
-          control={control}
-          rules={{ required: true, minLength: 6 }}
-          render={({ field }) => (
-            <div className="loginInput flex flex-col">
-              <Input placeholder="Email lub login" size="lg" {...field} />
-              {errors.email?.type === "required" && (
-                <span role="alert">Email lub login wymagany</span>
-              )}
-            </div>
-          )}
-        />
-
-        <Controller
-          name="password"
-          control={control}
-          rules={{ required: true, minLength: 6 }}
-          render={({ field }) => (
-            <div className="loginInput flex flex-col">
-              <Input placeholder="Hasło" size="lg" {...field} />
-              {errors.password?.type === "required" && (
-                <span role="alert">Hasło jest wymagane</span>
-              )}
-            </div>
-          )}
-        />
-        <button
-          type="button"
-          className="underlineButton"
-          onClick={() => console.log("nie pamiętam hasła")}
+      <form onSubmit={handleSubmit(onSubmit)} className="formContainer">
+        <div
+          style={{
+            height: 150,
+            display: "flex",
+            flexDirection: "column",
+          }}
         >
-          Nie pamiętasz hasła?
-        </button>
+          <Controller
+            name="email"
+            control={control}
+            rules={{ required: true, minLength: 6 }}
+            render={({ field }) => (
+              <div className="loginInput ">
+                <Input
+                  placeholder="Email lub login"
+                  size="lg"
+                  style={{
+                    border: errors.email
+                      ? "1px solid red"
+                      : "1px solid lightgray",
+                  }}
+                  {...field}
+                />
+                {errors.email && (
+                  <span role="alert" style={{ color: "red" }}>
+                    Email lub login wymagany, min. 6 znaków
+                  </span>
+                )}
+              </div>
+            )}
+          />
+
+          <Controller
+            name="password"
+            control={control}
+            rules={{ required: true, minLength: 6 }}
+            render={({ field }) => (
+              <div className="loginInput ">
+                <Input
+                  placeholder="Hasło"
+                  size="lg"
+                  style={{
+                    border: errors.password
+                      ? "1px solid red"
+                      : "1px solid lightgray",
+                  }}
+                  {...field}
+                />
+                {errors.password && (
+                  <span role="alert" style={{ color: "red" }}>
+                    Hasło jest wymagane, min. 6 znaków
+                  </span>
+                )}
+              </div>
+            )}
+          />
+        </div>
+        <div className="conatinerForUnderlineButton">
+          <button
+            type="button"
+            className="underlineButton"
+            onClick={() => console.log("nie pamiętam hasła")}
+          >
+            * Nie pamiętasz hasła?
+          </button>
+        </div>
 
         <div className="divForLoginButtonsInLogin">
           <Input
