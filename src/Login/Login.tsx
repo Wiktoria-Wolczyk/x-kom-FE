@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
-import { Input } from "@chakra-ui/react";
+import { Button, Input, useQuery } from "@chakra-ui/react";
 import "./Login.css";
 import axios from "axios";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 import { LoginContext } from "../context/loginContext/LoginContext";
+import { Mutation, useMutation } from "@tanstack/react-query";
 
 interface IFormInput {
   email: string;
@@ -25,27 +26,22 @@ function Login({ destination }: { destination?: string }) {
     },
   });
 
-  const { userIsLoggedIn, setUserIsLoggedIn, setActualUser } =
-    useContext(LoginContext);
-  console.log(userIsLoggedIn);
-
-  const navigate = useNavigate();
-
-  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    console.log("data is dirty", !data);
-    try {
+  const mutationLogin = useMutation({
+    mutationFn: async (data: IFormInput) => {
       const response = await axios.post("http://localhost:3000/auth/login", {
         email: data.email,
         password: data.password,
       });
+      return response?.data?.message;
+    },
+    onSuccess: (data) => {
+      console.log("success", data);
 
-      const token = response.data.message?.token;
-      const user = response.data.message?.user;
-      const userName = response.data.message?.user.firstName;
+      const token = data.token;
+      const user = data.user;
+      const userName = data.user.firstName;
 
       const userString = JSON.stringify(user);
-
-      console.log(userString);
 
       localStorage.setItem("token", token);
       localStorage.setItem("user", userString);
@@ -62,12 +58,20 @@ function Login({ destination }: { destination?: string }) {
       }, 1000);
 
       reset();
-    } catch (err) {
-      console.error(err);
-    }
-  };
+    },
+    onError: () => {
+      console.log("error");
+    },
+  });
 
-  console.log("isDirty", !isDirty);
+  const { userIsLoggedIn, setUserIsLoggedIn, setActualUser } =
+    useContext(LoginContext);
+
+  const navigate = useNavigate();
+
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    mutationLogin.mutate(data);
+  };
 
   return (
     <div className="divForLoginInputsInLogin">
@@ -141,11 +145,50 @@ function Login({ destination }: { destination?: string }) {
         </div>
 
         <div className="divForLoginButtonsInLogin">
-          <Input
-            type="submit"
-            className="buttonLoginInLogin"
-            disabled={!isValid}
-          />
+          {mutationLogin.isError ? (
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                width: "100%",
+                height: 80,
+              }}
+            >
+              <span style={{ display: "flex", color: "red", marginBottom: 10 }}>
+                Dane logowania niepoprawne
+              </span>
+              <Input
+                placeholder="Z"
+                type="submit"
+                className="buttonLoginInLogin"
+                disabled={!isValid}
+              />
+            </div>
+          ) : (
+            <div
+              style={{
+                width: "100%",
+                height: 80,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <span
+                style={{ visibility: "hidden", color: "red", marginBottom: 10 }}
+              >
+                Dane logowania niepoprawne
+              </span>
+              <Button
+                type="submit"
+                className="buttonLoginInLogin"
+                disabled={!isValid}
+              >
+                Zaloguj
+              </Button>
+            </div>
+          )}
         </div>
       </form>
     </div>

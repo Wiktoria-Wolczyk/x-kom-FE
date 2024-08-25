@@ -28,6 +28,9 @@ const CartSummary = () => {
     discountedPrice: 0,
   });
 
+  const { userIsLoggedIn, setUserIsLoggedIn, setActualUser } =
+    useContext(LoginContext);
+
   const [addCouponCodeIsClicked, setAddCouponCodeIsClicked] = useState(false);
   const { control, handleSubmit } = useForm({
     defaultValues: {
@@ -240,8 +243,12 @@ const CartSummary = () => {
           <button
             onClick={() => {
               // mutation.mutate()
-              console.log("przejdź do dostawy kliknięte");
-              navigate("/cart/login");
+
+              if (localStorage.getItem("user")) {
+                navigate("/cart/delivery");
+              } else {
+                navigate("/cart/login");
+              }
             }}
             disabled={mutation.isPending}
             className="buttonBuy"

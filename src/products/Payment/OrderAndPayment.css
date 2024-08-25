@@ -27,6 +27,9 @@
 }
 
 .radio-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   padding: 10px;
 }
 
@@ -38,4 +41,49 @@
 .selectedRadio {
   border: 1px solid black;
   border-radius: 10px;
+}
+
+.deliveryAdress {
+  margin-bottom: 10px;
+}
+
+.containerForShippingDetails {
+  width: 100%;
+  height: 100%;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.containerForDeliveryFormInputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.shippingDetailsInput {
+  margin-bottom: 10px;
+}
+
+.conatinerForInforAboutSendingEmail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.containerForOtherInvoiceData {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-top: 20px;
+}
+
+.divForPaymentLogoAndPrice {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
 }

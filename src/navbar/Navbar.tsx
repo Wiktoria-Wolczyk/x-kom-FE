@@ -62,8 +62,12 @@ function Navbar({ openAuthModal }: IProps) {
 
   const actualPath = window.location.pathname;
 
-  const shouldBeOnlyLogoInNavbar = actualPath.startsWith("/cart/login");
-  const shouldBeStepsInNavbar = actualPath.endsWith("/order-and-payment");
+  // const shouldBeOnlyLogoInNavbar = actualPath.startsWith("/cart/login");
+  const shouldBeOnlyLogoInNavbar = actualPath.startsWith("/cart/delivery");
+  // const shouldBeStepsInNavbar = actualPath.endsWith("/order-and-payment");
+  const shouldBeStepsInNavbar = actualPath.endsWith("/cart/delivery");
+
+  console.log("actualUser.name", actualUser?.firstName);
 
   return (
     <ChakraProvider>
@@ -231,11 +235,25 @@ function Navbar({ openAuthModal }: IProps) {
               </div>
 
               <div className="divForUserAndCart">
-                <div className="hiUser">
-                  <p>Cześć,</p>
+                <div
+                  className="hiUser"
+                  style={{ color: "black", width: "100%" }}
+                >
+                  <p>Cześć, {actualUser?.firstName}</p>
                   <p>zaloguj się</p>{" "}
                 </div>
-                <i className="fa-regular fa-user fa-xl"></i>
+                <i
+                  onClick={() => {
+                    // mutation.mutate()
+
+                    if (localStorage.getItem("user")) {
+                      navigate("/user_details");
+                    } else {
+                      navigate("/cart/login");
+                    }
+                  }}
+                  className="fa-regular fa-user fa-xl"
+                ></i>
                 <i className="fa-solid fa-headset fa-xl"></i>
                 <div className="divForCart" onClick={() => navigate("/cart")}>
                   <div className="countProductsInCart">{products.length}</div>
