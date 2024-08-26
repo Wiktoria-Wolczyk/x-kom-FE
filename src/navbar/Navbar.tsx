@@ -21,6 +21,9 @@ import {
   StepTitle,
   useSteps,
 } from "@chakra-ui/react";
+import CategoryTile from "../CategoryTile";
+import { categories } from "../constants";
+import Icons from "../Icons";
 
 interface IProps {
   openAuthModal: boolean | null;
@@ -84,17 +87,13 @@ function Navbar({ openAuthModal }: IProps) {
               justifyContent: "space-between",
               width: "100%",
               height: "100%",
-              backgroundColor: "white",
+              backgroundColor: "rgb(247, 247, 247)",
               paddingLeft: 10,
             }}
           >
-            <img
-              className="LogoIMG"
-              src={imageToAdd}
-              alt="X-kom Logo"
-              width={120}
-              onClick={() => navigate("/")}
-            />
+            <div style={{ marginTop: 30 }} onClick={() => navigate("/")}>
+              <Icons name={"Xkom"} style={{}} />
+            </div>
 
             {shouldBeStepsInNavbar ? (
               <div

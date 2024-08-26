@@ -35,6 +35,10 @@ export const categories = [
     img: "Accessories",
   },
   {
+    name: "Xkom",
+    img: "Xkom",
+  },
+  {
     name: "Promocje i nowości",
     img: "Percent",
   },
