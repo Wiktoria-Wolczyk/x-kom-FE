@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Checkbox,
@@ -21,6 +21,7 @@ import LogoUPS from "../OrderIcons/logoUPS.webp";
 import LogoInPostKurier from "../OrderIcons/inpostKurier.webp";
 import LogoFedEx from "../OrderIcons/FedEx.webp";
 import CartSummary from "../../Cart/CartSummary";
+import CheckboxDelivery from "./CheckboxDelivery";
 
 interface IFormInputInOrder {
   firstAndSecondName: string;
@@ -31,9 +32,88 @@ interface IFormInputInOrder {
   email: string;
 }
 
+const deliveryMethod = [
+  {
+    name: "Kurier",
+    img: CourierCar,
+    alt: "zarys busa",
+    price: "0 zł",
+    valueName: "courier",
+  },
+  {
+    name: "Salon x-kom",
+    img: XkomShop,
+    alt: "zarys budynku sklepu",
+    price: "0 zł",
+    valueName: "onsite",
+  },
+  {
+    name: "InPost Paczkomat 24/7",
+    img: InpostLogo,
+    alt: "logo InPost",
+    price: "0 zł",
+    valueName: "inpost",
+  },
+];
+
+const typesOfDeliveryCompanies = [
+  {
+    name: "UPS",
+    img: LogoUPS,
+    alt: "logo UPS",
+    price: "24,99 zł",
+    valueName: "ups",
+  },
+  {
+    name: "InPost Kurier",
+    img: LogoInPostKurier,
+    alt: "logo InPost kurier",
+    price: "19,99 zł",
+    valueName: "inpostCourier",
+  },
+  {
+    name: "FedEx",
+    img: LogoFedEx,
+    alt: "logo FedEx",
+    price: "0 zł",
+    valueName: "FedEx",
+  },
+];
+
+const paymentMethod = [
+  {
+    name: "Płatność online",
+    img: Przelewy24,
+    alt: "logo Przelewy24",
+    price: "0 zł",
+    valueName: "przelewy24",
+  },
+  {
+    name: "Karta płatnicza online",
+    img: VisaMastercard,
+    alt: "logo Visa i Mastercard",
+    price: "0 zł",
+    valueName: "onlinePaymentCard",
+  },
+  {
+    name: "Przelew tradycyjny",
+    img: PrzelewTradycyjny,
+    alt: "ikona przelewu tradycyjnego",
+    price: "0 zł",
+    valueName: "traditionalTransfer",
+  },
+  {
+    name: "Raty",
+    img: SantanderAndAliorBankLogo,
+    alt: "loga banków - Santander i AliorBank",
+    price: "0 zł",
+    valueName: "instalment",
+  },
+];
+
 const OrderAndPayment = () => {
-  const [value, setValue] = React.useState("courier");
-  const [deliveryMethodValue, setDeliveryMethodValue] = useState<string>("ups");
+  const [deliveryMethodValue, setDeliveryMethodValue] = useState("courier");
+  const [deliveryCompany, setDeliveryCompany] = useState<string>("ups");
   const [paymentMethodValue, setPaymentMethodValue] =
     useState<string>("przelewy24");
   const [checkedItems, setCheckedItems] = React.useState([false, false]);
@@ -69,161 +149,20 @@ const OrderAndPayment = () => {
       <h3 style={{ marginBottom: 10, paddingLeft: 15 }}>
         Prezentujemy tylko opcje dostępne dla tego zamówienia.
       </h3>
-      <div className="containerForCheckboxAndText">
-        <h2 className="textDeliveryMethod">Sposób dostawy</h2>
-        <div className="containerForDeliveryMethod">
-          <RadioGroup onChange={setValue} value={value}>
-            <Stack direction="column">
-              <div
-                onClick={() => setValue("courier")}
-                className={`radio-div ${value === "courier" ? "selectedRadio" : ""}`}
-              >
-                <Radio value="courier" className="radioElement">
-                  Kurier
-                </Radio>
-                <div className="divForPaymentLogoAndPrice">
-                  <img
-                    src={CourierCar}
-                    alt="zarys busa"
-                    width={30}
-                    height={30}
-                    style={{
-                      filter:
-                        value === "courier" ? "grayscale(0)" : "grayscale(1)",
-                    }}
-                  />
-                  <span style={{ marginLeft: 10 }}> od 0 zł</span>
-                </div>
-              </div>
-              <div
-                onClick={() => setValue("onsite")}
-                className={`radio-div ${value === "onsite" ? "selectedRadio" : ""}`}
-              >
-                <Radio value="onsite" className="radioElement">
-                  Salon x-kom
-                </Radio>
-                <div className="divForPaymentLogoAndPrice">
-                  <img
-                    src={XkomShop}
-                    alt="zarys budynku sklepu"
-                    width={30}
-                    height={30}
-                    style={{
-                      filter:
-                        value === "onsite" ? "grayscale(0)" : "grayscale(1)",
-                    }}
-                  />
-                  <span style={{ marginLeft: 10 }}>0 zł</span>
-                </div>
-              </div>
-              <div
-                onClick={() => setValue("inpost")}
-                className={`radio-div ${value === "inpost" ? "selectedRadio" : ""}`}
-              >
-                <Radio value="inpost" className="radioElement">
-                  InPost Paczkomat 24/7
-                </Radio>
+      <CheckboxDelivery
+        title="Sposób dostawy"
+        value={deliveryMethodValue}
+        setValue={(arg: string) => setDeliveryMethodValue(arg)}
+        elements={deliveryMethod}
+      />
 
-                <div className="divForPaymentLogoAndPrice">
-                  <img
-                    src={InpostLogo}
-                    alt="logo InPost"
-                    width={35}
-                    height={35}
-                    style={{
-                      filter:
-                        value === "inpost" ? "grayscale(0)" : "grayscale(1)",
-                    }}
-                  />
-                  <span style={{ marginLeft: 10 }}>0 zł</span>
-                </div>
-              </div>
-            </Stack>
-          </RadioGroup>
-        </div>
-      </div>
-      {value === "courier" && (
-        <div className="containerForCheckboxAndText">
-          <h2 className="textDeliveryMethod">Przesyłkę dostarczy</h2>
-          <div className="containerForDeliveryMethod">
-            <RadioGroup
-              onChange={setDeliveryMethodValue}
-              value={deliveryMethodValue}
-            >
-              <Stack direction="column" className="radioStack">
-                <div
-                  onClick={() => setDeliveryMethodValue("ups")}
-                  className={`radio-div ${deliveryMethodValue === "ups" ? "selectedRadio" : ""}`}
-                >
-                  <Radio value="ups" className="radioElement">
-                    UPS
-                  </Radio>
-                  <div className="divForPaymentLogoAndPrice">
-                    <img
-                      src={LogoUPS}
-                      alt="logo UPS"
-                      width={30}
-                      height={30}
-                      style={{
-                        filter:
-                          deliveryMethodValue === "ups"
-                            ? "grayscale(0)"
-                            : "grayscale(1)",
-                      }}
-                    />
-                    <span style={{ marginLeft: 10 }}> 24,99 zł</span>
-                  </div>
-                </div>
-                <div
-                  onClick={() => setDeliveryMethodValue("inpost")}
-                  className={`radio-div ${deliveryMethodValue === "inpost" ? "selectedRadio" : ""}`}
-                >
-                  <Radio value="inpost" className="radioElement">
-                    InPost Kurier
-                  </Radio>
-                  <div className="divForPaymentLogoAndPrice">
-                    <img
-                      src={LogoInPostKurier}
-                      alt="logo InPost Kurier"
-                      width={30}
-                      height={30}
-                      style={{
-                        filter:
-                          deliveryMethodValue === "inpost"
-                            ? "grayscale(0)"
-                            : "grayscale(1)",
-                      }}
-                    />
-                    <span style={{ marginLeft: 10 }}> 19,99 zł</span>
-                  </div>
-                </div>
-                <div
-                  onClick={() => setDeliveryMethodValue("fedex")}
-                  className={`radio-div ${deliveryMethodValue === "fedex" ? "selectedRadio" : ""}`}
-                >
-                  <Radio value="fedex" className="radioElement">
-                    FedEx
-                  </Radio>
-                  <div className="divForPaymentLogoAndPrice">
-                    <img
-                      src={LogoFedEx}
-                      alt="logo FedEx"
-                      width={30}
-                      height={30}
-                      style={{
-                        filter:
-                          deliveryMethodValue === "fedex"
-                            ? "grayscale(0)"
-                            : "grayscale(1)",
-                      }}
-                    />
-                    <span style={{ marginLeft: 10 }}>0 zł</span>
-                  </div>
-                </div>
-              </Stack>
-            </RadioGroup>
-          </div>
-        </div>
+      {deliveryMethodValue === "courier" && (
+        <CheckboxDelivery
+          title="Rodzaj kuriera"
+          value={deliveryCompany}
+          setValue={(arg: string) => setDeliveryCompany(arg)}
+          elements={typesOfDeliveryCompanies}
+        />
       )}
 
       <div className="containerForCheckboxAndText">
@@ -401,112 +340,14 @@ const OrderAndPayment = () => {
           </div>
         )}
       </div>
-      <div className="containerForCheckboxAndText">
-        <div className="containerForPaymentForms">
-          <RadioGroup
-            onChange={setPaymentMethodValue}
-            value={paymentMethodValue}
-          >
-            <Stack direction="column" className="radioStack">
-              <div
-                onClick={() => setPaymentMethodValue("przelewy24")}
-                className={`radio-div ${paymentMethodValue === "przelewy24" ? "selectedRadio" : ""}`}
-              >
-                <Radio value="przelewy24" className="radioElement">
-                  Płatność online
-                </Radio>
-                <div className="divForPaymentLogoAndPrice">
-                  <img
-                    src={Przelewy24}
-                    alt="zdjęcie loga Przelewy24"
-                    width={60}
-                    height={60}
-                    style={{
-                      filter:
-                        paymentMethodValue === "przelewy24"
-                          ? "grayscale(0)"
-                          : "grayscale(1)",
-                    }}
-                  />
-                  <span style={{ marginLeft: 10 }}>0 zł</span>
-                </div>
-              </div>
-              <div
-                onClick={() => setPaymentMethodValue("onlinePaymentCard")}
-                className={`radio-div ${paymentMethodValue === "onlinePaymentCard" ? "selectedRadio" : ""}`}
-              >
-                <Radio value="onlinePaymentCard" className="radioElement">
-                  Karta platnicza online
-                </Radio>
-                <div className="divForPaymentLogoAndPrice">
-                  <img
-                    src={VisaMastercard}
-                    alt="zdjęcie loga Visa i Mastercard"
-                    width={60}
-                    height={60}
-                    style={{
-                      filter:
-                        paymentMethodValue === "onlinePaymentCard"
-                          ? "grayscale(0)"
-                          : "grayscale(1)",
-                    }}
-                  />
-                  <span style={{ marginLeft: 10 }}>0 zł</span>
-                </div>
-              </div>
-              <div
-                onClick={() => setPaymentMethodValue("traditionalTransfer")}
-                className={`radio-div ${paymentMethodValue === "traditionalTransfer" ? "selectedRadio" : ""}`}
-              >
-                <Radio value="traditionalTransfer" className="radioElement">
-                  Przelew tradycyjny
-                </Radio>
-                <div className="divForPaymentLogoAndPrice">
-                  <img
-                    src={PrzelewTradycyjny}
-                    alt="zdjęcie loga Przelewu tradycyjnego"
-                    width={30}
-                    height={30}
-                    style={{
-                      filter:
-                        paymentMethodValue === "traditionalTransfer"
-                          ? "grayscale(0)"
-                          : "grayscale(1)",
-                    }}
-                  />
-                  <span style={{ marginLeft: 10 }}>0 zł</span>
-                </div>
-              </div>
-              <div
-                onClick={() => {
-                  setPaymentMethodValue("instalment");
-                  console.log("value", value);
-                }}
-                className={`radio-div ${paymentMethodValue === "instalment" ? "selectedRadio" : ""}`}
-              >
-                <Radio value="instalment" className="radioElement">
-                  Raty
-                </Radio>
-                <div className="divForPaymentLogoAndPrice">
-                  <img
-                    src={SantanderAndAliorBankLogo}
-                    alt="zdjęcie loga Przelewu tradycyjnego"
-                    width={80}
-                    height={80}
-                    style={{
-                      filter:
-                        paymentMethodValue === "instalment"
-                          ? "grayscale(0)"
-                          : "grayscale(1)",
-                    }}
-                  />
-                  <span style={{ marginLeft: 10 }}>0 zł</span>
-                </div>
-              </div>
-            </Stack>
-          </RadioGroup>
-        </div>
-      </div>
+
+      <CheckboxDelivery
+        title="Płatność"
+        value={paymentMethodValue}
+        setValue={(arg: string) => setPaymentMethodValue(arg)}
+        elements={paymentMethod}
+      />
+
       <div className="containerForCheckboxAndText">
         <div className="containerForConsentAndDeclaration">
           <h2 className="textDeliveryMethod">Zgody i Oświadczenia</h2>
