@@ -3,13 +3,14 @@ import React from "react";
 
 interface IProps {
   title: string;
-  value: string;
-  setValue: (arg: string) => void;
+  value: number;
+  setValue: (arg: number) => void;
   elements: {
+    id: number;
     name: string;
     img: string;
     alt: string;
-    price: string;
+    price?: number;
     valueName: string;
   }[];
 }
@@ -19,15 +20,15 @@ const CheckboxDelivery = ({ title, value, setValue, elements }: IProps) => {
     <div className="containerForCheckboxAndText">
       <h2 className="textDeliveryMethod">{title}</h2>
       <div className="containerForDeliveryMethod">
-        <RadioGroup onChange={setValue} value={value}>
+        <RadioGroup onChange={(_id) => setValue(+_id)} value={`${value}`}>
           <Stack direction="column">
-            {elements.map((el, index) => (
+            {elements.map((el) => (
               <div
-                key={index}
-                onClick={() => setValue(el.valueName)}
-                className={`radio-div ${value === el.valueName ? "selectedRadio" : ""}`}
+                key={el.id}
+                onClick={() => setValue(el.id)}
+                className={`radio-div ${value === el.id ? "selectedRadio" : ""}`}
               >
-                <Radio value={el.valueName} className="radioElement">
+                <Radio value={`${el.id}`} className="radioElement">
                   {el.name}
                 </Radio>
                 <div className="divForPaymentLogoAndPrice">
@@ -37,13 +38,10 @@ const CheckboxDelivery = ({ title, value, setValue, elements }: IProps) => {
                     width={30}
                     height={30}
                     style={{
-                      filter:
-                        value === el.valueName
-                          ? "grayscale(0)"
-                          : "grayscale(1)",
+                      filter: value === el.id ? "grayscale(0)" : "grayscale(1)",
                     }}
                   />
-                  <span style={{ marginLeft: 10 }}> {el.price}</span>
+                  <span style={{ marginLeft: 10 }}> {el.price} zł</span>
                 </div>
               </div>
             ))}

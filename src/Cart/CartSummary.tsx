@@ -14,7 +14,15 @@ interface IFormInput {
   couponCode: string;
 }
 
-const CartSummary = () => {
+interface IDeliveryPrice {
+  deliveryPrice?: number;
+  deliveryByParcelLocker?: number;
+}
+
+const CartSummary = ({
+  deliveryPrice,
+  deliveryByParcelLocker,
+}: IDeliveryPrice) => {
   const [couponCode, setCouponCode] = useState("");
   const [priceAndDiscountedPrice, setPriceAndDiscountedPrice] = useState({
     price: 0,
@@ -42,10 +50,13 @@ const CartSummary = () => {
     useContext(CartContext);
   const { actualUser } = useContext(LoginContext);
 
-  const savedMoney =
+  const priceForDelivery = deliveryPrice || deliveryByParcelLocker || 0;
+
+  const savedMoney = Math.round(
     priceAndDiscountedPriceWithValidCoupon.price -
       priceAndDiscountedPriceWithValidCoupon.discountedPrice ||
-    priceAndDiscountedPrice.price - priceAndDiscountedPrice.discountedPrice;
+      priceAndDiscountedPrice.price - priceAndDiscountedPrice.discountedPrice,
+  );
 
   const chevronCouponCodeClicked = () => {
     return setAddCouponCodeIsClicked((prev) => !prev);
@@ -58,6 +69,7 @@ const CartSummary = () => {
         {
           products: arrayWithActualProducts,
           couponCode: couponCode,
+          deliveryPrice: priceForDelivery,
         },
       );
       return response?.data?.message;
@@ -78,8 +90,10 @@ const CartSummary = () => {
   });
 
   useEffect(() => {
-    mutationPrice.mutate(arrayWithActualProducts);
-  }, [arrayWithActualProducts]);
+    if (arrayWithActualProducts.length > 0) {
+      mutationPrice.mutate(arrayWithActualProducts);
+    }
+  }, [arrayWithActualProducts, priceForDelivery]);
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     if (data.couponCode) {
@@ -110,6 +124,10 @@ const CartSummary = () => {
       }, 1000);
     },
   });
+
+  const actualPath = window.location.pathname;
+
+  const shouldBeChangedStyleInSummary = actualPath.endsWith("/cart/delivery");
 
   return (
     <div className="parentContainerForSummaryOrderAndCoupon">

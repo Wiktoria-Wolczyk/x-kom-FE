@@ -34,90 +34,99 @@ interface IFormInputInOrder {
 
 const deliveryMethod = [
   {
+    id: 0,
     name: "Kurier",
     img: CourierCar,
     alt: "zarys busa",
-    price: "0 zł",
     valueName: "courier",
   },
   {
+    id: 1,
     name: "Salon x-kom",
     img: XkomShop,
     alt: "zarys budynku sklepu",
-    price: "0 zł",
     valueName: "onsite",
   },
   {
+    id: 2,
     name: "InPost Paczkomat 24/7",
     img: InpostLogo,
     alt: "logo InPost",
-    price: "0 zł",
+    price: 11.99,
     valueName: "inpost",
   },
 ];
 
 const typesOfDeliveryCompanies = [
   {
+    id: 0,
     name: "UPS",
     img: LogoUPS,
     alt: "logo UPS",
-    price: "24,99 zł",
+    price: 24.99,
     valueName: "ups",
   },
   {
+    id: 1,
     name: "InPost Kurier",
     img: LogoInPostKurier,
     alt: "logo InPost kurier",
-    price: "19,99 zł",
+    price: 19.99,
     valueName: "inpostCourier",
   },
   {
+    id: 2,
     name: "FedEx",
     img: LogoFedEx,
     alt: "logo FedEx",
-    price: "0 zł",
+    price: 14.99,
     valueName: "FedEx",
   },
 ];
 
 const paymentMethod = [
   {
+    id: 0,
     name: "Płatność online",
     img: Przelewy24,
     alt: "logo Przelewy24",
-    price: "0 zł",
+    price: 0,
     valueName: "przelewy24",
   },
   {
+    id: 1,
     name: "Karta płatnicza online",
     img: VisaMastercard,
     alt: "logo Visa i Mastercard",
-    price: "0 zł",
+    price: 0,
     valueName: "onlinePaymentCard",
   },
   {
+    id: 2,
     name: "Przelew tradycyjny",
     img: PrzelewTradycyjny,
     alt: "ikona przelewu tradycyjnego",
-    price: "0 zł",
+    price: 0,
     valueName: "traditionalTransfer",
   },
   {
+    id: 3,
     name: "Raty",
     img: SantanderAndAliorBankLogo,
     alt: "loga banków - Santander i AliorBank",
-    price: "0 zł",
+    price: 0,
     valueName: "instalment",
   },
 ];
 
 const OrderAndPayment = () => {
-  const [deliveryMethodValue, setDeliveryMethodValue] = useState("courier");
-  const [deliveryCompany, setDeliveryCompany] = useState<string>("ups");
-  const [paymentMethodValue, setPaymentMethodValue] =
-    useState<string>("przelewy24");
+  const [deliveryMethodValue, setDeliveryMethodValue] = useState(0);
+  const [deliveryCompany, setDeliveryCompany] = useState(0);
+  const [paymentMethodValue, setPaymentMethodValue] = useState(0);
   const [checkedItems, setCheckedItems] = React.useState([false, false]);
   const [isCheckboxClicked, setIsCheckboxClicked] = useState(false);
+  const [priceClickedDeliveryCompany, setPriceClickedDeliveryCompany] =
+    useState({});
 
   const allChecked = checkedItems.every(Boolean);
   const isIndeterminate = checkedItems.some(Boolean) && !allChecked;
@@ -143,6 +152,16 @@ const OrderAndPayment = () => {
     console.log("tutaj tylko sprawdzam");
   };
 
+  const deliveryPriceInSelectedCompany = typesOfDeliveryCompanies.find(
+    ({ id }) => id === deliveryCompany,
+  )?.price;
+
+  const deliveryPriceInDeliveryMethod = deliveryMethod.find(
+    ({ id }) => id === deliveryMethodValue,
+  )?.price;
+
+  // const deliveryPriceInDeliveryMethod = findDeliveryMethod?.price;
+
   return (
     <div className="contianerForOrderAndPaymentComponent">
       <h1 className="deliveryAndPayment">Dostawa i płatność</h1>
@@ -152,15 +171,15 @@ const OrderAndPayment = () => {
       <CheckboxDelivery
         title="Sposób dostawy"
         value={deliveryMethodValue}
-        setValue={(arg: string) => setDeliveryMethodValue(arg)}
+        setValue={(arg: number) => setDeliveryMethodValue(arg)}
         elements={deliveryMethod}
       />
 
-      {deliveryMethodValue === "courier" && (
+      {deliveryMethodValue === 0 && (
         <CheckboxDelivery
           title="Rodzaj kuriera"
           value={deliveryCompany}
-          setValue={(arg: string) => setDeliveryCompany(arg)}
+          setValue={(arg: number) => setDeliveryCompany(arg)}
           elements={typesOfDeliveryCompanies}
         />
       )}
@@ -344,7 +363,7 @@ const OrderAndPayment = () => {
       <CheckboxDelivery
         title="Płatność"
         value={paymentMethodValue}
-        setValue={(arg: string) => setPaymentMethodValue(arg)}
+        setValue={(arg: number) => setPaymentMethodValue(arg)}
         elements={paymentMethod}
       />
 
@@ -426,7 +445,10 @@ const OrderAndPayment = () => {
         </div>
       </div>
       <div className="containerForSummaryInOrderAndPayment">
-        <CartSummary />
+        <CartSummary
+          deliveryPrice={deliveryPriceInSelectedCompany}
+          deliveryByParcelLocker={deliveryPriceInDeliveryMethod}
+        />
       </div>
     </div>
   );
