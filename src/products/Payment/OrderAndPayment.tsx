@@ -90,7 +90,6 @@ const paymentMethod = [
     name: "Płatność online",
     img: Przelewy24,
     alt: "logo Przelewy24",
-    price: 0,
     valueName: "przelewy24",
   },
   {
@@ -98,7 +97,6 @@ const paymentMethod = [
     name: "Karta płatnicza online",
     img: VisaMastercard,
     alt: "logo Visa i Mastercard",
-    price: 0,
     valueName: "onlinePaymentCard",
   },
   {
@@ -106,7 +104,6 @@ const paymentMethod = [
     name: "Przelew tradycyjny",
     img: PrzelewTradycyjny,
     alt: "ikona przelewu tradycyjnego",
-    price: 0,
     valueName: "traditionalTransfer",
   },
   {
@@ -114,7 +111,6 @@ const paymentMethod = [
     name: "Raty",
     img: SantanderAndAliorBankLogo,
     alt: "loga banków - Santander i AliorBank",
-    price: 0,
     valueName: "instalment",
   },
 ];
@@ -125,8 +121,6 @@ const OrderAndPayment = () => {
   const [paymentMethodValue, setPaymentMethodValue] = useState(0);
   const [checkedItems, setCheckedItems] = React.useState([false, false]);
   const [isCheckboxClicked, setIsCheckboxClicked] = useState(false);
-  const [priceClickedDeliveryCompany, setPriceClickedDeliveryCompany] =
-    useState({});
 
   const allChecked = checkedItems.every(Boolean);
   const isIndeterminate = checkedItems.some(Boolean) && !allChecked;
@@ -154,13 +148,21 @@ const OrderAndPayment = () => {
 
   const deliveryPriceInSelectedCompany = typesOfDeliveryCompanies.find(
     ({ id }) => id === deliveryCompany,
-  )?.price;
+  )?.valueName;
 
   const deliveryPriceInDeliveryMethod = deliveryMethod.find(
     ({ id }) => id === deliveryMethodValue,
-  )?.price;
+  )?.valueName;
 
-  // const deliveryPriceInDeliveryMethod = findDeliveryMethod?.price;
+  let selectedDeliveryMethod: string | undefined = "";
+
+  if (deliveryPriceInDeliveryMethod !== "courier") {
+    selectedDeliveryMethod = deliveryPriceInDeliveryMethod;
+  } else {
+    selectedDeliveryMethod = deliveryPriceInSelectedCompany;
+  }
+
+  console.log("takazmienna", deliveryMethod);
 
   return (
     <div className="contianerForOrderAndPaymentComponent">
@@ -444,10 +446,14 @@ const OrderAndPayment = () => {
           </Stack>
         </div>
       </div>
-      <div className="containerForSummaryInOrderAndPayment">
+      <div
+        className="containerForSummaryInOrderAndPayment"
+        style={{ position: "sticky", bottom: 0 }}
+      >
         <CartSummary
-          deliveryPrice={deliveryPriceInSelectedCompany}
-          deliveryByParcelLocker={deliveryPriceInDeliveryMethod}
+          // deliveryPrice={deliveryPriceInSelectedCompany}
+          // deliveryByParcelLocker={deliveryPriceInDeliveryMethod}
+          deliveryMethod={`${selectedDeliveryMethod}`}
         />
       </div>
     </div>

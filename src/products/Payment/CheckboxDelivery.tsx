@@ -41,7 +41,9 @@ const CheckboxDelivery = ({ title, value, setValue, elements }: IProps) => {
                       filter: value === el.id ? "grayscale(0)" : "grayscale(1)",
                     }}
                   />
-                  <span style={{ marginLeft: 10 }}> {el.price} zł</span>
+                  {el.price && (
+                    <span style={{ marginLeft: 10 }}> {el.price} zł</span>
+                  )}
                 </div>
               </div>
             ))}

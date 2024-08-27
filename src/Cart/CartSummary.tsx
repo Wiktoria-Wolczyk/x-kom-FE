@@ -15,14 +15,10 @@ interface IFormInput {
 }
 
 interface IDeliveryPrice {
-  deliveryPrice?: number;
-  deliveryByParcelLocker?: number;
+  deliveryMethod?: string;
 }
 
-const CartSummary = ({
-  deliveryPrice,
-  deliveryByParcelLocker,
-}: IDeliveryPrice) => {
+const CartSummary = (deliveryMethod: IDeliveryPrice) => {
   const [couponCode, setCouponCode] = useState("");
   const [priceAndDiscountedPrice, setPriceAndDiscountedPrice] = useState({
     price: 0,
@@ -50,7 +46,9 @@ const CartSummary = ({
     useContext(CartContext);
   const { actualUser } = useContext(LoginContext);
 
-  const priceForDelivery = deliveryPrice || deliveryByParcelLocker || 0;
+  // const priceForDelivery = deliveryPrice || deliveryByParcelLocker || 0;
+
+  const selectedDeliveryMethod = deliveryMethod.deliveryMethod;
 
   const savedMoney = Math.round(
     priceAndDiscountedPriceWithValidCoupon.price -
@@ -69,9 +67,10 @@ const CartSummary = ({
         {
           products: arrayWithActualProducts,
           couponCode: couponCode,
-          deliveryPrice: priceForDelivery,
+          deliveryMethod: selectedDeliveryMethod,
         },
       );
+      console.log("rerersopnse", response);
       return response?.data?.message;
     },
     onSuccess: (data) => {
@@ -90,10 +89,12 @@ const CartSummary = ({
   });
 
   useEffect(() => {
+    // console.log(priceForDelivery);
+    console.log(selectedDeliveryMethod);
     if (arrayWithActualProducts.length > 0) {
       mutationPrice.mutate(arrayWithActualProducts);
     }
-  }, [arrayWithActualProducts, priceForDelivery]);
+  }, [arrayWithActualProducts, selectedDeliveryMethod]);
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     if (data.couponCode) {
