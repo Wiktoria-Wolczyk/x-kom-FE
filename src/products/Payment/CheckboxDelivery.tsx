@@ -32,15 +32,47 @@ const CheckboxDelivery = ({ title, value, setValue, elements }: IProps) => {
                   {el.name}
                 </Radio>
                 <div className="divForPaymentLogoAndPrice">
-                  <img
-                    src={el.img}
-                    alt={el.alt}
-                    width={30}
-                    height={30}
-                    style={{
-                      filter: value === el.id ? "grayscale(0)" : "grayscale(1)",
-                    }}
-                  />
+                  {["przelewy24", "onlinePaymentCard"].includes(
+                    el.valueName,
+                  ) ? (
+                    <img
+                      src={el.img}
+                      alt={el.alt}
+                      width={50}
+                      height={50}
+                      style={{
+                        filter:
+                          value === el.id ? "grayscale(0)" : "grayscale(1)",
+                      }}
+                    />
+                  ) : (
+                    <>
+                      {el.valueName === "instalment" ? (
+                        <img
+                          src={el.img}
+                          alt={el.alt}
+                          width={70}
+                          height={70}
+                          style={{
+                            filter:
+                              value === el.id ? "grayscale(0)" : "grayscale(1)",
+                          }}
+                        />
+                      ) : (
+                        <img
+                          src={el.img}
+                          alt={el.alt}
+                          width={30}
+                          height={30}
+                          style={{
+                            filter:
+                              value === el.id ? "grayscale(0)" : "grayscale(1)",
+                          }}
+                        />
+                      )}
+                    </>
+                  )}
+
                   {el.price && (
                     <span style={{ marginLeft: 10 }}> {el.price} zł</span>
                   )}

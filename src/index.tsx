@@ -25,6 +25,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import CartLogin from "./Cart/CartLogin/CartLogin";
 import OrderAndPayment from "./products/Payment/OrderAndPayment";
 import LoginPage from "./LoginPage/LoginPage";
+import SummaryOrder from "./products/Summary_order/SummaryOrder";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
@@ -49,6 +50,10 @@ root.render(
                   <Route path="/cart" element={<Cart />} />
                   <Route path="/cart/login" element={<CartLogin />} />
                   <Route path="/cart/delivery" element={<OrderAndPayment />} />
+                  <Route
+                    path="/cart/delivery/summary"
+                    element={<SummaryOrder />}
+                  />
                   <Route path="/list" element={<List />} />
                   <Route path="/orders" element={<Orders />} />
                   <Route path="/user_details" element={<UserDetails />} />

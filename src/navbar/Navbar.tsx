@@ -44,9 +44,26 @@ function Navbar({ openAuthModal }: IProps) {
 
   const { setButtonLoginIsClicked } = useContext(CartContext);
 
-  const { activeStep } = useSteps({
+  const actualPath = window.location.pathname;
+
+  // const shouldBeOnlyLogoInNavbar = actualPath.startsWith("/cart/login");
+  const shouldBeOnlyLogoInNavbar = actualPath.startsWith("/cart/delivery");
+  // const shouldBeStepsInNavbar = actualPath.endsWith("/order-and-payment");
+  const shouldBeStepsInNavbar =
+    actualPath.endsWith("/cart/delivery") ||
+    actualPath.endsWith("/cart/delivery/summary");
+
+  const { activeStep, setActiveStep } = useSteps({
     index: 3,
     count: steps.length,
+  });
+
+  useEffect(() => {
+    if (actualPath.endsWith("/cart/delivery/summary")) {
+      setActiveStep(4);
+    } else {
+      setActiveStep(3);
+    }
   });
 
   useEffect(() => {
@@ -63,20 +80,14 @@ function Navbar({ openAuthModal }: IProps) {
 
   const { products } = useContext(CartContext);
 
-  const actualPath = window.location.pathname;
-
-  // const shouldBeOnlyLogoInNavbar = actualPath.startsWith("/cart/login");
-  const shouldBeOnlyLogoInNavbar = actualPath.startsWith("/cart/delivery");
-  // const shouldBeStepsInNavbar = actualPath.endsWith("/order-and-payment");
-  const shouldBeStepsInNavbar = actualPath.endsWith("/cart/delivery");
-
-  console.log("actualUser.name", actualUser?.firstName);
-
   return (
     <ChakraProvider>
       <div
         className="containerForNavbar"
-        style={{ height: shouldBeOnlyLogoInNavbar ? 140 : 100 }}
+        style={{
+          height: shouldBeOnlyLogoInNavbar ? 130 : 110,
+          paddingBottom: shouldBeOnlyLogoInNavbar ? 0 : 10,
+        }}
       >
         {shouldBeOnlyLogoInNavbar ? (
           <div
@@ -89,9 +100,10 @@ function Navbar({ openAuthModal }: IProps) {
               height: "100%",
               backgroundColor: "rgb(247, 247, 247)",
               paddingLeft: 10,
+              paddingBottom: 20,
             }}
           >
-            <div style={{ marginTop: 30 }} onClick={() => navigate("/")}>
+            <div style={{ marginTop: 10 }} onClick={() => navigate("/")}>
               <Icons name={"Xkom"} style={{}} />
             </div>
 
@@ -107,64 +119,127 @@ function Navbar({ openAuthModal }: IProps) {
                   paddingRight: 10,
                 }}
               >
-                <Stepper
-                  index={activeStep}
-                  size="sm"
-                  style={{
-                    width: "100%",
-                    display: "flex",
-                    alignItems: "center",
-                    marginRight: 30,
-                  }}
-                >
-                  {steps.map((step, index) => (
-                    <>
-                      <Step
-                        key={index}
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          height: "100%",
-                          position: "relative",
-                        }}
-                      >
-                        <StepIndicator
-                          onClick={() => {
-                            if (step.id === "cart") {
-                              navigate("/cart");
-                            } else if (step.id === "auth") {
-                              navigate("/cart/login");
-                            } else {
-                              return;
-                            }
-                          }}
-                        >
-                          <StepStatus
-                            complete={<StepIcon />}
-                            incomplete={<StepNumber />}
-                            active={<StepNumber />}
-                          />
-                        </StepIndicator>
-                        <div
+                {actualPath.endsWith("/cart/delivery/summary") ? (
+                  <Stepper
+                    index={activeStep}
+                    size="sm"
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      alignItems: "center",
+                      marginRight: 30,
+                    }}
+                  >
+                    {steps.map((step, index) => (
+                      <>
+                        <Step
+                          key={index}
                           style={{
-                            fontSize: 10,
-                            whiteSpace: "nowrap",
-                            position: "absolute",
-                            top: 30,
+                            display: "flex",
+                            flexDirection: "column",
+                            height: "100%",
+                            position: "relative",
                           }}
                         >
-                          {step.title}
-                        </div>
-                      </Step>
-                      <StepSeparator
-                        style={{
-                          color: "#3182ce",
-                          border: "1px solid #3182ce",
-                        }}
-                      />
-                    </>
-                  ))}
-                </Stepper>
+                          <StepIndicator
+                            onClick={() => {
+                              if (step.id === "cart") {
+                                navigate("/cart");
+                              } else if (step.id === "auth") {
+                                navigate("/cart/login");
+                              } else if (step.id === "delivery") {
+                                navigate("/cart/delivery");
+                              } else {
+                                navigate("/cart/delivery/summary");
+                              }
+                            }}
+                          >
+                            <StepStatus
+                              complete={<StepIcon />}
+                              incomplete={<StepNumber />}
+                              active={<StepNumber />}
+                            />
+                          </StepIndicator>
+                          <div
+                            style={{
+                              fontSize: 10,
+                              whiteSpace: "nowrap",
+                              position: "absolute",
+                              top: 30,
+                            }}
+                          >
+                            {step.title}
+                          </div>
+                        </Step>
+                        <StepSeparator
+                          style={{
+                            color: "#3182ce",
+                            border: "1px solid #3182ce",
+                          }}
+                        />
+                      </>
+                    ))}
+                  </Stepper>
+                ) : (
+                  <Stepper
+                    index={activeStep}
+                    size="sm"
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      alignItems: "center",
+                      marginRight: 30,
+                    }}
+                  >
+                    {steps.map((step, index) => (
+                      <>
+                        <Step
+                          key={index}
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            height: "100%",
+                            position: "relative",
+                          }}
+                        >
+                          <StepIndicator
+                            onClick={() => {
+                              if (step.id === "cart") {
+                                navigate("/cart");
+                              } else if (step.id === "auth") {
+                                navigate("/cart/login");
+                              } else {
+                                return;
+                              }
+                            }}
+                          >
+                            <StepStatus
+                              complete={<StepIcon />}
+                              incomplete={<StepNumber />}
+                              active={<StepNumber />}
+                            />
+                          </StepIndicator>
+                          <div
+                            style={{
+                              fontSize: 10,
+                              whiteSpace: "nowrap",
+                              position: "absolute",
+                              top: 30,
+                            }}
+                          >
+                            {step.title}
+                          </div>
+                        </Step>
+                        <StepSeparator
+                          style={{
+                            color: "#3182ce",
+                            border: "1px solid #3182ce",
+                          }}
+                        />
+                      </>
+                    ))}
+                  </Stepper>
+                )}
               </div>
             ) : (
               <div
@@ -194,13 +269,9 @@ function Navbar({ openAuthModal }: IProps) {
         ) : (
           <>
             <div className="title-User-Cart-Navbar">
-              <img
-                className="LogoIMG"
-                src={imageToAdd}
-                alt="X-kom Logo"
-                width={120}
-                onClick={() => navigate("/")}
-              />
+              <div style={{ marginTop: 10 }} onClick={() => navigate("/")}>
+                <Icons name={"Xkom"} style={{}} />
+              </div>
               <div className="chwilowy">
                 <input
                   className="searchInputForDesktop"

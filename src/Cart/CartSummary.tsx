@@ -9,6 +9,13 @@ import { Input } from "@chakra-ui/react";
 import { LoginContext } from "../context/loginContext/LoginContext";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
+import CourierCar from "../products/OrderIcons/courier-car.webp";
+import XkomShop from "../products/OrderIcons/x-komShop.webp";
+import InpostLogo from "../products/OrderIcons/inpostLogo.webp";
+import LogoUPS from "../products/OrderIcons/logoUPS.webp";
+import LogoInPostKurier from "../products/OrderIcons/inpostKurier.webp";
+import LogoFedEx from "../products/OrderIcons/FedEx.webp";
+import { IFormInputInOrder } from "../products/Payment/OrderAndPayment";
 
 interface IFormInput {
   couponCode: string;
@@ -16,13 +23,26 @@ interface IFormInput {
 
 interface IDeliveryPrice {
   deliveryMethod?: string;
+  // formUserData?: IFormInputInOrder;
+  // {
+  //   firstAndSecondName: string;
+  //   streetAndHomeNumber: string;
+  //   zipCode: string;
+  //   localization: string;
+  //   phoneNumber: number;
+  //   email: string;
+  // };
 }
 
-const CartSummary = (deliveryMethod: IDeliveryPrice) => {
+const CartSummary = (
+  deliveryMethod: IDeliveryPrice,
+  // formUserData: IFormInputInOrder,
+) => {
   const [couponCode, setCouponCode] = useState("");
   const [priceAndDiscountedPrice, setPriceAndDiscountedPrice] = useState({
     price: 0,
     discountedPrice: 0,
+    deliveryPrice: 0,
   });
   const [
     priceAndDiscountedPriceWithValidCoupon,
@@ -30,7 +50,12 @@ const CartSummary = (deliveryMethod: IDeliveryPrice) => {
   ] = useState({
     price: 0,
     discountedPrice: 0,
+    deliveryPrice: 0,
   });
+  // const [methodPrice, setMethodPrice] = useState({});
+
+  // const [nameOfCompany, setNameOfCompany] = useState("");
+  const { selectedCompany, setSelectedCompany } = useContext(CartContext);
 
   const { userIsLoggedIn, setUserIsLoggedIn, setActualUser } =
     useContext(LoginContext);
@@ -50,12 +75,6 @@ const CartSummary = (deliveryMethod: IDeliveryPrice) => {
 
   const selectedDeliveryMethod = deliveryMethod.deliveryMethod;
 
-  const savedMoney = Math.round(
-    priceAndDiscountedPriceWithValidCoupon.price -
-      priceAndDiscountedPriceWithValidCoupon.discountedPrice ||
-      priceAndDiscountedPrice.price - priceAndDiscountedPrice.discountedPrice,
-  );
-
   const chevronCouponCodeClicked = () => {
     return setAddCouponCodeIsClicked((prev) => !prev);
   };
@@ -70,7 +89,7 @@ const CartSummary = (deliveryMethod: IDeliveryPrice) => {
           deliveryMethod: selectedDeliveryMethod,
         },
       );
-      console.log("rerersopnse", response);
+
       return response?.data?.message;
     },
     onSuccess: (data) => {
@@ -84,9 +103,82 @@ const CartSummary = (deliveryMethod: IDeliveryPrice) => {
       setPriceAndDiscountedPriceWithValidCoupon({
         price: 0,
         discountedPrice: 0,
+        deliveryPrice: 0,
       });
     },
   });
+
+  const typesOfDeliveryCompanies = [
+    {
+      id: 0,
+      name: "UPS",
+      img: LogoUPS,
+      alt: "logo UPS",
+      price: 24.99,
+      valueName: "ups",
+    },
+    {
+      id: 1,
+      name: "InPost Kurier",
+      img: LogoInPostKurier,
+      alt: "logo InPost kurier",
+      price: 19.99,
+      valueName: "inpostCourier",
+    },
+    {
+      id: 2,
+      name: "FedEx",
+      img: LogoFedEx,
+      alt: "logo FedEx",
+      price: 14.99,
+      valueName: "FedEx",
+    },
+  ];
+
+  const deliveryMethodd = [
+    {
+      id: 0,
+      name: "Kurier",
+      img: CourierCar,
+      alt: "zarys busa",
+      valueName: "courier",
+    },
+    {
+      id: 1,
+      name: "Salon x-kom",
+      img: XkomShop,
+      alt: "zarys budynku sklepu",
+      valueName: "onsite",
+    },
+    {
+      id: 2,
+      name: "InPost Paczkomat 24/7",
+      img: InpostLogo,
+      alt: "logo InPost",
+      price: 11.99,
+      valueName: "inpost",
+    },
+  ];
+
+  useEffect(() => {
+    if (selectedDeliveryMethod) {
+      const deliveryCompany1 = typesOfDeliveryCompanies.find(
+        ({ valueName }) => valueName === selectedDeliveryMethod,
+      );
+
+      if (deliveryCompany1) {
+        setSelectedCompany(deliveryCompany1);
+      }
+
+      const deliveryCompany2 = deliveryMethodd.find(
+        ({ valueName }) => valueName === selectedDeliveryMethod,
+      );
+
+      if (deliveryCompany2) {
+        setSelectedCompany(deliveryCompany2);
+      }
+    }
+  }, [selectedDeliveryMethod]);
 
   useEffect(() => {
     // console.log(priceForDelivery);
@@ -96,6 +188,20 @@ const CartSummary = (deliveryMethod: IDeliveryPrice) => {
     }
   }, [arrayWithActualProducts, selectedDeliveryMethod]);
 
+  const savedMoney = Math.round(
+    priceAndDiscountedPriceWithValidCoupon.price -
+      priceAndDiscountedPriceWithValidCoupon.discountedPrice ||
+      priceAndDiscountedPrice.price - priceAndDiscountedPrice.discountedPrice,
+  );
+
+  const {
+    deliveryMethodValue,
+    setDeliveryMethodValue,
+    dataWithDeliveryAdress,
+    setDataWithDeliveryAdress,
+  } = useContext(CartContext);
+
+  console.log("bbbbbbbbb", dataWithDeliveryAdress);
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     if (data.couponCode) {
       setCouponCode(data.couponCode);
@@ -129,6 +235,7 @@ const CartSummary = (deliveryMethod: IDeliveryPrice) => {
   const actualPath = window.location.pathname;
 
   const shouldBeChangedStyleInSummary = actualPath.endsWith("/cart/delivery");
+  const shouldBeSticky = actualPath.endsWith("/cart/delivery/summary");
 
   return (
     <div className="parentContainerForSummaryOrderAndCoupon">
@@ -148,6 +255,7 @@ const CartSummary = (deliveryMethod: IDeliveryPrice) => {
             className={`fa-solid ${addCouponCodeIsClicked ? "fa-chevron-up" : "fa-chevron-down"} chevronInCouponCode`}
           ></i>
         </div>
+
         {addCouponCodeIsClicked && (
           <>
             {mutationPrice.isError ? (
@@ -210,10 +318,20 @@ const CartSummary = (deliveryMethod: IDeliveryPrice) => {
           </>
         )}
 
-        <div className="containerForSumOrderAndBuy">
+        <div
+          className="containerForSumOrderAndBuy"
+          style={{
+            position: shouldBeSticky ? "sticky" : "static",
+            bottom: shouldBeSticky ? 0 : 0,
+          }}
+        >
           <div className="divForAmountToPay">
             <div className="containerForTextAmountToPayAndSavedMoney">
-              <p>Do zapłaty</p>
+              <p>
+                Do zapłaty{" "}
+                {priceAndDiscountedPriceWithValidCoupon.deliveryPrice ||
+                  priceAndDiscountedPrice.deliveryPrice}
+              </p>
             </div>
             <div className="divForSumAmountToPayAndDiscount">
               <div
@@ -258,23 +376,59 @@ const CartSummary = (deliveryMethod: IDeliveryPrice) => {
               </div>
             </div>
           </div>
+          {shouldBeChangedStyleInSummary ? (
+            <button
+              type="submit"
+              onClick={() => {
+                // mutation.mutate()
 
-          <button
-            onClick={() => {
-              // mutation.mutate()
+                if (shouldBeChangedStyleInSummary) {
+                  if (localStorage.getItem("user")) {
+                    navigate("/cart/delivery/summary");
+                  } else {
+                    navigate("/cart/login");
+                  }
+                } else {
+                  if (localStorage.getItem("user")) {
+                    navigate("/cart/delivery");
+                  } else {
+                    navigate("/cart/login");
+                  }
+                }
+              }}
+              disabled={mutation.isPending}
+              className="buttonBuy"
+            >
+              {mutation.isPending ? "Loading..." : "Przejdź do dostawy"}
+              <i className="fa-solid fa-chevron-right chevronInbuttonBuy"></i>
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                // mutation.mutate()
 
-              if (localStorage.getItem("user")) {
-                navigate("/cart/delivery");
-              } else {
-                navigate("/cart/login");
-              }
-            }}
-            disabled={mutation.isPending}
-            className="buttonBuy"
-          >
-            {mutation.isPending ? "Loading..." : "Przejdź do dostawy"}
-            <i className="fa-solid fa-chevron-right chevronInbuttonBuy"></i>
-          </button>
+                if (shouldBeChangedStyleInSummary) {
+                  if (localStorage.getItem("user")) {
+                    navigate("/cart/delivery/summary");
+                  } else {
+                    navigate("/cart/login");
+                  }
+                } else {
+                  if (localStorage.getItem("user")) {
+                    navigate("/cart/delivery");
+                  } else {
+                    navigate("/cart/login");
+                  }
+                }
+              }}
+              disabled={mutation.isPending}
+              className="buttonBuy"
+            >
+              {mutation.isPending ? "Loading..." : "Przejdź do dostawy"}
+              <i className="fa-solid fa-chevron-right chevronInbuttonBuy"></i>
+            </button>
+          )}
+
           {mutation.isError ? (
             <>
               <div
