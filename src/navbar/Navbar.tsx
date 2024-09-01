@@ -87,38 +87,25 @@ function Navbar({ openAuthModal }: IProps) {
         style={{
           height: shouldBeOnlyLogoInNavbar ? 130 : 110,
           paddingBottom: shouldBeOnlyLogoInNavbar ? 0 : 10,
+          boxShadow: shouldBeOnlyLogoInNavbar
+            ? "0px 0px 0px 0px transparent"
+            : "8px 7px 24px 0px rgba(66, 68, 90, 0.2);",
+          backgroundColor: shouldBeOnlyLogoInNavbar
+            ? "rgb(247, 247, 247)"
+            : "white",
         }}
       >
         {shouldBeOnlyLogoInNavbar ? (
-          <div
-            className="containerForLogoAndButtonReturnInCartLogin"
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              width: "100%",
-              height: "100%",
-              backgroundColor: "rgb(247, 247, 247)",
-              paddingLeft: 10,
-              paddingBottom: 20,
-            }}
-          >
-            <div style={{ marginTop: 10 }} onClick={() => navigate("/")}>
+          <div className="containerForLogoAndButtonReturnInCartLogin">
+            <div
+              className="containerForNavbarLogo"
+              onClick={() => navigate("/")}
+            >
               <Icons name={"Xkom"} style={{}} />
             </div>
 
             {shouldBeStepsInNavbar ? (
-              <div
-                style={{
-                  width: "100%",
-                  height: 50,
-                  marginTop: 10,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  paddingRight: 10,
-                }}
-              >
+              <div className="containerForSteps">
                 {actualPath.endsWith("/cart/delivery/summary") ? (
                   <Stepper
                     index={activeStep}

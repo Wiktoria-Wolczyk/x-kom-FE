@@ -18,6 +18,15 @@ interface IFormInputInOrder {
   phoneNumber: number;
   email: string;
 }
+
+interface IFormOfPayment {
+  id: number;
+  name: string;
+  img: string;
+  alt: string;
+  valueName: string;
+}
+
 interface ICartContext {
   products: ICartProduct[];
   arrayWithActualProducts: ICartProduct[];
@@ -32,6 +41,8 @@ interface ICartContext {
   setSelectedCompany: (arg: ICompany) => void;
   dataWithDeliveryAdress: IFormInputInOrder;
   setDataWithDeliveryAdress: (arg: IFormInputInOrder) => void;
+  formOfPayment: IFormOfPayment;
+  setFormOfPayment: (arg: IFormOfPayment) => void;
 }
 
 export const CartContext = createContext<ICartContext>({
@@ -59,6 +70,14 @@ export const CartContext = createContext<ICartContext>({
     email: "",
   },
   setDataWithDeliveryAdress: (arg: IFormInputInOrder) => arg,
+  formOfPayment: {
+    id: 0,
+    name: "",
+    img: "",
+    alt: "",
+    valueName: "",
+  },
+  setFormOfPayment: (arg: IFormOfPayment) => arg,
 });
 
 export const CartContextController = ({
@@ -73,28 +92,65 @@ export const CartContextController = ({
   >(JSON.parse(localStorage.getItem("cart") || "[]") || []);
   const [buttonLoginIsClicked, setButtonLoginIsClicked] = useState(false);
   const [deliveryMethodValue, setDeliveryMethodValue] = useState(0);
-  const [selectedCompany, setSelectedCompany] = useState<ICompany>({
-    id: 0,
-    name: "",
-    img: "",
-    alt: "",
-    valueName: "",
-  });
+  const [selectedCompany, setSelectedCompany] = useState<ICompany>(
+    JSON.parse(localStorage.getItem("deliveryCompany") || "[]") || {
+      id: 0,
+      name: "",
+      img: "",
+      alt: "",
+      valueName: "",
+    },
+  );
   const [dataWithDeliveryAdress, setDataWithDeliveryAdress] =
-    useState<IFormInputInOrder>({
-      firstAndSecondName: "",
-      streetAndHomeNumber: "",
-      zipCode: "",
-      localization: "",
-      phoneNumber: 0,
-      email: "",
-    });
+    useState<IFormInputInOrder>(
+      JSON.parse(localStorage.getItem("userData") || "[]") || {
+        firstAndSecondName: "",
+        streetAndHomeNumber: "",
+        zipCode: "",
+        localization: "",
+        phoneNumber: 0,
+        email: "",
+      },
+    );
+
+  const [formOfPayment, setFormOfPayment] = useState<IFormOfPayment>(
+    JSON.parse(localStorage.getItem("formOfPayment") || "[]") || {
+      id: 0,
+      name: "",
+      img: "",
+      alt: "",
+      valueName: "",
+    },
+  );
 
   const setArrayWithProductsInStateAndLocalStorage = (
     newProducts: ICartProduct[] | ((prev: ICartProduct[]) => ICartProduct[]),
   ) => {
     localStorage.setItem("cart", JSON.stringify(newProducts));
     setArrayWithActualProducts(newProducts);
+  };
+
+  const setSelectedCompanyInStateAndLocalstorage = (
+    newCompany: ICompany | ((prev: ICompany) => ICompany),
+  ) => {
+    localStorage.setItem("deliveryCompany", JSON.stringify(newCompany));
+    setSelectedCompany(newCompany);
+  };
+
+  const setObjectWithUserDataFormInStateAndLocalStorage = (
+    newData:
+      | IFormInputInOrder
+      | ((prev: IFormInputInOrder) => IFormInputInOrder),
+  ) => {
+    localStorage.setItem("userData", JSON.stringify(newData));
+    setDataWithDeliveryAdress(newData);
+  };
+
+  const setFormOfPaymentInUseStateAndLocalStorage = (
+    newPayment: IFormOfPayment | ((prev: IFormOfPayment) => IFormOfPayment),
+  ) => {
+    localStorage.setItem("formOfPayment", JSON.stringify(newPayment));
+    setFormOfPayment(newPayment);
   };
 
   return (
@@ -108,9 +164,12 @@ export const CartContextController = ({
         deliveryMethodValue,
         setDeliveryMethodValue,
         selectedCompany,
-        setSelectedCompany,
+        setSelectedCompany: setSelectedCompanyInStateAndLocalstorage,
         dataWithDeliveryAdress,
-        setDataWithDeliveryAdress,
+        setDataWithDeliveryAdress:
+          setObjectWithUserDataFormInStateAndLocalStorage,
+        formOfPayment,
+        setFormOfPayment: setFormOfPaymentInUseStateAndLocalStorage,
       }}
     >
       {children}

@@ -201,7 +201,6 @@ const CartSummary = (
     setDataWithDeliveryAdress,
   } = useContext(CartContext);
 
-  console.log("bbbbbbbbb", dataWithDeliveryAdress);
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     if (data.couponCode) {
       setCouponCode(data.couponCode);
@@ -234,11 +233,18 @@ const CartSummary = (
 
   const actualPath = window.location.pathname;
 
+  const changeStyle = actualPath.endsWith("/cart");
   const shouldBeChangedStyleInSummary = actualPath.endsWith("/cart/delivery");
   const shouldBeSticky = actualPath.endsWith("/cart/delivery/summary");
 
   return (
-    <div className="parentContainerForSummaryOrderAndCoupon">
+    <div
+      className="parentContainerForSummaryOrderAndCoupon"
+      style={{
+        width: changeStyle ? "50%" : "100%",
+        marginLeft: changeStyle ? 200 : 0,
+      }}
+    >
       <div className="conatinerForCouponAndSummaryOrder">
         <div
           className="textAddCouponInCart"
@@ -320,10 +326,10 @@ const CartSummary = (
 
         <div
           className="containerForSumOrderAndBuy"
-          style={{
-            position: shouldBeSticky ? "sticky" : "static",
-            bottom: shouldBeSticky ? 0 : 0,
-          }}
+          // style={{
+          //   position: shouldBeSticky ? "sticky" : "static",
+          //   bottom: shouldBeSticky ? 0 : 0,
+          // }}
         >
           <div className="divForAmountToPay">
             <div className="containerForTextAmountToPayAndSavedMoney">
@@ -405,6 +411,7 @@ const CartSummary = (
           ) : (
             <button
               onClick={() => {
+                // wyciagnac do funkcji
                 // mutation.mutate()
 
                 if (shouldBeChangedStyleInSummary) {

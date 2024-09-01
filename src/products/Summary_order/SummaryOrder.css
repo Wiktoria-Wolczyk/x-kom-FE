@@ -3,11 +3,16 @@
   flex-direction: column;
 }
 
+.containerForDeliveryDetails {
+  margin-top: 10px;
+}
+
 .SummaryBoldText {
   font-size: 25px;
   font-weight: bold;
-  margin-top: 20px;
+  margin-top: 10px;
   padding-left: 10px;
+  margin-bottom: 20px;
 }
 
 .containerForSummaryDetails {
@@ -15,7 +20,7 @@
   flex-direction: column;
   padding: 10px;
   background-color: white;
-  margin-top: 30px;
+  margin-bottom: 20px;
 }
 
 .divForHeaderInSummaryAndChangeIcon {
@@ -57,11 +62,13 @@
 .containerForPhotoInSummary {
   display: flex;
   justify-content: center;
-  width: auto;
+  width: 150px;
   height: auto;
+  /* width: auto;
+  height: auto; */
 }
 
-.photoOfProductInSummary {
+.photoOfProductInSummaryOrder {
   padding: 5px;
   width: 200px;
   height: auto;
@@ -104,4 +111,85 @@
   border-radius: 10px;
   margin-top: 20px;
   padding: 10px;
+}
+
+@media only screen and (min-width: 768px) {
+  .containerForSummaryBeforePayment {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .containerForSummaryDetails {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: white;
+    margin-top: 40px;
+    border-radius: 10px;
+  }
+
+  .containerForPhotoInSummary {
+    display: flex;
+    justify-content: center;
+
+    height: auto;
+  }
+
+  .photoOfProductInSummaryOrder {
+    padding: 20px 20px 10px 20px;
+    height: auto;
+    width: 200px;
+  }
+
+  /* .photoOfProductInSummaryOrder {
+    padding: 5px;
+    width: 200px;
+    height: auto;
+  } */
+
+  .nameOfProductInSummary {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+  }
+
+  .containerForPhotoOfProductWithDescription {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .containerForProductDetailsInSummary {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 110px;
+    width: 90%;
+  }
+
+  .divForFriceBeforeInSummary {
+    display: none;
+  }
+
+  .containerForQuantityAndPriceInSummary {
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 5px;
+  }
+
+  .quantityInSummary {
+    padding-right: 20px;
+  }
+
+  .conatinerForPaymentSummary {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-left: 50px;
+    margin-right: 150px;
+    margin-top: 95px;
+  }
 }

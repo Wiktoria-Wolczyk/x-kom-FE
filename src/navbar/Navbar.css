@@ -21,6 +21,31 @@
   /* box-shadow: 0 4px 2px -2px lightgray; */
 }
 
+.containerForLogoAndButtonReturnInCartLogin {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(247, 247, 247);
+  padding-left: 10px;
+  padding-bottom: 20px;
+}
+
+.containerForNavbarLogo {
+  margin-top: 10px;
+}
+
+.containerForSteps {
+  width: 100%;
+  height: 50px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 10px;
+}
+
 .Navbar {
   padding-bottom: 10px;
 }
@@ -236,12 +261,38 @@
     flex-shrink: 0;
     align-items: center;
     width: 100%;
-    background-color: white;
     border: 0px;
     height: 140px;
     box-shadow: 8px 7px 24px 0px rgba(66, 68, 90, 0.2);
     position: relative;
     margin-bottom: 10px;
+  }
+
+  .containerForLogoAndButtonReturnInCartLogin {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 1444px;
+    height: 100%;
+    background-color: rgb(247, 247, 247);
+    padding-left: 10px;
+    padding-bottom: 20px;
+  }
+
+  .containerForNavbarLogo {
+    margin-top: 20px;
+  }
+
+  .containerForSteps {
+    width: 60%;
+    height: 50px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 10px;
+    margin-left: 50px;
   }
 
   .title-User-Cart-Navbar {
