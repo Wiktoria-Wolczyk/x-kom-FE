@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { CartContext } from "./context/loginContext/CartContext";
 import axios from "axios";
 import { useQuery } from "@chakra-ui/react";
+import { useNavigate } from "react-router";
 
 const RecommendedProduct = ({ product }: { product: IProduct }) => {
   const { setArrayWithActualProducts, products } = useContext(CartContext);
@@ -34,8 +35,13 @@ const RecommendedProduct = ({ product }: { product: IProduct }) => {
     toast.success("Added to cart!");
   };
 
+  const navigate = useNavigate();
+
   return (
-    <div className="containerForProduct">
+    <div
+      className="containerForProduct"
+      onClick={() => navigate(`/products/${product.id}`)}
+    >
       {product.tag && (
         <span className="infoAboutRecommendedProductInRecommended">
           {product.tag}

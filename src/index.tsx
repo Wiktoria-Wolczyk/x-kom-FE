@@ -26,6 +26,7 @@ import CartLogin from "./Cart/CartLogin/CartLogin";
 import OrderAndPayment from "./products/Payment/OrderAndPayment";
 import LoginPage from "./LoginPage/LoginPage";
 import SummaryOrder from "./products/Summary_order/SummaryOrder";
+import ProductDetails from "./products/ProductDetails/ProductDetails";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
@@ -67,6 +68,7 @@ root.render(
                   path="/user_details/edit_name"
                   element={<ChangeUserName />}
                 />
+                <Route path="/products/:id" element={<ProductDetails />} />
               </Routes>
             </BrowserRouter>
           </ChakraProvider>

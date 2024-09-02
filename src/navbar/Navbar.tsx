@@ -24,6 +24,7 @@ import {
 import CategoryTile from "../CategoryTile";
 import { categories } from "../constants";
 import Icons from "../Icons";
+import List from "../List/List";
 
 interface IProps {
   openAuthModal: boolean | null;
@@ -40,6 +41,9 @@ function Navbar({ openAuthModal }: IProps) {
   const [menuLoginIsOpen, setMenuLoginIsOpen] = useState(
     openAuthModal || false,
   );
+
+  const [menuUserIsOpen, setMenuUserIsOpen] = useState(openAuthModal || false);
+
   const { userIsLoggedIn, actualUser } = useContext(LoginContext);
 
   const { setButtonLoginIsClicked } = useContext(CartContext);
@@ -312,7 +316,7 @@ function Navbar({ openAuthModal }: IProps) {
                     <p>Cześć, {actualUser?.firstName}</p>
                     <p>zaloguj się</p>{" "}
                   </div>
-                  <i
+                  {/* <i
                     onClick={() => {
                       // mutation.mutate()
 
@@ -323,7 +327,163 @@ function Navbar({ openAuthModal }: IProps) {
                       }
                     }}
                     className="fa-regular fa-user fa-xl"
-                  ></i>
+                  ></i> */}
+                  <Menu isOpen={menuUserIsOpen}>
+                    <MenuButton
+                      as={IconButton}
+                      aria-label="Options"
+                      icon={<i className="fa-regular fa-user fa-xl"></i>}
+                      variant="outline"
+                      onClick={() => {
+                        setMenuUserIsOpen((prev) => !prev);
+                        setButtonLoginIsClicked(!menuUserIsOpen);
+                        console.log("is closed", menuUserIsOpen);
+                      }}
+                    />
+
+                    {/* <i className="fa-regular fa-user fa-xl"></i> */}
+                    <MenuList
+                      className="menuList"
+                      // style={{ position: "absolute", top: 55 }}
+                    >
+                      <div
+                        style={{
+                          width: "100%",
+                          display: "flex",
+                          flexDirection: "column",
+                          color: "gray",
+                          fontWeight: 500,
+                          marginTop: 10,
+                        }}
+                      >
+                        <span>Cześć,</span>
+                        <span
+                          style={{
+                            fontSize: 20,
+                            fontWeight: "bold",
+                            color: "black",
+                          }}
+                        >
+                          {actualUser?.firstName}
+                        </span>
+                      </div>
+                      <div className="divForMenuCategories">
+                        {/* <List /> */}
+                        {categories.map((category, index) => {
+                          return (
+                            <>
+                              {category.name === "Xkom" ? (
+                                <></>
+                              ) : (
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    marginTop: 10,
+                                    width: "100%",
+                                  }}
+                                  key={index}
+                                >
+                                  <Icons
+                                    name={category.img}
+                                    style={{ height: 40, marginRight: 20 }}
+                                  />
+
+                                  <div className="category">
+                                    {category.name}
+                                  </div>
+                                  <div
+                                    style={{
+                                      width: "100%",
+                                      display: "flex",
+                                      justifyContent: "flex-end",
+                                      paddingRight: 20,
+                                    }}
+                                  >
+                                    <i className="fa-solid fa-chevron-right fa-sm"></i>
+                                  </div>
+                                </div>
+                              )}
+                            </>
+                          );
+                        })}
+                      </div>
+                      {/* <div className="containerForLoginAndRegister">
+                      {userIsLoggedIn ? (
+                        <button
+                          onClick={() => {
+                            navigate("/list");
+                            setMenuLoginIsOpen(false);
+                          }}
+                        ></button>
+                      ) : (
+                        <>
+                          <button
+                            onClick={() => {
+                              setMenuLoginIsOpen(false);
+                              navigate("/login");
+                            }}
+                            className="buttonLoginInNavbar"
+                          >
+                            Login
+                          </button>
+                          <button
+                            onClick={() => {
+                              handleChangeAuthMenuOpen();
+                              navigate("/register");
+                            }}
+                            className="buttonRegisterInNavbar"
+                          >
+                            Register
+                          </button>
+                        </>
+                      )}
+                    </div> */}
+                      <div
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          display: "flex",
+                          alignItems: "flex-end",
+                          paddingBottom: 55,
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            width: "100%",
+                            paddingRight: 20,
+                            height: 60,
+                          }}
+                        >
+                          <div
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              alignItems: "center",
+                              backgroundColor: "lavender",
+                              display: "flex",
+                              justifyContent: "center",
+                              borderTop: "1px solid lightGray",
+                              fontSize: 16,
+                            }}
+                          >
+                            <button
+                              style={{
+                                width: "100%",
+                                height: "100%",
+                              }}
+                              onClick={() => localStorage.removeItem("user")}
+                            >
+                              {" "}
+                              Wyloguj się
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </MenuList>
+                  </Menu>
                   <i className="fa-solid fa-headset headset fa-xl"></i>
                   <div className="divForCart" onClick={() => navigate("/cart")}>
                     <div className="countProductsInCart">{products.length}</div>

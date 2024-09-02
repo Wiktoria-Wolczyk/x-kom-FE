@@ -10,6 +10,14 @@ import { ReactComponent as Accessories } from "../src/HomepageIcons/accessories.
 import { ReactComponent as Percent } from "../src/HomepageIcons/percent.svg";
 import { ReactComponent as CouponSVG } from "../src/HomepageIcons/coupon.svg";
 import { ReactComponent as Xkom } from "../src/HomepageIcons/xkom.svg";
+// import { ReactComponent as User } from "../src/navbar/svgInMenu/user.svg";
+import { ReactComponent as Order } from "../src/navbar/svgInMenu/order.svg";
+import { ReactComponent as Return } from "../src/navbar/svgInMenu/return.svg";
+import { ReactComponent as Saved } from "../src/navbar/svgInMenu/saved.svg";
+import { ReactComponent as Opinions } from "../src/navbar/svgInMenu/opinions.svg";
+// import { ReactComponent as OrderDetails } from "../src/navbar/svgInMenu/orderDetails.svg";
+import { ReactComponent as AccountSettings } from "../src/navbar/svgInMenu/acountSettings.svg";
+// import { ReactComponent as SalesMaster } from "../src/navbar/svgInMenu/salesMaster.svg";
 
 const Icons = ({ name, style = {} }: { name: string; style: any }) => {
   switch (name) {
@@ -33,8 +41,20 @@ const Icons = ({ name, style = {} }: { name: string; style: any }) => {
       return <CouponSVG style={style} />;
     case "Xkom":
       return <Xkom style={style} />;
-    default:
+    case "Percent":
       return <Percent style={style} />;
+
+    case "Order":
+      return <Order style={style} />;
+    case "Return":
+      return <Return style={style} />;
+    case "Saved":
+      return <Saved style={style} />;
+    case "Opinions":
+      return <Opinions style={style} />;
+
+    default:
+      return <AccountSettings style={style} />;
   }
 };
 

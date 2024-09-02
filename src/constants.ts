@@ -47,6 +47,32 @@ export const categories = [
     img: "Xkom",
   },
   {
+    name: "Zamówienia",
+    img: "Orders",
+    alt: "ikona listy",
+  },
+  {
+    name: "Zwroty i Reklamacje",
+    img: " Return",
+    alt: "ikona zawracającej strzałki",
+  },
+  {
+    name: "Lista zakupów",
+    img: "Saved",
+    alt: "ikona serca",
+  },
+  {
+    name: "Opinie",
+    img: "Opinions",
+    alt: "ikona chatu",
+  },
+  {
+    name: "Ustawienia konta",
+    img: "AccountSettings",
+    alt: "ikona ustawień",
+  },
+
+  {
     name: "Promocje i nowości",
     img: "Percent",
     alt: "ikona procenta",
