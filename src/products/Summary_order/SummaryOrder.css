@@ -21,6 +21,7 @@
   padding: 10px;
   background-color: white;
   margin-bottom: 20px;
+  gap: 20px;
 }
 
 .divForHeaderInSummaryAndChangeIcon {
@@ -57,6 +58,11 @@
 .containerForPhotoOfProductWithDescription {
   display: flex;
   flex-direction: row;
+  border-bottom: 1px solid lightgray;
+}
+
+.containerForPhotoOfProductWithDescription:last-child {
+  border-bottom: none;
 }
 
 .containerForPhotoInSummary {
@@ -69,7 +75,7 @@
 }
 
 .photoOfProductInSummaryOrder {
-  padding: 5px;
+  padding: 20px 20px 20px 0px;
   width: 200px;
   height: auto;
 }
@@ -79,6 +85,7 @@
   flex-direction: column;
   justify-content: space-between;
   height: 110px;
+  width: 100%;
 }
 
 .nameOfProductInSummary {

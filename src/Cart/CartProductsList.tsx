@@ -36,6 +36,10 @@ const CartProductsList = () => {
     localStorage.setItem("cart", cartWithElements);
   };
 
+  const actualPath = window.location.pathname;
+
+  const changeStyle = actualPath.startsWith("/cart");
+
   return (
     <div className="divForProductsInCart">
       <ul className="ulForProductsInCart">
@@ -109,15 +113,19 @@ const CartProductsList = () => {
                         </>
                       ) : (
                         <>
-                          <p style={{ fontSize: 14 }}>Najniższa cena:</p>
-                          <p
-                            style={{
-                              textDecoration: "line-through",
-                              fontSize: 14,
-                            }}
-                          >
-                            {el.price} zł
-                          </p>
+                          {changeStyle && (
+                            <div style={{ display: "none" }}>
+                              <p style={{ fontSize: 14 }}>Najniższa cena:</p>
+                              <p
+                                style={{
+                                  textDecoration: "line-through",
+                                  fontSize: 14,
+                                }}
+                              >
+                                {el.price} zł
+                              </p>
+                            </div>
+                          )}
                           <p
                             style={{
                               fontSize: 16,

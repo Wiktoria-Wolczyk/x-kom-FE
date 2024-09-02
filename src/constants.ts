@@ -4,35 +4,43 @@ export const categories = [
   {
     name: "Laptopy i komputery",
     img: "Computer",
+    alt: "ikona laptopa i komputera",
   },
   {
     name: "Smartfony i smartwatche",
     img: "Smartphones",
     oldPrice: "1679,00 zł",
+    alt: "ikona smartfona i smartwatcha",
   },
   {
     name: "Podzespoły komputerowe",
     img: "IC",
+    alt: "ikona podzespoły kompuetrowe",
   },
   {
     name: "Gaming i streaming",
     img: "GamesAcc",
+    alt: "ikona pada",
   },
   {
     name: "Urządzenia peryferyjne",
     img: "Printer",
+    alt: "ikona drukarki",
   },
   {
     name: "Tv i audio",
     img: "TV",
+    alt: "ikona telewizora",
   },
   {
     name: "Smarthome i lifestyle",
     img: "Smarthome",
+    alt: "ikona domu",
   },
   {
     name: "Akcesoria",
     img: "Accessories",
+    alt: "ikona ładowarki",
   },
   {
     name: "Xkom",
@@ -41,6 +49,7 @@ export const categories = [
   {
     name: "Promocje i nowości",
     img: "Percent",
+    alt: "ikona procenta",
   },
 ];
 

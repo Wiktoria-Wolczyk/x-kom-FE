@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import "./SummaryOrder.css";
 import Inpost from "../OrderIcons/inpostKurier.webp";
@@ -24,13 +24,23 @@ const SummaryOrder = () => {
     setFormOfPayment,
   } = useContext(CartContext);
 
+  const [inputValue, setInputValue] = useState("");
+
+  const handleInputChange = (e: any) => {
+    const value = e.target.value;
+
+    if (value.length <= 150) {
+      setInputValue(value);
+    } else {
+      return;
+    }
+  };
+
   const navigate = useNavigate();
 
   const savedDeliveryCompany = localStorage.getItem("deliveryCompany");
   const userFormData = localStorage.getItem("userData");
   const savedFormOfPayment = localStorage.getItem("formOfPayment");
-
-  console.log("PRODUCTS", products);
 
   return (
     <div className="containerForSummaryBeforePayment">
@@ -158,6 +168,14 @@ const SummaryOrder = () => {
                 </div>
               )}
             </>
+            {savedFormOfPayment && formOfPayment.id === 0 && (
+              <div className="containerForUserDetailsInSummary">
+                <span>
+                  Zapłać szybkim przelewem lub skorzystaj z płatności odroczonej
+                  PayPo.
+                </span>
+              </div>
+            )}
           </div>
         </div>
 
@@ -215,9 +233,13 @@ const SummaryOrder = () => {
                 placeholder="Twój komentarz"
                 className="addComentToOrder"
                 rows={5}
+                value={inputValue}
+                onChange={handleInputChange}
               ></textarea>
               <div style={{ display: "flex", justifyContent: "flex-end" }}>
-                <span style={{ fontSize: 14, color: "gray" }}>0/100</span>
+                <span style={{ fontSize: 14, color: "gray" }}>
+                  {inputValue.length} /150
+                </span>
               </div>
             </div>
           )}

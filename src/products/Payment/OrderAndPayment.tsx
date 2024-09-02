@@ -536,7 +536,10 @@ const OrderAndPayment = () => {
         </div>
 
         <div className="conatinerForProductsAndPaymentSummary">
-          <div className="containerForSummaryDetails">
+          <div
+            className="containerForSummaryDetails"
+            style={{ display: "none" }}
+          >
             <span className="headerBiggerFontInPaymentSummary">
               Produkty i usługi
             </span>

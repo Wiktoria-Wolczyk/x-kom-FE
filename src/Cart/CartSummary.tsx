@@ -237,6 +237,22 @@ const CartSummary = (
   const shouldBeChangedStyleInSummary = actualPath.endsWith("/cart/delivery");
   const shouldBeSticky = actualPath.endsWith("/cart/delivery/summary");
 
+  const handleClick = () => {
+    if (shouldBeChangedStyleInSummary) {
+      if (localStorage.getItem("user")) {
+        navigate("/cart/delivery/summary");
+      } else {
+        navigate("/cart/login");
+      }
+    } else {
+      if (localStorage.getItem("user")) {
+        navigate("/cart/delivery");
+      } else {
+        navigate("/cart/login");
+      }
+    }
+  };
+
   return (
     <div
       className="parentContainerForSummaryOrderAndCoupon"
@@ -331,20 +347,67 @@ const CartSummary = (
           //   bottom: shouldBeSticky ? 0 : 0,
           // }}
         >
-          <div className="divForAmountToPay">
-            <div className="containerForTextAmountToPayAndSavedMoney">
-              <p>
-                Do zapłaty{" "}
-                {priceAndDiscountedPriceWithValidCoupon.deliveryPrice ||
-                  priceAndDiscountedPrice.deliveryPrice}
-              </p>
+          {shouldBeChangedStyleInSummary && (
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                padding: "10px 20px 10px 30px",
+              }}
+            >
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <span>Produkty i usługi </span>
+                <span>
+                  {priceAndDiscountedPriceWithValidCoupon.discountedPrice ||
+                    priceAndDiscountedPriceWithValidCoupon.price ||
+                    priceAndDiscountedPrice.discountedPrice ||
+                    priceAndDiscountedPrice.price}{" "}
+                  zł
+                </span>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  paddingTop: 10,
+                  borderBottom: "1px dashed gray",
+                  paddingBottom: 10,
+                }}
+              >
+                <span>Dostawa i płatność </span>
+                <span>
+                  {priceAndDiscountedPriceWithValidCoupon.deliveryPrice ||
+                    priceAndDiscountedPrice.deliveryPrice}{" "}
+                  zł
+                </span>
+              </div>
+            </div>
+          )}
+          <div
+            className="divForAmountToPay"
+            style={{ height: shouldBeChangedStyleInSummary ? 40 : 60 }}
+          >
+            <div
+              className="containerForTextAmountToPayAndSavedMoney"
+              style={{
+                display: "flex",
+                justifyContent: shouldBeChangedStyleInSummary
+                  ? "flex-start"
+                  : "flex-end",
+              }}
+            >
+              <p>Do zapłaty </p>
             </div>
             <div className="divForSumAmountToPayAndDiscount">
               <div
                 className="amountToPayBeforeAndAfter"
                 style={{
                   display: "flex",
-                  justifyContent: !savedMoney ? "flex-end" : "space-between",
+                  justifyContent:
+                    !savedMoney && shouldBeChangedStyleInSummary
+                      ? "flex-end"
+                      : "space-between",
                 }}
               >
                 {mutationPrice.isPending ? (
@@ -352,7 +415,14 @@ const CartSummary = (
                 ) : (
                   <>
                     {savedMoney !== 0 && (
-                      <div className="divForSavedMoney">
+                      <div
+                        className="divForSavedMoney"
+                        style={{
+                          display: shouldBeChangedStyleInSummary
+                            ? "none"
+                            : "flex",
+                        }}
+                      >
                         <div className="savedMoney">
                           Oszczędzasz {savedMoney} zł
                         </div>
@@ -365,15 +435,24 @@ const CartSummary = (
                       }}
                     >
                       {savedMoney !== 0 && (
-                        <span className="priceBefore">
+                        <span
+                          className="priceBefore"
+                          style={{
+                            display: shouldBeChangedStyleInSummary
+                              ? "none"
+                              : "flex",
+                          }}
+                        >
                           {priceAndDiscountedPriceWithValidCoupon.price ||
                             priceAndDiscountedPrice.price}{" "}
                           zł
                         </span>
                       )}
                       <span className="priceAfter">
-                        {priceAndDiscountedPriceWithValidCoupon.discountedPrice ||
-                          priceAndDiscountedPrice.discountedPrice}{" "}
+                        {priceAndDiscountedPriceWithValidCoupon.discountedPrice +
+                          priceAndDiscountedPriceWithValidCoupon.deliveryPrice ||
+                          priceAndDiscountedPrice.discountedPrice +
+                            priceAndDiscountedPrice.deliveryPrice}{" "}
                         zł
                       </span>
                     </div>
@@ -410,24 +489,7 @@ const CartSummary = (
             </button>
           ) : (
             <button
-              onClick={() => {
-                // wyciagnac do funkcji
-                // mutation.mutate()
-
-                if (shouldBeChangedStyleInSummary) {
-                  if (localStorage.getItem("user")) {
-                    navigate("/cart/delivery/summary");
-                  } else {
-                    navigate("/cart/login");
-                  }
-                } else {
-                  if (localStorage.getItem("user")) {
-                    navigate("/cart/delivery");
-                  } else {
-                    navigate("/cart/login");
-                  }
-                }
-              }}
+              onClick={() => handleClick()}
               disabled={mutation.isPending}
               className="buttonBuy"
             >

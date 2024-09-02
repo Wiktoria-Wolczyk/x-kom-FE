@@ -50,6 +50,10 @@
   padding-bottom: 10px;
 }
 
+.Navbar > div {
+  z-index: 11;
+}
+
 .title-User-Cart-Navbar {
   display: flex;
   flex-shrink: 0;
@@ -109,7 +113,7 @@
   padding-right: 20px;
 }
 
-.fa-headset {
+.headset {
   display: none;
 }
 
@@ -156,28 +160,28 @@
 }
 
 .menuList {
-  z-index: 2;
+  z-index: 99999;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   width: 100vw;
-  height: 100% - 50px;
+  height: 95vh;
+  padding-left: 20px;
 }
 
 .divForMenuCategories {
   z-index: 2;
-  width: 200px;
+  width: 100%;
 }
 
 .category {
   display: flex;
-  justify-content: center;
-  width: 100px;
-  height: 70px;
-  border-bottom: 1px solid lightgray;
-  margin-top: 30px;
-  font-size: 18px;
+  justify-content: flex-start;
+  align-items: center;
+  width: 400px;
+  height: 30px;
+  font-size: 15px;
 }
 
 .containerForLoginAndRegister {
@@ -260,10 +264,10 @@
     padding-bottom: 10px;
     flex-shrink: 0;
     align-items: center;
-    width: 100%;
+    max-width: 1444px;
     border: 0px;
     height: 140px;
-    box-shadow: 8px 7px 24px 0px rgba(66, 68, 90, 0.2);
+
     position: relative;
     margin-bottom: 10px;
   }
@@ -318,6 +322,7 @@
     width: 100%;
     height: 50px;
     position: relative;
+    left: 50px;
   }
 
   #menu-button-test {
@@ -489,7 +494,7 @@
   .category {
     display: flex;
     justify-content: center;
-    width: 100px;
+    width: 200px;
     height: 70px;
     border-bottom: 1px solid lightgray;
     margin-top: 30px;
