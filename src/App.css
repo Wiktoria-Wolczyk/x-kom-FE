@@ -742,6 +742,14 @@
     background-color: white;
   }
 
+  .displayNoneOnDesktop {
+    display: none !important;
+  }
+
+  .visibilityHiddenOnDesktop {
+    visibility: hidden !important;
+  }
+
   .appWithMargin {
     display: flex;
     flex-direction: column;

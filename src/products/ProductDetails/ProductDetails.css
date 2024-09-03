@@ -34,6 +34,7 @@
 }
 
 .PriceInProductDetails {
+  display: flex;
   margin-top: 5px;
   font-weight: 500;
 }
@@ -127,4 +128,86 @@
 
 .divForTextDescribingProduct {
   margin: 10px 0px 30px;
+}
+
+.mobile-desktop-productDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (min-width: 768px) {
+  .mobile-desktop-productDetails {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .containerForMainPhotoOfProduct {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0px;
+    width: 50%;
+  }
+
+  .divForMainProductPhoto {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    width: 100%;
+  }
+
+  .mainPhotoOfProduct {
+    width: auto;
+    height: 400px;
+    max-height: 100%;
+    /* height: auto; */
+  }
+
+  .PriceInProductDetails {
+    display: none;
+  }
+
+  .desktopviewDeliveryAndInsurance {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  .desktopProductDetails {
+    width: 50%;
+  }
+
+  .divWithDetailsAboutDeliveryOnDesktop {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-bottom: 1px solid lightgray;
+  }
+
+  .containerForQuantityButtonsInProductDetails {
+    /* display: none; */
+  }
+
+  .divForPriceAboveQuantityButtons {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    font-weight: 500;
+    font-size: 22px;
+  }
+
+  .conatainerForDetailsAboutProductDelivery {
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    margin: 10px 10px 0px;
+    width: 100%;
+  }
+
+  .containerForInsuranceInformation {
+    margin: 20px 10px 0px;
+    width: 100%;
+  }
+
+  .productName {
+    margin-bottom: 20px;
+  }
 }
