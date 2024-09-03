@@ -1,0 +1,130 @@
+.scrollableContainerForStepsInProductDetails {
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  margin-left: 10px;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+
+.stepsInProductDetails {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-right: 10px;
+  font-size: 13px;
+}
+
+.containerForMainPhotoOfProduct {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0px;
+}
+
+.divForMainProductPhoto {
+  padding: 5px;
+}
+
+.containerForNameOfProductAndPriceInProductDetails {
+  display: flex;
+  flex-direction: column;
+  margin: 0px 10px;
+  font-size: 20px;
+}
+
+.PriceInProductDetails {
+  margin-top: 5px;
+  font-weight: 500;
+}
+
+.ContainerForQuantityButtonsAndAddToCart {
+  display: flex;
+  padding: 20px 0px;
+}
+
+.containerForQuantityButtonsInProductDetails {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 40px;
+  border: 1px solid lightgrey;
+  background-color: white;
+  border-radius: 10px;
+  padding: 0px 10px;
+}
+
+.divForButtonAddToCartInProductDetails {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #37c727;
+  margin-left: 20px;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.buttonAddToCartInProductDetails {
+  font-size: 16px;
+  color: white;
+  font-weight: 500;
+}
+
+.conatainerForDetailsAboutProductDelivery {
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  margin: 10px 10px 0px;
+}
+
+.greenFont {
+  color: #37c727;
+  font-weight: 500;
+}
+
+.smallText {
+  font-size: 12px;
+}
+
+.divWithDetailsAboutDelivery {
+  display: flex;
+  padding: 10px;
+  border-bottom: 1px solid lightgray;
+}
+
+.divForIMGInDetailsAboutProductDelivery {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.divForTextInDetailsAboutProductDelivery {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.containerForInsuranceInformation {
+  margin: 20px 10px 0px;
+}
+
+.containerForRadioInSelectInsurance {
+  margin-top: 10px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+
+.divForRadioSelectInsurance {
+  padding-left: 10px;
+  display: flex;
+  height: 40px;
+  border-radius: 5px;
+}
+.containerForDescriptionOfProduct {
+  margin: 20px 10px 0px;
+}
+
+.divForTextDescribingProduct {
+  margin: 10px 0px 30px;
+}

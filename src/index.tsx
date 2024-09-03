@@ -63,12 +63,12 @@ root.render(
                   <Route path="category">
                     <Route path=":categoryName" element={<Products />} />
                   </Route>
+                  <Route path="/products/:id" element={<ProductDetails />} />
                 </Route>
                 <Route
                   path="/user_details/edit_name"
                   element={<ChangeUserName />}
                 />
-                <Route path="/products/:id" element={<ProductDetails />} />
               </Routes>
             </BrowserRouter>
           </ChakraProvider>
