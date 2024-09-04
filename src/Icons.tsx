@@ -39,10 +39,10 @@ const Icons = ({ name, style = {} }: { name: string; style: any }) => {
       return <Accessories style={style} />;
     case "Coupon":
       return <CouponSVG style={style} />;
-    case "Xkom":
-      return <Xkom style={style} />;
     case "Percent":
       return <Percent style={style} />;
+    case "Xkom":
+      return <Xkom style={style} />;
 
     case "Order":
       return <Order style={style} />;

@@ -210,13 +210,12 @@
   padding-bottom: 10px;
 }
 
-.dropzoneContainer {
+/* .dropzoneContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 300px;
-}
+} */
 
 .dropZone {
   display: flex;
@@ -248,7 +247,7 @@
 .avatarAndDragZoneContainer {
   display: flex;
   justify-content: center;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .dropzoneContainer {
@@ -261,7 +260,7 @@
   justify-content: space-between;
   align-items: center;
   width: 90%;
-  min-height: 500px;
+  /* min-height: 500px; */
 }
 
 .avatarImage {
@@ -281,14 +280,5 @@
   border-style: dashed;
   width: 90%;
   height: 100px;
-}
-
-.sendAvatar {
-  margin-top: 10px;
-  border-radius: 10px;
-  border: 1px solid gray;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  color: rgb(0, 119, 255);
-  width: 50%;
+  margin-top: 20px;
 }

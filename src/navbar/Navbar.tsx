@@ -330,6 +330,12 @@ function Navbar({ openAuthModal }: IProps) {
                   ></i> */}
                   <Menu isOpen={menuUserIsOpen}>
                     <MenuButton
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        paddingLeft: 20,
+                      }}
                       as={IconButton}
                       aria-label="Options"
                       icon={<i className="fa-regular fa-user fa-xl"></i>}
@@ -343,7 +349,7 @@ function Navbar({ openAuthModal }: IProps) {
 
                     {/* <i className="fa-regular fa-user fa-xl"></i> */}
                     <MenuList
-                      className="menuList"
+                      className="userMenuList"
                       // style={{ position: "absolute", top: 55 }}
                     >
                       <div
@@ -353,7 +359,7 @@ function Navbar({ openAuthModal }: IProps) {
                           flexDirection: "column",
                           color: "gray",
                           fontWeight: 500,
-                          marginTop: 10,
+                          marginTop: 30,
                         }}
                       >
                         <span>Cześć,</span>
@@ -370,42 +376,44 @@ function Navbar({ openAuthModal }: IProps) {
                       <div className="divForMenuCategories">
                         {/* <List /> */}
                         {categories.map((category, index) => {
-                          return (
-                            <>
-                              {category.name === "Xkom" ? (
-                                <></>
-                              ) : (
-                                <div
-                                  style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    marginTop: 10,
-                                    width: "100%",
-                                  }}
-                                  key={index}
-                                >
-                                  <Icons
-                                    name={category.img}
-                                    style={{ height: 40, marginRight: 20 }}
-                                  />
-
-                                  <div className="category">
-                                    {category.name}
-                                  </div>
+                          if (index > 9) {
+                            return (
+                              <>
+                                {category.name === "Xkom" ? (
+                                  <></>
+                                ) : (
                                   <div
                                     style={{
-                                      width: "100%",
                                       display: "flex",
-                                      justifyContent: "flex-end",
-                                      paddingRight: 20,
+                                      alignItems: "center",
+                                      marginTop: 10,
+                                      width: "100%",
                                     }}
+                                    key={index}
                                   >
-                                    <i className="fa-solid fa-chevron-right fa-sm"></i>
+                                    <Icons
+                                      name={category.img}
+                                      style={{ height: 40, marginRight: 20 }}
+                                    />
+
+                                    <div className="category">
+                                      {category.name}
+                                    </div>
+                                    <div
+                                      style={{
+                                        width: "100%",
+                                        display: "flex",
+                                        justifyContent: "flex-end",
+                                        paddingRight: 20,
+                                      }}
+                                    >
+                                      <i className="fa-solid fa-chevron-right fa-sm"></i>
+                                    </div>
                                   </div>
-                                </div>
-                              )}
-                            </>
-                          );
+                                )}
+                              </>
+                            );
+                          }
                         })}
                       </div>
                       {/* <div className="containerForLoginAndRegister">
@@ -462,7 +470,6 @@ function Navbar({ openAuthModal }: IProps) {
                               width: "100%",
                               height: "100%",
                               alignItems: "center",
-                              backgroundColor: "lavender",
                               display: "flex",
                               justifyContent: "center",
                               borderTop: "1px solid lightGray",
@@ -504,7 +511,6 @@ function Navbar({ openAuthModal }: IProps) {
                     onClick={() => {
                       setMenuLoginIsOpen((prev) => !prev);
                       setButtonLoginIsClicked(!menuLoginIsOpen);
-                      console.log("is closed", menuLoginIsOpen);
                     }}
                   />
                   <MenuList className="menuList">
@@ -521,40 +527,44 @@ function Navbar({ openAuthModal }: IProps) {
                     </div>
                     <div className="divForMenuCategories">
                       {categories.map((category, index) => {
-                        return (
-                          <>
-                            {category.name === "Xkom" ? (
-                              <></>
-                            ) : (
-                              <div
-                                style={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  marginTop: 10,
-                                  width: "100%",
-                                }}
-                                key={index}
-                              >
-                                <Icons
-                                  name={category.img}
-                                  style={{ height: 40, marginRight: 20 }}
-                                />
-
-                                <div className="category">{category.name}</div>
+                        if (index < 8) {
+                          return (
+                            <>
+                              {category.name === "Xkom" ? (
+                                <></>
+                              ) : (
                                 <div
                                   style={{
-                                    width: "100%",
                                     display: "flex",
-                                    justifyContent: "flex-end",
-                                    paddingRight: 20,
+                                    alignItems: "center",
+                                    marginTop: 10,
+                                    width: "100%",
                                   }}
+                                  key={index}
                                 >
-                                  <i className="fa-solid fa-chevron-right fa-sm"></i>
+                                  <Icons
+                                    name={category.img}
+                                    style={{ height: 40, marginRight: 20 }}
+                                  />
+
+                                  <div className="category">
+                                    {category.name}
+                                  </div>
+                                  <div
+                                    style={{
+                                      width: "100%",
+                                      display: "flex",
+                                      justifyContent: "flex-end",
+                                      paddingRight: 20,
+                                    }}
+                                  >
+                                    <i className="fa-solid fa-chevron-right fa-sm"></i>
+                                  </div>
                                 </div>
-                              </div>
-                            )}
-                          </>
-                        );
+                              )}
+                            </>
+                          );
+                        }
                       })}
                     </div>
                     {/* <div className="containerForLoginAndRegister">

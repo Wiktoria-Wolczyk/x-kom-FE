@@ -51,7 +51,7 @@
 }
 
 .Navbar > div {
-  z-index: 11;
+  /* z-index: 11; */
 }
 
 .title-User-Cart-Navbar {
@@ -170,9 +170,22 @@
   padding-left: 20px;
 }
 
+.userMenuList {
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100vw;
+  height: 95vh;
+  padding-left: 20px;
+  margin-top: 0px;
+}
+
 .divForMenuCategories {
-  z-index: 2;
+  /* z-index: 2; */
   width: 100%;
+  /* z-index: 99999; */
 }
 
 .category {

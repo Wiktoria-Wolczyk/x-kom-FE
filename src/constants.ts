@@ -38,6 +38,11 @@ export const categories = [
     alt: "ikona domu",
   },
   {
+    name: "Promocje i nowości",
+    img: "Percent",
+    alt: "ikona procenta",
+  },
+  {
     name: "Akcesoria",
     img: "Accessories",
     alt: "ikona ładowarki",
@@ -48,12 +53,12 @@ export const categories = [
   },
   {
     name: "Zamówienia",
-    img: "Orders",
+    img: "Order",
     alt: "ikona listy",
   },
   {
     name: "Zwroty i Reklamacje",
-    img: " Return",
+    img: "Return",
     alt: "ikona zawracającej strzałki",
   },
   {
@@ -70,12 +75,6 @@ export const categories = [
     name: "Ustawienia konta",
     img: "AccountSettings",
     alt: "ikona ustawień",
-  },
-
-  {
-    name: "Promocje i nowości",
-    img: "Percent",
-    alt: "ikona procenta",
   },
 ];
 

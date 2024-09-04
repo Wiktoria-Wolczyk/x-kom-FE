@@ -135,6 +135,10 @@
   flex-direction: column;
 }
 
+.divWithDetailsAboutDeliveryOnDesktop {
+  display: none;
+}
+
 @media only screen and (min-width: 768px) {
   .mobile-desktop-productDetails {
     display: flex;

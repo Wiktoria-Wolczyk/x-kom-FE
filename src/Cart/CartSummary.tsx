@@ -256,10 +256,10 @@ const CartSummary = (
   return (
     <div
       className="parentContainerForSummaryOrderAndCoupon"
-      style={{
-        width: changeStyle ? "50%" : "100%",
-        marginLeft: changeStyle ? 200 : 0,
-      }}
+      // style={{
+      //   width: changeStyle ? "50%" : "100%",
+      //   marginLeft: changeStyle ? 200 : 0,
+      // }}
     >
       <div className="conatinerForCouponAndSummaryOrder">
         <div

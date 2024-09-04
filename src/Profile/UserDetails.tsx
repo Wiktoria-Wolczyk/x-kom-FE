@@ -6,10 +6,11 @@ import { useNavigate } from "react-router";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { Input } from "@chakra-ui/react";
+import { Checkbox, Input, Stack } from "@chakra-ui/react";
 import { useDropzone } from "react-dropzone";
 import { IActualUser } from "../context/loginContext/LoginContext";
 import { useMutation } from "@tanstack/react-query";
+import "../Profile/UserDetails.css";
 
 interface IFormValues {
   firstName: string;
@@ -62,6 +63,15 @@ function UserDetails() {
   const [changePasswordIsClicked, setChangePasswordIsClicked] = useState(false);
   const [files, setFiles] = useState<IFileWithPreview[]>([]);
   const [dragDropIsClicked, setDragDropIsClicked] = useState(false);
+  const [checkedItems, setCheckedItems] = React.useState([
+    false,
+    false,
+    false,
+    false,
+  ]);
+
+  const allChecked = checkedItems.every(Boolean);
+  const isIndeterminate = checkedItems.some(Boolean) && !allChecked;
 
   const mutation = useMutation({
     mutationFn: (data: {
@@ -365,10 +375,11 @@ function UserDetails() {
             onClick={() => navigate("/list")}
           >
             <i className="fa-solid fa-chevron-left "></i>
-            <p>Return</p>
+            <p>Wróć</p>
           </button>
-          <p className="textAccountSettings">Account Settings</p>
-          <div className="yourDetailsText">Your details</div>
+          <p className="textAccountSettings">Ustawienia konta</p>
+          <div className="accountDataText">Dane konta</div>
+          <div className="yourDetailsText">Twoje dane</div>
           <div className="containerForUserNameAndEdit">
             <div className="containerForUserName">
               <p className="pUserFirstName">{actualUser?.firstName}</p>
@@ -379,7 +390,7 @@ function UserDetails() {
                 className="editNameText"
                 onClick={() => setEditNameIsClicked(true)}
               >
-                Edit
+                Edytuj
               </button>
             </div>
           </div>
@@ -393,7 +404,7 @@ function UserDetails() {
                 className="editEmailText"
                 onClick={() => setChangeEmailIsClicked(true)}
               >
-                Change
+                Zmień
               </button>
             </div>
           </div>
@@ -407,10 +418,89 @@ function UserDetails() {
                 className="changePasswordText"
                 onClick={() => setChangePasswordIsClicked(true)}
               >
-                Change
+                Zmień
               </button>
             </div>
-          </div>{" "}
+          </div>
+          <div>
+            <div className="divForYourConsentsAndNotificationSettings">
+              Twoje zgody i ustawienia powiadomień
+            </div>
+            <div className="divForPrivacyPolicyTextAndButton">
+              <span>Zaznaczając pola, akceptujesz</span>
+              <button className="privacyPolicy">Politykę prywatności</button>
+            </div>
+            <div className="containerForCheckboxPrivacyPolicy">
+              <Stack pl={0} mt={1} spacing={4}>
+                <Checkbox
+                  className="parentCheckboxInPrivacyPolicy"
+                  isChecked={allChecked}
+                  isIndeterminate={isIndeterminate}
+                  onChange={(e) =>
+                    setCheckedItems([
+                      e.target.checked,
+                      e.target.checked,
+                      e.target.checked,
+                      e.target.checked,
+                    ])
+                  }
+                >
+                  Zaznacz wszystkie
+                </Checkbox>
+
+                <Checkbox
+                  isChecked={checkedItems[0]}
+                  onChange={(e) =>
+                    setCheckedItems([e.target.checked, checkedItems[1]])
+                  }
+                >
+                  Chcę otrzymywać informacje o aktualnych ofertach oraz
+                  promocjach w wiadomości e-mail{" "}
+                  <button className="privacyPolicy">Więcej</button>
+                </Checkbox>
+                <Checkbox
+                  isChecked={checkedItems[1]}
+                  onChange={(e) =>
+                    setCheckedItems([checkedItems[0], e.target.checked])
+                  }
+                >
+                  Chcę otrzymywać wiadomości SMS.{" "}
+                  <button className="privacyPolicy">Więcej</button>
+                </Checkbox>
+
+                <Checkbox
+                  isChecked={checkedItems[2]}
+                  onChange={(e) =>
+                    setCheckedItems([
+                      checkedItems[0],
+                      checkedItems[1],
+                      e.target.checked,
+                    ])
+                  }
+                >
+                  Chcę otrzymywać informacje telefonicznie{" "}
+                  <button className="privacyPolicy">Więcej</button>
+                </Checkbox>
+                <Checkbox
+                  isChecked={checkedItems[3]}
+                  onChange={(e) =>
+                    setCheckedItems([
+                      checkedItems[0],
+                      checkedItems[1],
+                      checkedItems[2],
+                      e.target.checked,
+                    ])
+                  }
+                >
+                  Chcę otrzymywać ofertę dopasowaną do moich potrzeb{" "}
+                  <button className="privacyPolicy">Więcej</button>
+                </Checkbox>
+              </Stack>
+              <div className="divForButtonSaveAgreement">
+                <button className="agreementButton">Zapisz zgody</button>
+              </div>
+            </div>
+          </div>
           <div className="avatarAndDragZoneContainer">
             <div className="dropzoneContainer">
               <img
@@ -419,25 +509,23 @@ function UserDetails() {
                 height={250}
                 width={250}
               />
-              <span className="changeAvatarText"> Zmień avatar</span>
+
               <div
                 className="styleForDragDrop"
                 style={{ height: dragDropIsClicked ? "300px" : "100px" }}
               >
-                <section className="container">
+                <section className="containerDopzone">
                   <div {...getRootProps({ className: "dropzone" })}>
                     <input {...getInputProps()} />
                     <p>
-                      {
-                        "Drag 'n' drop some files here, or click to select files"
-                      }
+                      {"Przeciągnij i upuść plik aby zmienić zdjęcie profilowe"}
                     </p>
                   </div>
                   <aside style={thumbsContainer as object}>{thumbs}</aside>
                 </section>
               </div>
               <button className="sendAvatar" onClick={sendAvatar}>
-                Zmień avatar
+                Zapisz zdjęcie
               </button>
             </div>
           </div>

@@ -40,6 +40,22 @@ const ProductDetails = () => {
     return quantityValue;
   };
 
+  const addToCart = () => {
+    if (data.message) {
+      data.message.quantity = quantityValue;
+    }
+
+    const productExist = arrayWithActualProducts.find(
+      (el) => el.id === data?.message.id,
+    );
+
+    if (productExist) {
+      productExist.quantity = productExist.quantity + quantityValue;
+    } else {
+      arrayWithActualProducts.push(data.message);
+    }
+  };
+
   return (
     <div>
       {/* <div className="scrollableContainerForStepsInProductDetails">
@@ -81,7 +97,12 @@ const ProductDetails = () => {
                 />
               </div>
               <div className="divForButtonAddToCartInProductDetails">
-                <button className="buttonAddToCartInProductDetails">
+                <button
+                  className="buttonAddToCartInProductDetails"
+                  onClick={() => {
+                    console.log("add to cart"), addToCart();
+                  }}
+                >
                   <i
                     className="fa-solid fa-cart-shopping"
                     style={{ color: "#ffffff" }}
