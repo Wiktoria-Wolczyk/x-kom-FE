@@ -108,6 +108,16 @@ const CartSummary = (
     },
   });
 
+  const mutationOrder = useMutation({
+    mutationFn: async (arrayWithActualProducts: ICartProduct[]) => {
+      const response = await axios.post("http://localhost:3000/orders", {
+        products: arrayWithActualProducts,
+        userID: actualUser?.id,
+      });
+      console.log("jaki to bedzie response", response);
+    },
+  });
+
   const typesOfDeliveryCompanies = [
     {
       id: 0,
@@ -187,6 +197,10 @@ const CartSummary = (
       mutationPrice.mutate(arrayWithActualProducts);
     }
   }, [arrayWithActualProducts, selectedDeliveryMethod]);
+
+  useEffect(() => {
+    mutationOrder.mutate(arrayWithActualProducts);
+  }, []);
 
   const savedMoney = Math.round(
     priceAndDiscountedPriceWithValidCoupon.price -
@@ -493,7 +507,12 @@ const CartSummary = (
               disabled={mutation.isPending}
               className="buttonBuy"
             >
-              {mutation.isPending ? "Loading..." : "Przejdź do dostawy"}
+              {shouldBeSticky ? (
+                <>{mutation.isPending ? "Loading..." : "Złóż zamówienie"}</>
+              ) : (
+                <>{mutation.isPending ? "Loading..." : "Przejdź do dostawy"}</>
+              )}
+
               <i className="fa-solid fa-chevron-right chevronInbuttonBuy"></i>
             </button>
           )}

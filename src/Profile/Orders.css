@@ -1,6 +1,5 @@
 .containerForUserInformations {
   width: 100vw;
-  height: 100vh;
   background-color: white;
 }
 
@@ -22,7 +21,6 @@
   height: 40px;
   background-color: rgb(223, 222, 222);
   border-radius: 10px;
-  margin-top: 20px;
   margin-left: 20px;
 }
 
@@ -98,6 +96,14 @@
 .containerForProductsInfo {
   width: 60%;
   padding-left: 10px;
+}
+.orderActionButton {
+  align-self: flex-start;
+  margin-left: auto;
+}
+.orderActionButtonIcon {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .divForStatusAndCreateDate {

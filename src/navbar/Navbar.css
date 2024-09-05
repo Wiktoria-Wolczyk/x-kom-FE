@@ -50,8 +50,8 @@
   padding-bottom: 10px;
 }
 
-.Navbar > div {
-  /* z-index: 11; */
+.Navbar > div:first-of-type {
+  z-index: 11;
 }
 
 .title-User-Cart-Navbar {
@@ -101,6 +101,10 @@
   width: 50%;
   height: 100%;
   padding-right: 10px;
+}
+
+.divForUserAndCart > div:first-of-type {
+  z-index: 11;
 }
 
 .hiUser {

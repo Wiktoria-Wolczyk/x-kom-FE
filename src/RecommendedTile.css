@@ -6,6 +6,7 @@
   justify-content: flex-start;
   position: relative;
   row-gap: 15px;
+  padding-top: 20px;
 }
 
 .cartOnHover {
@@ -16,11 +17,11 @@
   display: flex;
   justify-content: center;
   position: absolute;
-  top: 15px;
+  top: 0px;
   left: 0px;
   border: 1px solid gray;
   border-radius: 5px;
-  width: 70px;
+  padding: 0px 4px;
 }
 
 .containerForPriceInRecommended {

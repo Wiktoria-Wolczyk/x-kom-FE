@@ -309,13 +309,13 @@ function Navbar({ openAuthModal }: IProps) {
                 </div>
 
                 <div className="divForUserAndCart">
-                  <div
+                  {/* <div
                     className="hiUser"
                     style={{ color: "black", width: "100%" }}
                   >
                     <p>Cześć, {actualUser?.firstName}</p>
                     <p>zaloguj się</p>{" "}
-                  </div>
+                  </div> */}
                   {/* <i
                     onClick={() => {
                       // mutation.mutate()
@@ -332,18 +332,24 @@ function Navbar({ openAuthModal }: IProps) {
                     <MenuButton
                       style={{
                         display: "flex",
-                        justifyContent: "center",
+                        justifyContent: "flex-end",
                         alignItems: "center",
-                        paddingLeft: 20,
+                        backgroundColor: "white",
+                        border: 0,
+                        paddingTop: 10,
                       }}
                       as={IconButton}
                       aria-label="Options"
                       icon={<i className="fa-regular fa-user fa-xl"></i>}
                       variant="outline"
                       onClick={() => {
-                        setMenuUserIsOpen((prev) => !prev);
-                        setButtonLoginIsClicked(!menuUserIsOpen);
-                        console.log("is closed", menuUserIsOpen);
+                        if (localStorage.getItem("user")) {
+                          setMenuUserIsOpen((prev) => !prev);
+                          setButtonLoginIsClicked(!menuUserIsOpen);
+                          console.log("is closed", menuUserIsOpen);
+                        } else {
+                          navigate("/login");
+                        }
                       }}
                     />
 
@@ -389,11 +395,23 @@ function Navbar({ openAuthModal }: IProps) {
                                       marginTop: 10,
                                       width: "100%",
                                     }}
+                                    onClick={() => {
+                                      if (index === 10) {
+                                        navigate("/orders");
+                                        setMenuUserIsOpen((prev) => !prev);
+                                      } else if (index === 14) {
+                                        navigate("/user_details");
+                                        setMenuUserIsOpen((prev) => !prev);
+                                      }
+                                    }}
                                     key={index}
                                   >
                                     <Icons
                                       name={category.img}
-                                      style={{ height: 40, marginRight: 20 }}
+                                      style={{
+                                        height: 40,
+                                        marginRight: 20,
+                                      }}
                                     />
 
                                     <div className="category">
@@ -416,6 +434,7 @@ function Navbar({ openAuthModal }: IProps) {
                           }
                         })}
                       </div>
+
                       {/* <div className="containerForLoginAndRegister">
                       {userIsLoggedIn ? (
                         <button
@@ -481,7 +500,10 @@ function Navbar({ openAuthModal }: IProps) {
                                 width: "100%",
                                 height: "100%",
                               }}
-                              onClick={() => localStorage.removeItem("user")}
+                              onClick={() => {
+                                localStorage.removeItem("user");
+                                setMenuUserIsOpen((prev) => !prev);
+                              }}
                             >
                               {" "}
                               Wyloguj się
