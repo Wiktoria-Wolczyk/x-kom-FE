@@ -53,7 +53,6 @@ function Footer() {
           <div className="containerForFooterDetails">
             <div
               className="ordersButtonInFooter"
-              style={{ border: 0 }}
               onClick={() => {
                 setOrderArrowIsOpen(!orderArrowIsOpen);
                 setSalesAndInspirationsAreOpen(false);
@@ -86,7 +85,6 @@ function Footer() {
           <div className="containerForFooterDetails">
             <div
               className="salesAndInspirationsButtonInFooter"
-              style={{ border: 0 }}
               onClick={() => {
                 setSalesAndInspirationsAreOpen(!salesAndInspirationsAreOpen);
                 setOrderArrowIsOpen(false);
@@ -115,7 +113,6 @@ function Footer() {
           <div className="containerForFooterDetails">
             <div
               className="xkomButtonInFooter"
-              style={{ border: 0 }}
               onClick={() => {
                 setXkomButtonIsOpen(!xkomButtonIsOpen);
                 setOrderArrowIsOpen(false);
