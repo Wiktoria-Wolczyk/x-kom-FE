@@ -84,6 +84,8 @@ function Navbar({ openAuthModal }: IProps) {
 
   const { products } = useContext(CartContext);
 
+  console.log("products", products);
+
   return (
     <ChakraProvider>
       <div

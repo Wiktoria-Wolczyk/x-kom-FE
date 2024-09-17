@@ -77,7 +77,10 @@ const RecommendedProduct = ({ product }: { product: IProduct }) => {
           </div>
           <div
             className="cartOnHover"
-            onClick={() => addProductsToCart(product)}
+            onClick={(e) => {
+              e.stopPropagation();
+              addProductsToCart(product);
+            }}
           >
             <i className="fa-solid fa-cart-shopping fa-lg cartInProductsContainer"></i>
           </div>

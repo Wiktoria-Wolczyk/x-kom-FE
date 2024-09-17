@@ -56,6 +56,8 @@ const ProductDetails = () => {
     }
   };
 
+  console.log("xyz");
+
   return (
     <div>
       {/* <div className="scrollableContainerForStepsInProductDetails">
@@ -97,12 +99,7 @@ const ProductDetails = () => {
                 />
               </div>
               <div className="divForButtonAddToCartInProductDetails">
-                <button
-                  className="buttonAddToCartInProductDetails"
-                  onClick={() => {
-                    console.log("add to cart"), addToCart();
-                  }}
-                >
+                <button className="buttonAddToCartInProductDetails">
                   <i
                     className="fa-solid fa-cart-shopping"
                     style={{ color: "#ffffff" }}
@@ -128,7 +125,10 @@ const ProductDetails = () => {
                     />
                   </div>
                   <div className="divForButtonAddToCartInProductDetails">
-                    <button className="buttonAddToCartInProductDetails">
+                    <button
+                      className="buttonAddToCartInProductDetails"
+                      onClick={() => {}}
+                    >
                       <i
                         className="fa-solid fa-cart-shopping"
                         style={{ color: "#ffffff" }}

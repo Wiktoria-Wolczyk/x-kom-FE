@@ -1,5 +1,6 @@
 import React from "react";
 import Icons from "./Icons";
+import { position } from "@chakra-ui/react";
 
 interface Category {
   name: string;
